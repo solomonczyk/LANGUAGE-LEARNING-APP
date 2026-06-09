@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/diagnostic_session.json",
+  "title": "Diagnostic Session",
+  "description": "A complete initial diagnostic assessment session",
+  "type": "object",
+  "required": [
+    "learner_id",
+    "session_id",
+    "dimensions",
+    "started_at",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "learner_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "session_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/dimension_assessment"
+      },
+      "minItems": 14
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "completed",
+        "abandoned"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    }
+  },
+  "definitions": {
+    "dimension_assessment": {
+      "type": "object",
+      "required": [
+        "dimension",
+        "level",
+        "confidence"
+      ],
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "reading",
+            "listening",
+            "passive_vocabulary",
+            "active_vocabulary",
+            "grammar_recognition",
+            "productive_grammar",
+            "spoken_production",
+            "spoken_interaction",
+            "pronunciation_intelligibility",
+            "narrative_coherence",
+            "writing",
+            "mediation",
+            "communication_strategies"
+          ]
+        },
+        "level": {
+          "type": "string",
+          "pattern": "^(A1|A2|B1|B2|C1|C2)(_entering|_developing|_consolidating)?$"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "observations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "evidence_id": "00000000-0000-0000-0000-000000000000",
+  "session_id": "00000000-0000-0000-0000-000000000000",
+  "dimension": "test_dimension",
+  "task_type": "test_task_type",
+  "score": 0.5,
+  "timestamp": "2026-06-09T00:00:00Z"
+}

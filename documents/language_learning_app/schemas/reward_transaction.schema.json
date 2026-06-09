@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/reward_transaction.json",
+  "title": "Reward Transaction",
+  "description": "A deterministic reward transaction record",
+  "type": "object",
+  "required": [
+    "transaction_id",
+    "learner_id",
+    "event_type",
+    "xp_amount",
+    "idempotency_key"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "transaction_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "learner_id": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "xp_amount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "idempotency_key": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_service": {
+      "type": "string"
+    },
+    "previous_balance": {
+      "type": "integer"
+    },
+    "new_balance": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "reversed"
+      ]
+    }
+  }
+}

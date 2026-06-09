@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/performance_task.json",
+  "title": "Performance Task",
+  "description": "A performance-based assessment task",
+  "type": "object",
+  "required": [
+    "task_id",
+    "task_type",
+    "prompt",
+    "assessment_criteria"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "stimulus": {
+      "type": "object"
+    },
+    "scaffolding_level": {
+      "type": "string"
+    },
+    "assessment_criteria": {
+      "type": "object",
+      "required": [
+        "dimensions"
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pass_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "cefr_level": {
+      "type": "string"
+    }
+  }
+}

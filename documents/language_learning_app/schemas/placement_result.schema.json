@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/placement_result.json",
+  "title": "Placement Result",
+  "description": "Recommended starting point derived from diagnostic",
+  "type": "object",
+  "required": [
+    "learner_id",
+    "diagnostic_session_id",
+    "recommended_start_range"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "learner_id": {
+      "type": "string"
+    },
+    "diagnostic_session_id": {
+      "type": "string"
+    },
+    "recommended_start_range": {
+      "type": "object",
+      "required": [
+        "low",
+        "high"
+      ],
+      "properties": {
+        "low": {
+          "type": "string"
+        },
+        "high": {
+          "type": "string"
+        }
+      }
+    },
+    "weakest_dimensions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strongest_dimensions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

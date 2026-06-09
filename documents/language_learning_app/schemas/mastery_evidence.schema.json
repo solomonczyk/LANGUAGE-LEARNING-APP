@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/mastery_evidence.json",
+  "title": "Mastery Evidence",
+  "description": "Evidence record for mastery state transition",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "learner_id",
+    "item_id",
+    "current_state",
+    "performance",
+    "timestamp"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "learner_id": {
+      "type": "string"
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "current_state": {
+      "type": "string",
+      "enum": [
+        "introduced",
+        "recognized",
+        "reconstructed",
+        "guided_use",
+        "independent_use",
+        "interactive_use",
+        "transferred",
+        "retained"
+      ]
+    },
+    "performance": {
+      "type": "string",
+      "enum": [
+        "perfect",
+        "good",
+        "hint",
+        "fail"
+      ]
+    },
+    "context": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "string"
+    }
+  }
+}

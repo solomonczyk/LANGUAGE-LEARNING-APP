@@ -1,0 +1,8 @@
+{
+  "evidence_id": "00000000-0000-0000-0000-000000000000",
+  "learner_id": "test_learner_id",
+  "item_id": "test_item_id",
+  "current_state": "introduced",
+  "performance": "perfect",
+  "timestamp": "2026-06-09T00:00:00Z"
+}

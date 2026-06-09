@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/dialogue_assessment.json",
+  "title": "Dialogue Assessment",
+  "description": "Assessment of learner performance in a spoken dialogue task",
+  "type": "object",
+  "required": [
+    "assessment_id",
+    "learner_id",
+    "dialogue_turns",
+    "scores"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "assessment_id": {
+      "type": "string"
+    },
+    "learner_id": {
+      "type": "string"
+    },
+    "dialogue_turns": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "scores": {
+      "type": "object",
+      "properties": {
+        "fluency": {
+          "type": "number"
+        },
+        "appropriateness": {
+          "type": "number"
+        },
+        "effectiveness": {
+          "type": "number"
+        },
+        "range": {
+          "type": "number"
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "overall_level": {
+      "type": "string"
+    }
+  }
+}

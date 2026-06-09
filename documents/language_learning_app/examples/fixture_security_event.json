@@ -1,0 +1,6 @@
+{
+  "event_id": "00000000-0000-0000-0000-000000000000",
+  "event_type": "injection_attempt",
+  "severity": "critical",
+  "timestamp": "2026-06-09T00:00:00Z"
+}

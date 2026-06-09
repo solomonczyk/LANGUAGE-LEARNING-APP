@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/security_event.json",
+  "title": "Security Event",
+  "description": "A logged security event for audit and monitoring",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "severity",
+    "timestamp"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "injection_attempt",
+        "auth_failure",
+        "auth_success",
+        "unauthorized_access",
+        "rate_limit_exceeded",
+        "anomalous_pattern",
+        "state_mutation_attempt",
+        "config_change"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "source": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "details": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "action_taken": {
+      "type": "string"
+    }
+  }
+}

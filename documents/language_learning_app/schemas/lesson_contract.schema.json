@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/lesson_contract.json",
+  "title": "Lesson Contract",
+  "description": "Complete specification for a single lesson session",
+  "type": "object",
+  "required": [
+    "lesson_id",
+    "communicative_goal",
+    "mode",
+    "cognitive_budget"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "lesson_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "communicative_goal": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "grammar_focus": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "vocabulary_focus": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "narrative_focus": {
+      "type": "string"
+    },
+    "receptive_skill_focus": {
+      "type": "string"
+    },
+    "productive_skill_focus": {
+      "type": "string"
+    },
+    "interaction_focus": {
+      "type": "string"
+    },
+    "strategy_focus": {
+      "type": "string"
+    },
+    "scaffolding_mode": {
+      "type": "string"
+    },
+    "cognitive_budget": {
+      "type": "object",
+      "required": [
+        "max_duration_minutes"
+      ],
+      "properties": {
+        "max_duration_minutes": {
+          "type": "integer"
+        },
+        "max_new_vocabulary": {
+          "type": "integer"
+        },
+        "max_new_constructions": {
+          "type": "integer"
+        },
+        "max_corrections": {
+          "type": "integer"
+        },
+        "audio_max_seconds": {
+          "type": "integer"
+        },
+        "interaction_turns": {
+          "type": "integer"
+        }
+      }
+    },
+    "assessment_criteria": {
+      "type": "object"
+    }
+  }
+}

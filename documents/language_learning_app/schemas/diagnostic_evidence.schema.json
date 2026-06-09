@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/diagnostic_evidence.json",
+  "title": "Diagnostic Evidence",
+  "description": "A single piece of evidence from a diagnostic task",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "session_id",
+    "dimension",
+    "task_type",
+    "score",
+    "timestamp"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "session_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "dimension": {
+      "type": "string"
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "confidence_weight": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 2.0
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "response_data": {
+      "type": "object"
+    }
+  }
+}

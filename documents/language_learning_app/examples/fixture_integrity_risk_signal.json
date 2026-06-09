@@ -1,0 +1,7 @@
+{
+  "signal_id": "00000000-0000-0000-0000-000000000000",
+  "learner_id": "test_learner_id",
+  "signal_type": "response_time_anomaly",
+  "severity": "low",
+  "timestamp": "2026-06-09T00:00:00Z"
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/quiz_package.json",
+  "title": "Quiz Package",
+  "description": "A short controlled-practice quiz (4-7 items, 2-4 minutes)",
+  "type": "object",
+  "required": [
+    "quiz_id",
+    "items",
+    "time_limit_minutes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "quiz_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "lesson_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/quiz_item"
+      },
+      "minItems": 4,
+      "maxItems": 7
+    },
+    "time_limit_minutes": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 4
+    },
+    "passing_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "definitions": {
+    "quiz_item": {
+      "type": "object",
+      "required": [
+        "item_id",
+        "type",
+        "prompt",
+        "correct_answer"
+      ],
+      "properties": {
+        "item_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "multiple_choice",
+            "gap_fill",
+            "matching",
+            "ordering",
+            "short_answer"
+          ]
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correct_answer": {
+          "type": "string"
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

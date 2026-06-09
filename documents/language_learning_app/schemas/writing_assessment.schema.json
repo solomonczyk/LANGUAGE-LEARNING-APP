@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/writing_assessment.json",
+  "title": "Writing Assessment",
+  "description": "Assessment of learner written production",
+  "type": "object",
+  "required": [
+    "assessment_id",
+    "learner_id",
+    "text",
+    "scores"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "assessment_id": {
+      "type": "string"
+    },
+    "learner_id": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "scores": {
+      "type": "object",
+      "required": [
+        "content",
+        "organization",
+        "vocabulary",
+        "grammar",
+        "mechanics"
+      ],
+      "properties": {
+        "content": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "organization": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "vocabulary": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "grammar": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "mechanics": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "cycle_stage": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "problem_identification",
+        "hint",
+        "self_correction",
+        "recheck",
+        "natural_model",
+        "transfer"
+      ]
+    },
+    "errors_identified": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

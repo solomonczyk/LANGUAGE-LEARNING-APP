@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/narrative_analysis.json",
+  "title": "Narrative Analysis",
+  "description": "Analysis of a learner's spoken or written narrative",
+  "type": "object",
+  "required": [
+    "narrative_id",
+    "learner_id",
+    "analysis_dimensions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "narrative_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "learner_id": {
+      "type": "string"
+    },
+    "source_text": {
+      "type": "string"
+    },
+    "analysis_dimensions": {
+      "type": "object",
+      "required": [
+        "grammatical_accuracy",
+        "lexical_range",
+        "narrative_coherence",
+        "pragmatic_appropriateness"
+      ],
+      "properties": {
+        "grammatical_accuracy": {
+          "$ref": "#/definitions/dimension_score"
+        },
+        "lexical_range": {
+          "$ref": "#/definitions/dimension_score"
+        },
+        "narrative_coherence": {
+          "$ref": "#/definitions/dimension_score"
+        },
+        "pragmatic_appropriateness": {
+          "$ref": "#/definitions/dimension_score"
+        }
+      }
+    },
+    "errors_detected": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/error_entry"
+      }
+    },
+    "strengths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_focus": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "definitions": {
+    "dimension_score": {
+      "type": "object",
+      "required": [
+        "score",
+        "level"
+      ],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "level": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "error_entry": {
+      "type": "object",
+      "required": [
+        "type",
+        "target_form",
+        "learner_form",
+        "context"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "target_form": {
+          "type": "string"
+        },
+        "learner_form": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "l1_influence": {
+          "type": "boolean"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "global",
+            "local"
+          ]
+        }
+      }
+    }
+  }
+}

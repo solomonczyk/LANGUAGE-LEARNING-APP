@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/integrity_risk_signal.json",
+  "title": "Integrity Risk Signal",
+  "description": "Anomaly detection signal for anti-cheat system",
+  "type": "object",
+  "required": [
+    "signal_id",
+    "learner_id",
+    "signal_type",
+    "severity",
+    "timestamp"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "signal_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "learner_id": {
+      "type": "string"
+    },
+    "signal_type": {
+      "type": "string",
+      "enum": [
+        "response_time_anomaly",
+        "perfect_sequence",
+        "off_session_submission",
+        "duplicate_content",
+        "multiple_accounts",
+        "unusual_pattern"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "details": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "action_taken": {
+      "type": "string"
+    }
+  }
+}

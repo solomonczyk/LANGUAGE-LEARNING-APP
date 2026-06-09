@@ -1,0 +1,1928 @@
+{
+  "$schema": "./schemas/artifact_index.schema.json",
+  "artifacts": [
+    {
+      "path": "documents/language_learning_app/00_documentation_index.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 00_documentation_index.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2e68445e008a2c3138abb65ee7691b2d161b9764c7bba724bc76636b7ab8033b",
+      "related_requirements": [
+        "R001"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/01_glossary.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 01_glossary.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "0eeb3b9738d2cfab12fb297950b3b230cc2983bb1412b28367692e55c5e758c6",
+      "related_requirements": [
+        "R002"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/02_decision_log.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 02_decision_log.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a553094b6a427473c962ee53053cb68aa99ce4395357f8fe3e9b77e1946e5cba",
+      "related_requirements": [
+        "R003"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/100_review_scheduler_service.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 100_review_scheduler_service.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9c9af312dadbea06b652ebf34caca2c5f5a6a2ce804f06c005e4b94893c3c4ba",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/101_ai_linguistic_quality_assurance.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 101_ai_linguistic_quality_assurance.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "291233c0ba2a3c9851ac0c0dde8d29ac185a4a99c31f0eeb19dd645d6094622f",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/102_model_provider_and_fallback_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 102_model_provider_and_fallback_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "6bd0bbc09a1a1f61e72bc93fa044e504a2719719af1667bd3a97446666757938",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/103_observability_audit_and_cost_control.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 103_observability_audit_and_cost_control.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d211a373e9b3e762b7fe2067dbce8dc35ccec48d3a67c671f00dbdb06802bfc5",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/90_system_architecture.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 90_system_architecture.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "03f2eb96f94e646764fb60195de37fd6f98b8f4630d7761f3fc6a3e6f996d364",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/91_ai_agent_architecture.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 91_ai_agent_architecture.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a321113754205adc8dd02bc8cea498f9a3b69a1db60c80e565efd4bb6bb880f9",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/92_narrative_learning_engine.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 92_narrative_learning_engine.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "76a380834574dd189a9ccdf1be24651b405a8ba1fe62b12cc8881137b35e08c8",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/93_visual_scenario_engine.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 93_visual_scenario_engine.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "5cfcc1f981e7a1bfe9d0022d7bb23b4c8f1b4dce750f57d15bc6b0b9256cbbfa",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/94_audio_scenario_engine.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 94_audio_scenario_engine.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "33d72efd338fccd4df33849622f3e879118455b19f922a346b4d53e5ab0009b9",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/95_curriculum_engine.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 95_curriculum_engine.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "de745635d54c75c921581f3c9b75cdc61613cb0fe380b180031595ee30766191",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/96_learner_model_service.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 96_learner_model_service.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "41c53084933df17c920f231bd71b27fc4a4c1041c0c9049040543fdb66cf9ab1",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/97_assessment_engine.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 97_assessment_engine.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "74f49917bc3cfadff732a142dd741be6b2f8c56dd18f4c2e216460d04c96a6ba",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/98_mastery_engine.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 98_mastery_engine.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "4e37be26517de514865c8823bfb94908c11a25003a1c52fa8b8bbd080733740c",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/architecture/99_reward_engine.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 99_reward_engine.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "4e9ead071222429e1718ef08fdcfd38bffa735e228c75a70c89ef21cc224989b",
+      "related_requirements": [
+        "R059-R072",
+        "R200-R202"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagnostics/40_initial_diagnostic_and_placement_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 40_initial_diagnostic_and_placement_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9b2e0785b3dc66ad169a33e69f8221c0c8a09a75ada1e6c59d88b816a22d30eb",
+      "related_requirements": [
+        "R021-R027",
+        "R100"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagnostics/41_diagnostic_task_bank_contract.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 41_diagnostic_task_bank_contract.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d6e2fe97e5019dfd708fe9b1fda3149c2df1b4a3ec430d4808c408974fc5f289",
+      "related_requirements": [
+        "R021-R027",
+        "R100"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagnostics/42_multidimensional_learner_profile.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 42_multidimensional_learner_profile.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "57d99053f3e4ca8ba32469884b1c4f5ceb7a7315a630c98e1304a4cdd4dddff4",
+      "related_requirements": [
+        "R021-R027",
+        "R100"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagnostics/43_learning_entry_contract.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 43_learning_entry_contract.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9c598eb6c536e650f643315ace28b16bd4292981fba82a327a59558bf1065d95",
+      "related_requirements": [
+        "R021-R027",
+        "R100"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagnostics/44_continuous_recalibration_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 44_continuous_recalibration_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "849a12b12d4a171f5369053925047d326509ecd44e901f74ea0c14937420e35d",
+      "related_requirements": [
+        "R021-R027",
+        "R100"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagnostics/45_assessment_confidence_and_evidence_model.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 45_assessment_confidence_and_evidence_model.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "59f9e7886254ba65c35b6268b523344c4a20705d06ff03a6e3d079bcde7846e5",
+      "related_requirements": [
+        "R021-R027",
+        "R100"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagnostics/46_learner_error_evidence_model.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 46_learner_error_evidence_model.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "52850db01e31acfe3d8a8821bec43a91f67f0328dc615ac27ee8edf9c7c726d9",
+      "related_requirements": [
+        "R021-R027",
+        "R100"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/diagrams/system_architecture.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: system_architecture.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "18f89829c201d8d5509ac5a200d8fac0d0ce8e9d9983303254888b8a32128698",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/example_01_personal_narrative_cat.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: example_01_personal_narrative_cat.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "23aca9773d0539943654dad2bd574ab8b254b25592565056490b32abb378913e",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/example_02_visual_sequence_morning.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: example_02_visual_sequence_morning.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "8cd6bd3d9c5e32edf91808f13e5aa8045b0b36e876262042bf307dc42fd99ac6",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/example_03_emotion_fisherman.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: example_03_emotion_fisherman.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "f527c4bf5ec6d6cf93002e98f47d351adb8e4fef14dfd6b74edcf8b49d92c0dc",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/example_04_audio_missed_bus.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: example_04_audio_missed_bus.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2a5449664a19d5fb4cbca4c662aab8d9c222365f075252819a127f881a2508fa",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/example_05_functional_problem.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: example_05_functional_problem.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a05f26998045c7e5e887cff9c038fd73ac346c74faeec26fee64f7c12d387b50",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/50_lesson_type_taxonomy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 50_lesson_type_taxonomy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2256aedac3b9b4f12f63dc315203927159c2774d840fa1668fc8c329d1328684",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/51_lesson_runtime_contract.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 51_lesson_runtime_contract.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "822dd028d65cc7f471bf5871845718aa699edf2601334ad34c2be48fee42e029",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/52_lesson_topic_orchestrator.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 52_lesson_topic_orchestrator.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "21d6d41beb9750f55d95725b54fe42b911548827569274896688c3a5ac94c380",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/53_adaptive_lesson_format_selector.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 53_adaptive_lesson_format_selector.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "69164b7f20a5577a451835c255ea65e7b2a28f7a2b1ad533f6c87ac3b2220157",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/54_language_scaffolding_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 54_language_scaffolding_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "0811fc8ed2de7a01f4c40253aa16d64b3e2d81d416854d496cff08d393fc3ab7",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/55_cognitive_load_and_lesson_difficulty.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 55_cognitive_load_and_lesson_difficulty.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "52907167cf8b952e189f23aad7274d1ed4f51c2a9eb37e3eead19d9c2afb8196",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/56_corrective_feedback_and_error_treatment.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 56_corrective_feedback_and_error_treatment.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9a399ac005b881e2d8f00c03e500d7046cf6366ac264c76be438d37454a466a3",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/57_lesson_completion_and_mastery_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 57_lesson_completion_and_mastery_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9bb0b5c384ad4d0793e64301c76eb4b35275b025aaab1aee98a253a69053d816",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/lessons/58_scenario_complexity_and_content_progression.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 58_scenario_complexity_and_content_progression.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "77cbc456ba8c179280be4e0dd34f007c3c14add2f798a160bc8528b6945d2f24",
+      "related_requirements": [
+        "R028-R036",
+        "R101"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/80_spaced_repetition_and_memory_consolidation.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 80_spaced_repetition_and_memory_consolidation.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "bae3d0f20e98c63a2d0a383d2a8fc13db2e48e5097d485a23364cfc29a4bd4ef",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/81_adaptive_review_scheduler.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 81_adaptive_review_scheduler.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "666c8804d119d6f78013df2180068827f32e5710b5c038d0beca5f579ecf1cf5",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/82_review_task_variation_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 82_review_task_variation_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c52390fe9d914d4d9fed6b4bc4f4624471a9f9da2fd4833866db92d197df192d",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/83_adaptive_learning_load.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 83_adaptive_learning_load.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2681170d04f6ba693b7ffc595dcddd02363f2b3e5d579fed7f29d93b75d07e99",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/84_gamification_and_engagement_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 84_gamification_and_engagement_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "879a219c01e2ab7ad4643927a7f91fc899443a577bd124b1d900bd35dfe23ed6",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/85_memory_review_reward_economy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 85_memory_review_reward_economy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "65fee9686bf04aaff23ab3550135b6ffe8bd339bd1caf2647b181e8503392124",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/86_streaks_soft_consequences_and_recovery.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 86_streaks_soft_consequences_and_recovery.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b83ed5f6c9c00a6c1decfb1c1294875c7e25fc3923d22ec0a8cedad709365df4",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/87_interest_and_content_personalization.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 87_interest_and_content_personalization.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "facc10897ab2e812345cb64e039ec9922a8dcdb5bb943dfccae44a3373151821",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/memory_and_engagement/88_notification_and_reminder_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 88_notification_and_reminder_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "952875c340eaa2bd90399aa10d61ec654233ed7d847dcda54eed914af07c48de",
+      "related_requirements": [
+        "R050-R058",
+        "R107-R110"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/20_learning_methodology.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 20_learning_methodology.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a6a26d9efa1fe6d4e6626ced854f594b064225f92bb5819c6af0fbcd07fead95",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/21_communicative_competence_model.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 21_communicative_competence_model.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "56c45478b340750b8bba657fa25ed7729532e743f463411874e0772852f49e75",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/22_curriculum_progression.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 22_curriculum_progression.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "cee776896d14dc3a127272fba6159d871103fea13c102c64effac47ddf96b57b",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/23_curriculum_and_language_knowledge_base.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 23_curriculum_and_language_knowledge_base.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9566c7b825da1d026a025b8fde0ad8d18d4326a39172fe8c1e59a6c8a698bad9",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/24_grammar_instruction_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 24_grammar_instruction_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "af8f3af0ec886c347b3729357a12b5ef89bb8b6065f2f52f5de6ca9a82182f27",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/25_vocabulary_collocation_and_phraseology.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 25_vocabulary_collocation_and_phraseology.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "31ae8adae9a173f33112b8bbc0532daa2d2140c1aaae327ab222d7b927015353",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/26_phonological_competence_and_pronunciation.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 26_phonological_competence_and_pronunciation.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d287767962a3e8e4a1567c551de65c4eb1c21a93354175e141dabbce2b8bfa0e",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/27_pragmatics_register_and_politeness.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 27_pragmatics_register_and_politeness.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c83cd055f30179ff4c29d2de033a1532937492594efb24cb19a5729fcd1d5c49",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/28_intercultural_competence.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 28_intercultural_competence.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b86d9dce9129f7ad3e8b3ef2179503593d9726d4effb81676a167a6557273c04",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/29_plurilingual_and_language_transfer_model.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 29_plurilingual_and_language_transfer_model.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b36923e3a6e03dd8ada1eb427c540e80301876a96f087f5c4b9a9b65d532912c",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/30_mediation_and_information_transfer.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 30_mediation_and_information_transfer.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a4f6b812da0f15de6283dafb9d5f01beffd7b5f69b4dcfbc2befa722b65c7da2",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/31_communication_strategy_and_repair.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 31_communication_strategy_and_repair.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "eb5afd6cf27b30a5f50bf47c3f98df501716cc019a8648d57207c4c9c81a21a0",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/methodology/32_learner_autonomy_and_learning_strategies.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 32_learner_autonomy_and_learning_strategies.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "f9a25f034ab44f871491ffae5e1e6eac485fc3d0dbc24aa31b15917d704567e7",
+      "related_requirements": [
+        "R009-R020"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/product/10_product_vision.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 10_product_vision.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2fa4acbe35b1691545c0530176cf915ace7f7cd8fb481ec1f42de5959cbc14d4",
+      "related_requirements": [
+        "R004-R008"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/product/11_problem_and_target_audience.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 11_problem_and_target_audience.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "0835df8b41d7c3a3f9aa2d53254d3066a98fae1043510b7d72aad08466c56722",
+      "related_requirements": [
+        "R004-R008"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/product/12_product_principles_and_non_goals.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 12_product_principles_and_non_goals.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "25a0659c451a6a9f038d232f29c0f60faf52c79546b2d12854310f0d6c9b915d",
+      "related_requirements": [
+        "R004-R008"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/product/13_value_proposition_and_differentiation.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 13_value_proposition_and_differentiation.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "f09ad159533cb513c14962fda3e89a5db2ce23e2497292c1f06a67bc709196d0",
+      "related_requirements": [
+        "R004-R008"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/product/14_market_and_competitor_framework.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 14_market_and_competitor_framework.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "8274511c3c8d1bb0c827f8b5f6bf464c6801139875737c4a05e80328642d57b0",
+      "related_requirements": [
+        "R004-R008"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/110_ai_security_and_prompt_injection_defense.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 110_ai_security_and_prompt_injection_defense.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "89fe5fe9fbf83afdd08cf2e1df02b0c3234f709ddcd99c5fedcbb8981420e24a",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/111_anti_cheat_and_learning_integrity.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 111_anti_cheat_and_learning_integrity.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7737b32d5c53857d0ea66d251809c4a4bddf45672e2f82768a3271757e0016eb",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/112_authorization_and_tool_access_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 112_authorization_and_tool_access_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a1007169b4a2dff344f95b0ae23e75b94e9b5eacebb5d9ee425538d475c3d0a6",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/113_reward_economy_integrity.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 113_reward_economy_integrity.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "15a093498773d3cea6649ca7f5ae1551b84f34116d2c052355bea055a9d9efea",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/114_untrusted_content_handling.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 114_untrusted_content_handling.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a1f251e4baa963a297292ff63e125f42404027e4a3c10e3014049ed0e3ab0bd6",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/115_user_data_isolation_and_privacy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 115_user_data_isolation_and_privacy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "53a65cd8ff87adc0d5901a6d27f062b5abb6500ea4ec8608b586c26f9454acfb",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/116_abuse_rate_limit_and_cost_controls.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 116_abuse_rate_limit_and_cost_controls.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "27099af6b1111211af13d9e1069bd600865004fead5df5313e914206747f86e6",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/117_security_logging_and_incident_response.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 117_security_logging_and_incident_response.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "0b94f0bbc0f3de013dd072e92a4893b99e9eb07459cfdd6d7beadeced9b4e61a",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/118_ai_red_team_and_security_test_plan.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 118_ai_red_team_and_security_test_plan.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "279d8f4f9d56adc283f400a30c63d08e86c25016e6bf7cc90011548dd0cc14b0",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/119_sensitive_content_and_safeguarding.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 119_sensitive_content_and_safeguarding.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "78ed2f227b57dfcad494c64ee206c6c4d39474d5a76fc52fb75b72730efc4ed3",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/security/120_data_retention_export_and_deletion.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 120_data_retention_export_and_deletion.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "fbe95a85c8e584e85d3643e41973f9f17fb172ab142fe96428336b90ab074525",
+      "related_requirements": [
+        "R073-R083",
+        "R300-R306"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/60_personal_narrative_lesson_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 60_personal_narrative_lesson_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "77c0457209f92c6521202bd03ae63636c925ed1543a210c7105337710bd6cd59",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/61_suggested_situation_lesson_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 61_suggested_situation_lesson_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c2c1e1dda297db8d26572ddb8712f3de53aa3453a856c0a6968be5e4b570adbe",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/62_visual_narrative_lesson_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 62_visual_narrative_lesson_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b838078c6fac90699364166a454c933414ac29d229b69fa181326ca46a93b9eb",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/63_illustrated_emotion_and_perspective_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 63_illustrated_emotion_and_perspective_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c3ae503d6fb9e772ac3950932515b8c48608d6f6b09138b92f213402b2771394",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/64_audio_narrative_lesson_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 64_audio_narrative_lesson_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "41d5a8d992a60ab5ac7b745e817968e50e2b42cb58d66b82c8e9c1ad4ede664f",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/65_listening_and_audio_comprehension.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 65_listening_and_audio_comprehension.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a1cfa8e95c568ed471fbdfb87031648e7e1b88d3e1d8bb264d9daddc95d819ab",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/66_functional_reading_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 66_functional_reading_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "00b4806ccfc1d5fa54c45ef72abde64af07ee317e75c9a7956de023a083b4516",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/67_writing_and_written_production.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 67_writing_and_written_production.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b842419e347e8669e872e35850da7f3c788261ced0ed16eb87c5a5c723a0cfe5",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/68_online_written_interaction.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 68_online_written_interaction.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7791df037a1cf6a1950960d809bd2b9060a3e51e2965cc6ec6565122387074ce",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/69_spoken_dialogue_and_real_life_transfer.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 69_spoken_dialogue_and_real_life_transfer.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "8505ea44e8f4a3e1a4b4d4569df37e94366d5c93fa9e00d427425c33a15a9b8e",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/70_performance_based_learning_assessment.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 70_performance_based_learning_assessment.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "f39b755293b380a6576e1645067561adb44f16117891f7dadcfc6d4206bae8f7",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/71_quiz_and_controlled_practice_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 71_quiz_and_controlled_practice_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e80e0066eb0e54dc2912659c20935c7ae10f9596635757e40055f82ab2ee78d9",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/skill_modes/72_audiovisual_comprehension_system.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 72_audiovisual_comprehension_system.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "fa70f894616eec3952f3870be7dc2f5c963d9f675c0ac71b845c9db64826ce85",
+      "related_requirements": [
+        "R037-R049",
+        "R102-R105"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/130_mvp_scope.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 130_mvp_scope.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "33e6ef9376ec01b379f3704d545a168e90ae13f3f1ff7c3daecc124c4f49241e",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/131_validation_and_experiment_plan.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 131_validation_and_experiment_plan.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "ae0fcd497b9e8dbbeb88a0506de5c1034feb52ba126554f6cff84e1e583ccda7",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/132_product_and_learning_metrics.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 132_product_and_learning_metrics.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b228bfd04411adef753184b24eff79bbbc8dff8265c10dfba6244f2346673c04",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/133_accessibility_and_inclusive_learning.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 133_accessibility_and_inclusive_learning.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "ff73b8f5a21262fccb132339bdc44eee01e3a4e57c67fb1bdb3300f4a0b3395f",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/134_content_authoring_and_editorial_workflow.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 134_content_authoring_and_editorial_workflow.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d42cb9ed7dde4382e708c85dfe9ef7969e6ce08ef093caef163fe3a745b40a7c",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/135_human_linguist_review_process.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 135_human_linguist_review_process.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "83d35b491feae66d3685bf6eb40b4fb5ca9a356b723d994bfb0f06375405960e",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/136_product_roadmap.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 136_product_roadmap.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d2c13c0e358fe8387e4551393c0a94c8941cfaa182d681ddacba8b49d880d4af",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/137_risk_register.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 137_risk_register.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7b94693f11780e7eb6854ef9b01d0d839b81d5997c66ee1a29d03ba84ba56b78",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/138_requirements_traceability_matrix.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 138_requirements_traceability_matrix.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2f29006c76244b8f249ad432f9829400c3c3396aa4f1fff331b06a4dbd59d955",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/139_acceptance_criteria.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 139_acceptance_criteria.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2eb578cb4e5e23c120620b5cf5e3ee3865ff7de93a53447043361491e59c3fc7",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/140_ai_assessment_calibration_and_human_agreement.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 140_ai_assessment_calibration_and_human_agreement.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e948ecee38054891f2dba59def4c6353311daf956f54380f7c02fb7c1ba29f10",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/141_language_variant_and_norm_policy.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 141_language_variant_and_norm_policy.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d16a044f0842dda6741d222c2209c6c1c802246dd3622a013a5d109a1913d93e",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/142_content_licensing_and_provenance.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 142_content_licensing_and_provenance.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "be32c73bec82bf1e3d2acdda3fdb7fbf27b65e0f81fdf695e6ec142cc1ffa25d",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/143_offline_learning_and_state_synchronization.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 143_offline_learning_and_state_synchronization.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c4f14b4ccc7e7069ace1f7c287ec1f0e9175aaa7d5a46d2ff1d9dc676d188d08",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/validation/144_content_recall_and_learning_state_repair.md",
+      "type": "documentation",
+      "purpose": "Canonical documentation: 144_content_recall_and_learning_state_repair.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "a34496550bb8026cb5484f6762c42711e0d7bbc11a1cd0c47bf0d1b0b9d168c5",
+      "related_requirements": [
+        "R084-R098"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/artifact_index.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: artifact_index.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "37641be10876e4fb21f48db402875474b1e07802e9d379b24e6dfbcc6cd96a1a",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/audio_scenario.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: audio_scenario.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7f0e4ffdd338589733ea3d13a27249da1c615e884b800a6dc6b2f5bef5cdc40d",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/diagnostic_evidence.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: diagnostic_evidence.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "8f9c508889b6e29ab51905747d2ab8734a261ea99287792e4d110a5481a2532e",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/diagnostic_session.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: diagnostic_session.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "5b939b4966cf08ca11809b711354f9748116dc13e94c2a08c851d5820ca187d6",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/dialogue_assessment.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: dialogue_assessment.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "033c3c967a7108e50bdd62cfac48a9a122bba95d7e4320536e4c942fa2399e2b",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/documentation_proof.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: documentation_proof.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2c126ffd2bd6fd83eafe375af4f7c9a998de7ba0acae00060abd6dd90c9f5e54",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/integrity_risk_signal.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: integrity_risk_signal.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9b10fa2bc36c6cb887d7641604939474f2bcda48ec04da7a34305a476cdbbbd3",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/learner_profile.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: learner_profile.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d7675544da1583159183dff9ed3178fbb9361aed4bd93cfa98fe10614ebd1664",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/learning_entry_contract.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: learning_entry_contract.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "4858862c9154ac986f5323f8b5d87f5a2cdd562a21b0e2ea50fd3b5e048726a1",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/lesson_contract.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: lesson_contract.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d2c9a33131f7715a4ecd060b3b9cb70fdbecae6421efc2ffbe577e5765d2092d",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/lesson_session.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: lesson_session.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e3de9f5e2f2db39186357e17b7bc37eae1c1dc5e03e5c56d36b70e12f37a1dd0",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/listening_assessment.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: listening_assessment.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "52901703aca831f0cf9a4568d53b6cf1b82d285dd30f8a5c9360bced29057a7e",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/mastery_evidence.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: mastery_evidence.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "35409b9be0a76410bb1f81a8834e7a6336dd860f7f108e67de8e03c51249e37c",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/narrative_analysis.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: narrative_analysis.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "8e9dfc72ad5be0fcf0f705dc5e415a725287b4a62d856c3e41380029536da9fc",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/performance_task.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: performance_task.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "f546d336093802011c2d10e9afcbc8b9bf2b889c86ff4a47ac79d5a6b86c0704",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/placement_result.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: placement_result.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "0e2de4efa552860a8d4eb326bcff3463cd97b09ed0b236e1f6545ee64fa4d14c",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/quiz_package.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: quiz_package.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "29c38a0ee781a4532afe1af36373d1e7bd533f861eb07cf4dc299a5d6c3519bc",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/review_schedule.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: review_schedule.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e97e40fb1b6b9816d761d01cb9b7475d93ba0fae3d8922544ca429c8a7811ead",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/reward_transaction.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: reward_transaction.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d46608ad9e6f93eac2869537f1cc8a75066a9c0d33cdeda4de0391e8f334e677",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/security_event.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: security_event.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9c1b5b57b8a4376c49aabdb3cd49462f7d15b97abd9832f535df9481e3aca1fc",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/skill_assessment.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: skill_assessment.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "00a8c709722fad288ab3eb42ff4f858b244219616f0514a01a4b14fa7226de90",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/visual_scenario.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: visual_scenario.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d785b51928dd13048a96b1e86fabb2972a918eb5c333873f9cf84ba5fc4577a4",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/schemas/writing_assessment.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema: writing_assessment.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7a9367919b95342173b2c60e6dc6f898ea5ec3f1a36809b53fd7884a576ea130",
+      "related_requirements": [
+        "R400"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_artifact_index.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_artifact_index.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "dcd6043f1154eaf3d548e229de08f05b11511630f9135b43d52010cb458394c7",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_audio_scenario.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_audio_scenario.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e75fcba8a139356db804aa578cf5c16dd8b44edb4e505f6c4d2ef22af9659707",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_diagnostic_evidence.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_diagnostic_evidence.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "ef097041e3f09c24f52f7a7f69586a04f009b11f08c1babe053587710fd44198",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_diagnostic_session.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_diagnostic_session.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7a0cf3a226bc467842f566bf6a627540f99457b0efbdc99a105c32042e649e4c",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_dialogue_assessment.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_dialogue_assessment.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "ba342dc98486c35319609518972309dc0ebc5bed4eee8efd811765041a4ee8c3",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_integrity_risk_signal.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_integrity_risk_signal.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "dc2fe0dd20cc0b8a786f8bd1be87f0ecd929c6811a6e1a2b77be02cdf30216d6",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_learner_profile.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_learner_profile.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "00ad4637bf85d48d2a9a795e86a5b12d0b7401d1bc99e951dbda4d8bc7559d92",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_learning_entry_contract.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_learning_entry_contract.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "dbe9d3d9b1e25e479a85166ff36708c72f8fb60145e52df94d7114f0ff23ad3d",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_lesson_contract.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_lesson_contract.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d20eea803b214866a131a1f09e9ed9e5636b47b794fa7fb6f9a879346060dbf7",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_lesson_session.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_lesson_session.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d5c0bb0795cb45e1e72765dd444f92b434a833984f576c31738b147c03b1053d",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_listening_assessment.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_listening_assessment.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "25e81a376a36e4020dea91d27aa2b343d84eeab9541a13d6007439b993d2a1a0",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_mastery_evidence.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_mastery_evidence.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "ba39de16ee73c3665480f6b11895a16447ea146e4efd3cd0c30d4e1a8ded4fea",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_narrative_analysis.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_narrative_analysis.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "962f51c8e0e8015ec5ddcb006b362245d81d54b5586759c4a8d02f3e7cbb8df6",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_performance_task.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_performance_task.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "1de901b953c628875ea235206084a49685741cf86e5e25c7a42b5859ca116f99",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_placement_result.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_placement_result.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b72eaf963fef7067b217da7470e1cbf81ff0af68b2814b32ccfb8e6e426bb057",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_quiz_package.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_quiz_package.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "53a2a9a6f3a24a93cb8bf5ef80347525da10971d5064bc22e011e1b7944c4af2",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_review_schedule.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_review_schedule.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "ac141b278a51e210c77ce9da348c83c9e4236dc08168ad6c433a51a6885e9e13",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_reward_transaction.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_reward_transaction.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "aac12d0b6ffa5d4f532868cbbba2b371ac7bcb0f0455d66cfd8417360b1b6ab6",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_security_event.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_security_event.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c95dfb76d1d771fc7f7de453ce506e616233f5541597896a8fe2a7aa7a936e56",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_skill_assessment.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_skill_assessment.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "1528b4539d6661140f091a69b68fa20541b0b59c30f61a3398e2bbd10dc26f3a",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_visual_scenario.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_visual_scenario.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "11995e1d1362d98f3f85c3121710d12ca5f3516cd5fc7ef6c09720a5e12ddc38",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/examples/fixture_writing_assessment.json",
+      "type": "example",
+      "purpose": "Schema fixture: fixture_writing_assessment.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "29e876a10b3de90eeaac10d73189744ee03dfd29b01b07541050a0faede3ed82",
+      "related_requirements": [
+        "R500"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "scripts/gen_all.py",
+      "type": "script",
+      "purpose": "Documentation generator: gen_all.py",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "80951ed9d19b41e859141c96874ddaea8e243a9380febd436d4bd3b2587446b4",
+      "related_requirements": [
+        "R600"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "scripts/gen_all_part2.py",
+      "type": "script",
+      "purpose": "Documentation generator: gen_all_part2.py",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c8e538a58ebeed56a0386820e0cc2e5e067988198962bf5af7eb70d865e689f4",
+      "related_requirements": [
+        "R600"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "scripts/gen_final_artifacts.py",
+      "type": "script",
+      "purpose": "Documentation generator: gen_final_artifacts.py",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "674663bea21d27f911c91e23f349a2b569a4156f851e6ce1096b3d59e3ed0de4",
+      "related_requirements": [
+        "R600"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "scripts/gen_methodology.py",
+      "type": "script",
+      "purpose": "Documentation generator: gen_methodology.py",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "fd02d6af5598cbb4f0922de07d16e0435bdd7e6099614df38b185509f77777cf",
+      "related_requirements": [
+        "R600"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "scripts/gen_schemas.py",
+      "type": "script",
+      "purpose": "Documentation generator: gen_schemas.py",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b347cc3d4373a1a393dae25c4bc82ad8bbb132665935babcc70de0292a072097",
+      "related_requirements": [
+        "R600"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "scripts/doc_data.json",
+      "type": "script",
+      "purpose": "Document generation data",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "79d9b67e79b00b067e1534ff01617e9fcc162ebbf8431ec5c14c2e16f36ce9b5",
+      "related_requirements": [
+        "R600"
+      ],
+      "dependencies": []
+    }
+  ]
+}

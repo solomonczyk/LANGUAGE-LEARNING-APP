@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/visual_scenario.json",
+  "title": "Visual Scenario",
+  "description": "A visual scenario (single image or sequence) used as lesson stimulus",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "image_count",
+    "task_types"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "image_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "task_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scene_description": {
+      "type": "string"
+    },
+    "detected_elements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "emotional_interpretations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cefr_level": {
+      "type": "string"
+    }
+  }
+}

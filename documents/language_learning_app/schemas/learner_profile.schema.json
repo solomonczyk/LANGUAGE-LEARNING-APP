@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/learner_profile.json",
+  "title": "Learner Profile",
+  "description": "Multidimensional learner profile with ability estimates and preferences",
+  "type": "object",
+  "required": [
+    "learner_id",
+    "profiles",
+    "preferences"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "learner_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/dimension_profile"
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "learning_style": {
+          "type": "string",
+          "enum": [
+            "inductive",
+            "deductive",
+            "mixed"
+          ]
+        },
+        "preferred_modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "session_duration_min": {
+          "type": "integer"
+        }
+      }
+    },
+    "interests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "languages": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "dimension_profile": {
+      "type": "object",
+      "required": [
+        "level",
+        "confidence"
+      ],
+      "properties": {
+        "level": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number"
+        },
+        "observations": {
+          "type": "integer"
+        },
+        "trend": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
