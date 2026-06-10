@@ -11,8 +11,8 @@
 
 | Platform | Minimum Version | Target Version | Rationale |
 |----------|----------------|----------------|-----------|
-| Android phones | Android 12 (API 31) | Android 14–15 | Expo SDK 52 supports API 31+; ~85% Android market reach by mid-2025 |
-| iPhone | iOS 16 | iOS 18–19 | Expo SDK 52 supports iOS 16+; ~90% iOS adoption by end-2024 |
+| Android phones | Android 12 (API 31) | Android 14–15 | Expo SDK 52 supports API 31+ (min: API 24); ~69% Android market reach on API 31+ by mid-2025 (informational estimate) |
+| iPhone | iOS 16 | iOS 18–19 | Expo SDK 52 supports iOS 16+ (min: iOS 15.1); ~89% iOS adoption on iOS 16+ by end-2024 (informational estimate) |
 
 **Versioned decision.** Changing minimum versions requires a new ADR with compatibility analysis against current Expo SDK policy.
 

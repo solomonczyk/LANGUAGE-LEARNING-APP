@@ -49,6 +49,9 @@
     { "path": "documents/language_learning_app/implementation_canon/examples/frontend_module.example.json", "type": "example", "purpose": "Example frontend module JSON fixture", "version": "1.0.0", "status": "accepted" },
     { "path": "documents/language_learning_app/implementation_canon/examples/backend_module.example.json", "type": "example", "purpose": "Example backend module JSON fixture", "version": "1.0.0", "status": "accepted" },
     { "path": "documents/language_learning_app/implementation_canon/examples/test_requirement.example.json", "type": "example", "purpose": "Example test requirement JSON fixture", "version": "1.0.0", "status": "accepted" },
-    { "path": "documents/language_learning_app/implementation_canon/examples/quality_gate.example.json", "type": "example", "purpose": "Example quality gate JSON fixture", "version": "1.0.0", "status": "accepted" }
+    { "path": "documents/language_learning_app/implementation_canon/examples/quality_gate.example.json", "type": "example", "purpose": "Example quality gate JSON fixture", "version": "1.0.0", "status": "accepted" },
+    { "path": "documents/language_learning_app/implementation_canon/validation/evidence_verification_report_002c.md", "type": "documentation", "purpose": "Evidence verification report for implementation canon 002B", "version": "1.0.0", "status": "accepted" },
+    { "path": "documents/language_learning_app/implementation_canon/validation/expo_compatibility_verification.md", "type": "documentation", "purpose": "Expo SDK compatibility verification report", "version": "1.0.0", "status": "accepted" },
+    { "path": "documents/language_learning_app/implementation_canon/proof_language_learning_app_implementation_canon_002c.json", "type": "proof", "purpose": "Evidence verification proof JSON for task 002C", "version": "1.0.0", "status": "accepted" }
   ]
 }
