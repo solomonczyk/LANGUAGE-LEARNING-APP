@@ -1234,7 +1234,7 @@
       "purpose": "Canonical documentation: 138_requirements_traceability_matrix.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "2f29006c76244b8f249ad432f9829400c3c3396aa4f1fff331b06a4dbd59d955",
+      "sha256": "5e83583a08ae762f210e0da51bbb8e2d607d8959476f9c269326091b59460066",
       "related_requirements": [
         "R084-R098"
       ],
@@ -1378,7 +1378,7 @@
       "purpose": "JSON Schema: documentation_proof.schema.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "2c126ffd2bd6fd83eafe375af4f7c9a998de7ba0acae00060abd6dd90c9f5e54",
+      "sha256": "36466969392412e7eaaef24f4f3d694ab757ad41e860a1b1a8a22cdcf65a3826",
       "related_requirements": [
         "R400"
       ],

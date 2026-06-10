@@ -75,7 +75,7 @@ This matrix maps every requirement from the LANGUAGE-LEARNING-APP-CANONICAL-DOCU
 
 | ID | Requirement | Document | Section | Status |
 |----|-------------|----------|---------|--------|
-| R100 | Multidimensional diagnostic (14+ dimensions) | diagnostics/40_initial_diagnostic_and_placement_system.md | Dimensions assessed | COVERED |
+| R100 | Multidimensional diagnostic (13 dimensions) | diagnostics/40_initial_diagnostic_and_placement_system.md | Dimensions assessed | COVERED |
 | R101 | Dynamic scaffolding (6 levels) | lessons/54_language_scaffolding_policy.md | Six scaffolding levels | COVERED |
 | R102 | Visual narrative task types | skill_modes/62_visual_narrative_lesson_system.md | Task types | COVERED |
 | R103 | Audio narrative duration limits | skill_modes/64_audio_narrative_lesson_system.md | Audio duration by CEFR level | COVERED |

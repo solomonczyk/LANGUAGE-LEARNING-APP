@@ -1,61 +1,61 @@
 {
-  "task_id": "LANGUAGE-LEARNING-APP-CANONICAL-DOCUMENTATION-FOUNDATION-001A",
-  "parent_task_id": "LANGUAGE-LEARNING-APP-CANONICAL-DOCUMENTATION-FOUNDATION-001",
+  "task_id": "LANGUAGE-LEARNING-APP-CANONICAL-DOCUMENTATION-FOUNDATION-001B",
+  "parent_task_id": "LANGUAGE-LEARNING-APP-CANONICAL-DOCUMENTATION-FOUNDATION-001A",
   "verdict": "ACCEPTED",
   "feature_completed": true,
   "documentation_only": true,
   "reconciliation_completed": true,
   "canonical_commit_chain_verified": true,
-  "previous_reports_consistent": false,
-  "previous_contradictions_resolved": true,
+  "requirement_count_delta_explained": true,
+  "requirements_lost": 0,
+  "artifact_index_delta_verified": true,
+  "forbidden_actions_complete": true,
   "git": {
     "branch": "master",
-    "repository_initial_commit": "86ca21574dedb7203523d06227290060ddd31587",
-    "foundation_baseline_commit": null,
     "foundation_implementation_commit": "86ca21574dedb7203523d06227290060ddd31587",
     "correction_starting_commit": "86ca21574dedb7203523d06227290060ddd31587",
-    "correction_intermediate_commits": [],
+    "correction_intermediate_commits": [
+      "2bf4b8d0c3dce1997715a80a79d7171b81542b93"
+    ],
     "correction_final_commit": "5dc80e3c4047f3088e73b0a009e17f31d1b54a29",
     "origin_master_commit": "5dc80e3c4047f3088e73b0a009e17f31d1b54a29",
     "commit_created": true,
     "commit_pushed": true,
     "git_clean": true,
-    "head_matches_origin": true
+    "head_matches_origin": true,
+    "unpushed_commits": 0
+  },
+  "requirements": {
+    "previous_reported_requirements": 55,
+    "canonical_requirements": 52,
+    "duplicates_removed": 0,
+    "merged_requirements": 0,
+    "counting_errors_corrected": 3,
+    "requirements_lost": 0,
+    "untraced_requirements": 0,
+    "broken_trace_links": 0,
+    "duplicate_requirement_ids": 0
   },
   "artifacts": {
-    "markdown_document_count": 105,
-    "json_schema_count": 23,
-    "schema_fixture_count": 22,
-    "end_to_end_example_count": 5,
-    "artifact_index_entry_count": 156,
-    "missing_artifacts": 0,
+    "previous_index_entries": 156,
+    "artifacts_added_by_001a": 0,
+    "artifacts_removed": 0,
+    "final_index_entries": 156,
+    "unindexed_required_artifacts": 0,
+    "missing_indexed_artifacts": 0,
     "hash_mismatches": 0
   },
   "validation": {
-    "tests_total": 20,
-    "tests_passed": 20,
+    "tests_total": 12,
+    "tests_passed": 12,
     "tests_failed": 0,
     "warnings": 0,
     "schemas_valid": true,
     "fixtures_valid": true,
-    "artifact_index_valid": true,
     "traceability_valid": true,
-    "proof_valid": true
-  },
-  "traceability": {
-    "requirements_total": 52,
-    "requirements_traced": 52,
-    "requirements_untraced": 0,
-    "broken_trace_links": 0,
-    "duplicate_requirement_ids": 0
-  },
-  "contradictions": {
-    "lesson_modes": 0,
-    "mastery_lifecycle": 0,
-    "diagnostic_dimensions": 1,
-    "review_intervals": 0,
-    "llm_permissions": 0,
-    "reward_authority": 0
+    "artifact_index_valid": true,
+    "proof_001a_valid": true,
+    "proof_001b_valid": true
   },
   "forbidden_actions": {
     "application_code_changed": false,

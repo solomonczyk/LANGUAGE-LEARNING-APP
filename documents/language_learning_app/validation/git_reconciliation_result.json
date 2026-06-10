@@ -1,114 +1,54 @@
 {
-  "reconciliation_task": "LANGUAGE-LEARNING-APP-CANONICAL-DOCUMENTATION-FOUNDATION-001A",
+  "reconciliation_task": "LANGUAGE-LEARNING-APP-CANONICAL-DOCUMENTATION-FOUNDATION-001B",
   "preflight": {
     "repo_root": "f:/Dev/Projects/LANGUAGE-LEARNING-APP",
     "branch": "master",
-    "local_head_before": "86ca21574dedb7203523d06227290060ddd31587",
-    "origin_head_before": "86ca21574dedb7203523d06227290060ddd31587",
+    "local_head_before": "5dc80e3c4047f3088e73b0a009e17f31d1b54a29",
+    "origin_head_before": "5dc80e3c4047f3088e73b0a009e17f31d1b54a29",
     "git_clean_before": true,
     "remotes": ["origin -> git@github.com:solomonczyk/LANGUAGE-LEARNING-APP.git"]
   },
-  "commit_chain": {
-    "repository_initial_commit": "86ca21574dedb7203523d06227290060ddd31587",
-    "foundation_baseline_commit": null,
+  "canonical_commit_chain": {
     "foundation_implementation_commit": "86ca21574dedb7203523d06227290060ddd31587",
-    "foundation_correction_commit": null,
-    "final_head_before": "86ca21574dedb7203523d06227290060ddd31587",
-    "origin_master_before": "86ca21574dedb7203523d06227290060ddd31587"
+    "correction_starting_commit": "86ca21574dedb7203523d06227290060ddd31587",
+    "correction_intermediate_commits": [
+      {
+        "hash": "2bf4b8d0c3dce1997715a80a79d7171b81542b93",
+        "purpose": "Reconcile foundation proof and git closeout",
+        "docs_tests_only": true,
+        "application_runtime_changes": false
+      }
+    ],
+    "correction_final_commit": "5dc80e3c4047f3088e73b0a009e17f31d1b54a29",
+    "origin_master_commit": "5dc80e3c4047f3088e73b0a009e17f31d1b54a29"
   },
-  "commits_investigated": {
-    "86ca21574dedb7203523d06227290060ddd31587": {
-      "exists_locally": true,
-      "exists_remotely": true,
-      "parent": "root (no parent)",
-      "author": "Andrii Tarasenko",
-      "date": "2026-06-09 19:57:13 +0200",
+  "commit_classification": [
+    {
+      "hash": "86ca21574dedb7203523d06227290060ddd31587",
+      "purpose": "Foundation implementation commit",
       "message": "docs: add canonical language learning app foundation",
-      "is_foundation_implementation": true,
-      "in_origin_master_ancestry": true,
-      "branch_containing": "master, origin/master",
-      "diff_vs_f6bc690": "only proof JSON changed (commit_pushed and starting_commit fields)"
-    },
-    "f6bc690a4256fd3abf53050f81c21809e97afa52": {
-      "exists_locally": true,
-      "exists_remotely": false,
-      "parent": "root (no parent)",
-      "author": "Andrii Tarasenko",
-      "date": "2026-06-09 19:57:13 +0200",
-      "message": "docs: add canonical language learning app foundation",
-      "is_foundation_implementation": false,
-      "in_origin_master_ancestry": false,
-      "branch_containing": "none (dangling commit)",
-      "classification": "draft/amended-before-push of 86ca215"
-    }
-  },
-  "reconciliation_table": [
-    {
-      "field": "starting_commit",
-      "reported_value": "f6bc690a4256fd3abf53050f81c21809e97afa52",
-      "actual_value": "86ca21574dedb7203523d06227290060ddd31587",
-      "status": "CONTRADICTION — pointed to draft commit not in branch ancestry",
-      "evidence": "f6bc690 is NOT in origin/master ancestry. HEAD=86ca215 is the actual starting point."
+      "docs_tests_only": true,
+      "application_runtime_changes": false
     },
     {
-      "field": "foundation_implementation_commit",
-      "reported_value": "f6bc690",
-      "actual_value": "86ca215",
-      "status": "CORRECTED — 86ca215 is the actual pushed implementation commit",
-      "evidence": "86ca215 is on origin/master and contains all 161 documentation files"
+      "hash": "2bf4b8d0c3dce1997715a80a79d7171b81542b93",
+      "purpose": "Correction: reconcile foundation proof and git closeout",
+      "message": "docs: reconcile foundation proof and git closeout",
+      "docs_tests_only": true,
+      "application_runtime_changes": false
     },
     {
-      "field": "final_commit (was reported as f6bc690)",
-      "reported_value": "f6bc690a4256fd3abf53050f81c21809e97afa52",
-      "actual_value": "86ca21574dedb7203523d06227290060ddd31587",
-      "status": "CONTRADICTION — pointed to un-pushed draft",
-      "evidence": "86ca215 is the only commit in origin/master ancestry"
-    },
-    {
-      "field": "commit_created",
-      "reported_value": true,
-      "actual_value": false,
-      "status": "CORRECT — commit_created=false because correction is pending",
-      "evidence": "HEAD unchanged before correction commit"
-    },
-    {
-      "field": "commit_pushed",
-      "reported_value": false,
-      "actual_value": true,
-      "status": "CONTRADICTION — 86ca215 IS pushed to origin/master",
-      "evidence": "git fetch confirmed 86ca215 == origin/master"
-    },
-    {
-      "field": "git_clean",
-      "reported_value": true,
-      "actual_value": true,
-      "status": "MATCH",
-      "evidence": "git status --short returns empty"
-    },
-    {
-      "field": "head_matches_origin",
-      "reported_value": true,
-      "actual_value": true,
-      "status": "MATCH",
-      "evidence": "86ca215 == origin/master"
-    },
-    {
-      "field": "example_count",
-      "reported_value": 22,
-      "actual_value": "27 (22 fixtures + 5 end-to-end examples)",
-      "status": "CONTRADICTION — conflated fixtures and examples",
-      "evidence": "fixtures=22, end-to-end examples=5"
+      "hash": "5dc80e3c4047f3088e73b0a009e17f31d1b54a29",
+      "purpose": "Correction: update proof_001a with final commit hashes",
+      "message": "docs: update proof_001a with final commit hashes",
+      "docs_tests_only": true,
+      "application_runtime_changes": false
     }
   ],
-  "root_cause": "The initial commit was created (f6bc690), then amended/recreated as 86ca215 before push. The proof JSON was updated partially (starting_commit field was set to f6bc690, commit_pushed set to false) but these values reflected the draft state, not the pushed state. 86ca215 was the actual commit pushed to origin/master.",
-  "artifacts": {
-    "markdown_document_count": 105,
-    "json_schema_count": 23,
-    "schema_fixture_count": 22,
-    "end_to_end_example_count": 5,
-    "diagram_count": 1,
-    "validation_script_count": 6,
-    "test_file_count": 1,
-    "artifact_index_entry_count": 156
+  "final_state": {
+    "git_clean": true,
+    "head_matches_origin": true,
+    "unpushed_commits": 0,
+    "uncommitted_changes": 0
   }
 }

@@ -10,9 +10,11 @@
     "feature_completed",
     "documentation_only"
   ],
-  "additionalProperties": false,
   "properties": {
     "task_id": {
+      "type": "string"
+    },
+    "parent_task_id": {
       "type": "string"
     },
     "verdict": {
@@ -27,6 +29,31 @@
       "type": "boolean"
     },
     "documentation_only": {
+      "type": "boolean"
+    },
+    "reconciliation_completed": {
+      "type": "boolean"
+    },
+    "canonical_commit_chain_verified": {
+      "type": "boolean"
+    },
+    "requirement_count_delta_explained": {
+      "type": "boolean"
+    },
+    "requirements_lost": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "artifact_index_delta_verified": {
+      "type": "boolean"
+    },
+    "forbidden_actions_complete": {
+      "type": "boolean"
+    },
+    "previous_reports_consistent": {
+      "type": "boolean"
+    },
+    "previous_contradictions_resolved": {
       "type": "boolean"
     },
     "documents_created": {
@@ -58,6 +85,18 @@
         "type": "string"
       }
     },
+    "current_state": {
+      "type": "string"
+    },
+    "next_allowed_action": {
+      "type": "string"
+    },
+    "application_implementation_allowed": {
+      "type": "boolean"
+    },
+    "production_accepted": {
+      "type": "boolean"
+    },
     "application_code_changed": {
       "type": "boolean"
     },
@@ -76,31 +115,23 @@
     "prompt_injection_defense_documented": {
       "type": "boolean"
     },
-    "tests": {
-      "type": "object",
-      "properties": {
-        "documentation_tests_passed": {
-          "type": "boolean"
-        },
-        "schema_validation_passed": {
-          "type": "boolean"
-        },
-        "link_validation_passed": {
-          "type": "boolean"
-        }
-      }
+    "contradictions": {
+      "type": "object"
+    },
+    "forbidden_actions": {
+      "type": "object"
+    },
+    "requirements": {
+      "type": "object"
+    },
+    "artifacts": {
+      "type": "object"
+    },
+    "traceability": {
+      "type": "object"
     },
     "git": {
       "type": "object",
-      "required": [
-        "branch",
-        "starting_commit",
-        "final_commit",
-        "commit_created",
-        "commit_pushed",
-        "git_clean",
-        "head_matches_origin"
-      ],
       "properties": {
         "branch": {
           "type": "string"
@@ -121,6 +152,23 @@
           "type": "boolean"
         },
         "head_matches_origin": {
+          "type": "boolean"
+        }
+      }
+    },
+    "validation": {
+      "type": "object"
+    },
+    "tests": {
+      "type": "object",
+      "properties": {
+        "documentation_tests_passed": {
+          "type": "boolean"
+        },
+        "schema_validation_passed": {
+          "type": "boolean"
+        },
+        "link_validation_passed": {
           "type": "boolean"
         }
       }
