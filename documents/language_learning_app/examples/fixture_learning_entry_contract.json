@@ -1,5 +1,11 @@
 {
   "learner_id": "test_learner_id",
-  "goals": [],
-  "time_commitment": {}
+  "goals": [
+    "Improve conversational fluency",
+    "Expand vocabulary"
+  ],
+  "time_commitment": {
+    "minutes_per_day": 20,
+    "days_per_week": 5
+  }
 }

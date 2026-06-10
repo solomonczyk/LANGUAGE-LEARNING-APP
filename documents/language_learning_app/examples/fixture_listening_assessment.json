@@ -1,5 +1,8 @@
 {
   "assessment_id": "test_assessment_id",
   "audio_id": "test_audio_id",
-  "comprehension_scores": {}
+  "comprehension_scores": {
+    "gist": 0.85,
+    "detail": 0.75
+  }
 }

@@ -31,7 +31,7 @@
       "purpose": "Canonical documentation: 02_decision_log.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "a553094b6a427473c962ee53053cb68aa99ce4395357f8fe3e9b77e1946e5cba",
+      "sha256": "e6f43d40ae8b4ae5a09ec3271ee4baefd18ed97c74bb6621ddd69f0102809f31",
       "related_requirements": [
         "R003"
       ],
@@ -225,7 +225,7 @@
       "purpose": "Canonical documentation: 40_initial_diagnostic_and_placement_system.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "9b2e0785b3dc66ad169a33e69f8221c0c8a09a75ada1e6c59d88b816a22d30eb",
+      "sha256": "06d2e92cdd0e15b22295f7fa6c91dec516136b78f54e2c5f84d9e60c41e68558",
       "related_requirements": [
         "R021-R027",
         "R100"
@@ -238,7 +238,7 @@
       "purpose": "Canonical documentation: 41_diagnostic_task_bank_contract.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "d6e2fe97e5019dfd708fe9b1fda3149c2df1b4a3ec430d4808c408974fc5f289",
+      "sha256": "8018993fa876707ee3b73f52cd734cfbe5033ea58074d3b7c3ab86e7ade96082",
       "related_requirements": [
         "R021-R027",
         "R100"
@@ -251,7 +251,7 @@
       "purpose": "Canonical documentation: 42_multidimensional_learner_profile.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "57d99053f3e4ca8ba32469884b1c4f5ceb7a7315a630c98e1304a4cdd4dddff4",
+      "sha256": "12a39cdad3b68bffde1f6d0903b0853cc9ab3b82829ab6b6a233887b60986555",
       "related_requirements": [
         "R021-R027",
         "R100"
@@ -264,7 +264,7 @@
       "purpose": "Canonical documentation: 43_learning_entry_contract.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "9c598eb6c536e650f643315ace28b16bd4292981fba82a327a59558bf1065d95",
+      "sha256": "30c96b922c9ef0a590af7937cc3accaef529427cec3c65d0e0fcf85632bf7cce",
       "related_requirements": [
         "R021-R027",
         "R100"
@@ -277,7 +277,7 @@
       "purpose": "Canonical documentation: 44_continuous_recalibration_policy.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "849a12b12d4a171f5369053925047d326509ecd44e901f74ea0c14937420e35d",
+      "sha256": "9b59ca7350c676b8320b174e2714256347d87355e13ceb1b96a4c5099ec83689",
       "related_requirements": [
         "R021-R027",
         "R100"
@@ -290,7 +290,7 @@
       "purpose": "Canonical documentation: 45_assessment_confidence_and_evidence_model.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "59f9e7886254ba65c35b6268b523344c4a20705d06ff03a6e3d079bcde7846e5",
+      "sha256": "72c8e1cd6b030445f02b5eeb26b8bd8bdb5731e297fe0dd687378c7e58eb6122",
       "related_requirements": [
         "R021-R027",
         "R100"
@@ -303,7 +303,7 @@
       "purpose": "Canonical documentation: 46_learner_error_evidence_model.md",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "52850db01e31acfe3d8a8821bec43a91f67f0328dc615ac27ee8edf9c7c726d9",
+      "sha256": "90ce6fbc0e9b6c8945b37872b86e146da2669b69dc022e7abf52b811eebd149a",
       "related_requirements": [
         "R021-R027",
         "R100"
@@ -1354,7 +1354,7 @@
       "purpose": "JSON Schema: diagnostic_session.schema.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "5b939b4966cf08ca11809b711354f9748116dc13e94c2a08c851d5820ca187d6",
+      "sha256": "b72a83c2f69ad38a6c72fe2a6a7f812b4d4daa0f07c71b01a85970ad57aaf416",
       "related_requirements": [
         "R400"
       ],
@@ -1606,7 +1606,7 @@
       "purpose": "Schema fixture: fixture_audio_scenario.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "e75fcba8a139356db804aa578cf5c16dd8b44edb4e505f6c4d2ef22af9659707",
+      "sha256": "0e0872fe2b46bed8d56e70e00d1026ef02f59d5a6393d23441f09772129181a4",
       "related_requirements": [
         "R500"
       ],
@@ -1630,7 +1630,7 @@
       "purpose": "Schema fixture: fixture_diagnostic_session.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "7a0cf3a226bc467842f566bf6a627540f99457b0efbdc99a105c32042e649e4c",
+      "sha256": "8da9814b9538f30691561e83d818741ad333dc4cbb0be639ff9c31ab83546ade",
       "related_requirements": [
         "R500"
       ],
@@ -1678,7 +1678,7 @@
       "purpose": "Schema fixture: fixture_learning_entry_contract.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "dbe9d3d9b1e25e479a85166ff36708c72f8fb60145e52df94d7114f0ff23ad3d",
+      "sha256": "52f0970e43f732d77ec8ef9e5567adf47c7de8e8b109e6eabadd87bc36c0e958",
       "related_requirements": [
         "R500"
       ],
@@ -1690,7 +1690,7 @@
       "purpose": "Schema fixture: fixture_lesson_contract.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "d20eea803b214866a131a1f09e9ed9e5636b47b794fa7fb6f9a879346060dbf7",
+      "sha256": "7fb82d978f8c1200fdf600a23001b9609acd0dd8a8b7460454b8d79db1937a9a",
       "related_requirements": [
         "R500"
       ],
@@ -1714,7 +1714,7 @@
       "purpose": "Schema fixture: fixture_listening_assessment.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "25e81a376a36e4020dea91d27aa2b343d84eeab9541a13d6007439b993d2a1a0",
+      "sha256": "8b7296b8d8e66a93d63eddcb249ff4d54dff31a8cf00a455b058733d881f4cf2",
       "related_requirements": [
         "R500"
       ],
@@ -1738,7 +1738,7 @@
       "purpose": "Schema fixture: fixture_narrative_analysis.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "962f51c8e0e8015ec5ddcb006b362245d81d54b5586759c4a8d02f3e7cbb8df6",
+      "sha256": "fd26f11ec9d65c19be21632d8e96afc36a33310b0e0f7060954a4e951bf3537e",
       "related_requirements": [
         "R500"
       ],
@@ -1750,7 +1750,7 @@
       "purpose": "Schema fixture: fixture_performance_task.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "1de901b953c628875ea235206084a49685741cf86e5e25c7a42b5859ca116f99",
+      "sha256": "958dece93b543573c9e9bf01e0ebf081527048d3663eec3f34ad8f3d26de3fd9",
       "related_requirements": [
         "R500"
       ],
@@ -1762,7 +1762,7 @@
       "purpose": "Schema fixture: fixture_placement_result.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "b72eaf963fef7067b217da7470e1cbf81ff0af68b2814b32ccfb8e6e426bb057",
+      "sha256": "737488a59f9b9851528a64e24c9372a0d90d8a930b41d0bb09ed534acc89b76b",
       "related_requirements": [
         "R500"
       ],
@@ -1774,7 +1774,7 @@
       "purpose": "Schema fixture: fixture_quiz_package.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "53a2a9a6f3a24a93cb8bf5ef80347525da10971d5064bc22e011e1b7944c4af2",
+      "sha256": "998e49b1abcf1b5a64f50667fdc8ff2511ae7412846271d67dd5604a4029e8ba",
       "related_requirements": [
         "R500"
       ],
@@ -1846,7 +1846,7 @@
       "purpose": "Schema fixture: fixture_writing_assessment.json",
       "version": "1.0.0",
       "status": "approved",
-      "sha256": "29e876a10b3de90eeaac10d73189744ee03dfd29b01b07541050a0faede3ed82",
+      "sha256": "fa783563d7cb5386bba9dfd7700f6ee8652064c1351954a93d9b67ef70e8ff6d",
       "related_requirements": [
         "R500"
       ],

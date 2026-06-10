@@ -1,7 +1,73 @@
 {
   "learner_id": "00000000-0000-0000-0000-000000000000",
   "session_id": "00000000-0000-0000-0000-000000000000",
-  "dimensions": [],
+  "dimensions": [
+    {
+      "dimension": "reading",
+      "level": "B1",
+      "confidence": 0.85
+    },
+    {
+      "dimension": "listening",
+      "level": "B1",
+      "confidence": 0.8
+    },
+    {
+      "dimension": "passive_vocabulary",
+      "level": "B1",
+      "confidence": 0.82
+    },
+    {
+      "dimension": "active_vocabulary",
+      "level": "A2",
+      "confidence": 0.78
+    },
+    {
+      "dimension": "grammar_recognition",
+      "level": "B1",
+      "confidence": 0.83
+    },
+    {
+      "dimension": "productive_grammar",
+      "level": "A2",
+      "confidence": 0.75
+    },
+    {
+      "dimension": "spoken_production",
+      "level": "A2",
+      "confidence": 0.72
+    },
+    {
+      "dimension": "spoken_interaction",
+      "level": "A2",
+      "confidence": 0.74
+    },
+    {
+      "dimension": "pronunciation_intelligibility",
+      "level": "B1",
+      "confidence": 0.8
+    },
+    {
+      "dimension": "narrative_coherence",
+      "level": "A2",
+      "confidence": 0.76
+    },
+    {
+      "dimension": "writing",
+      "level": "A2",
+      "confidence": 0.73
+    },
+    {
+      "dimension": "mediation",
+      "level": "B1",
+      "confidence": 0.79
+    },
+    {
+      "dimension": "communication_strategies",
+      "level": "B1",
+      "confidence": 0.81
+    }
+  ],
   "started_at": "2026-06-09T00:00:00Z",
   "status": "in_progress"
 }

@@ -26,7 +26,7 @@
       "items": {
         "$ref": "#/definitions/dimension_assessment"
       },
-      "minItems": 14
+      "minItems": 13
     },
     "started_at": {
       "type": "string",

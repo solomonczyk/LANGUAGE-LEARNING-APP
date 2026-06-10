@@ -1,5 +1,5 @@
 {
   "scenario_id": "test_scenario_id",
-  "duration_seconds": 0.5,
+  "duration_seconds": 30,
   "transcript": "test_transcript"
 }

@@ -8,7 +8,7 @@
 
 ## Purpose
 
-The multidimensional initial assessment that evaluates learners across 14+ separate dimensions with confidence intervals.
+The multidimensional initial assessment that evaluates learners across 13 separate dimensions with confidence intervals.
 
 ## In scope
 
@@ -27,7 +27,7 @@ The multidimensional initial assessment that evaluates learners across 14+ separ
 
 ## Core decisions
 
-1. Diagnostic must evaluate 14+ separate dimensions
+1. Diagnostic must evaluate 13 separate dimensions
 2. No single-level placement is allowed
 3. Confidence intervals accompany every estimate
 4. Continuous recalibration updates the profile

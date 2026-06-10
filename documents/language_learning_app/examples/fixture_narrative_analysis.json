@@ -1,5 +1,26 @@
 {
   "narrative_id": "00000000-0000-0000-0000-000000000000",
   "learner_id": "test_learner_id",
-  "analysis_dimensions": {}
+  "analysis_dimensions": {
+    "grammatical_accuracy": {
+      "score": 0.7,
+      "evidence": [],
+      "level": "intermediate"
+    },
+    "lexical_range": {
+      "score": 0.65,
+      "evidence": [],
+      "level": "intermediate"
+    },
+    "narrative_coherence": {
+      "score": 0.8,
+      "evidence": [],
+      "level": "intermediate"
+    },
+    "pragmatic_appropriateness": {
+      "score": 0.75,
+      "evidence": [],
+      "level": "intermediate"
+    }
+  }
 }

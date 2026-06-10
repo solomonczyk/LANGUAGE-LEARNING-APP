@@ -77,7 +77,7 @@ Each entry:
 | Field | Value |
 |-------|-------|
 | **Date** | 2026-06-09 |
-| **Title** | Diagnostic evaluates 14+ separate dimensions, not one overall level |
+| **Title** | Diagnostic evaluates 13 separate dimensions, not one overall level |
 | **Context** | Language ability is not monolithic. A learner may be B1 in reading but A2 in speaking. Single-level placement leads to inappropriate content. |
 | **Decision** | The initial diagnostic separately assesses: reading, listening, passive vocabulary, active vocabulary, grammar recognition, productive grammar, spoken production, spoken interaction, pronunciation intelligibility, narrative coherence, writing, mediation, communication strategies. Each dimension receives a level estimate with confidence interval. |
 | **Alternatives** | 1. **Single placement test** — faster but inaccurate. 2. **Self-assessment** — unreliable for objective placement. |

@@ -27,7 +27,7 @@ The structured representation of a learner's abilities across all assessed dimen
 
 ## Core decisions
 
-1. Diagnostic must evaluate 14+ separate dimensions
+1. Diagnostic must evaluate 13 separate dimensions
 2. No single-level placement is allowed
 3. Confidence intervals accompany every estimate
 4. Continuous recalibration updates the profile
@@ -43,7 +43,7 @@ The structured representation of a learner's abilities across all assessed dimen
 
 ## Profile structure
 
-The learner profile captures ability estimates across all 14+ dimensions, plus metadata, preferences, and history.
+The learner profile captures ability estimates across all 13 dimensions, plus metadata, preferences, and history.
 
 ## Per-dimension data
 

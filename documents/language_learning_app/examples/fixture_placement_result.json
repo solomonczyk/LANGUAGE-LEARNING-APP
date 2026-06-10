@@ -1,5 +1,8 @@
 {
   "learner_id": "test_learner_id",
   "diagnostic_session_id": "test_diagnostic_session_id",
-  "recommended_start_range": {}
+  "recommended_start_range": {
+    "low": "A2",
+    "high": "B1"
+  }
 }

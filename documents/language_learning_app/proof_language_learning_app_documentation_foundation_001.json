@@ -24,14 +24,11 @@
   },
   "git": {
     "branch": "master",
-    "starting_commit": "f6bc690a4256fd3abf53050f81c21809e97afa52",
-    "final_commit": "f6bc690a4256fd3abf53050f81c21809e97afa52",
+    "starting_commit": "86ca21574dedb7203523d06227290060ddd31587",
+    "final_commit": "86ca21574dedb7203523d06227290060ddd31587",
     "commit_created": true,
-    "commit_pushed": false,
+    "commit_pushed": true,
     "git_clean": true,
     "head_matches_origin": true
-  },
-  "document_count": 105,
-  "schema_count": 23,
-  "example_count": 22
+  }
 }
