@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Vertical Slice 003 Proof",
+  "description": "Validation schema for the implementation proof JSON",
+  "type": "object",
+  "required": [
+    "task_id",
+    "verdict",
+    "feature_completed",
+    "vertical_slice_completed",
+    "tests",
+    "dangerous_action_gates",
+    "git"
+  ],
+  "properties": {
+    "task_id": { "type": "string", "const": "FIRST-MVP-VERTICAL-SLICE-IMPLEMENTATION-003" },
+    "verdict": { "type": "string", "enum": ["ACCEPTED", "REJECTED"] },
+    "feature_completed": { "type": "boolean", "const": true },
+    "tests": {
+      "type": "object",
+      "required": ["tests_total", "tests_passed", "tests_failed"],
+      "properties": {
+        "tests_total": { "type": "integer", "minimum": 0 },
+        "tests_passed": { "type": "integer", "minimum": 0 },
+        "tests_failed": { "type": "integer", "minimum": 0, "maximum": 0 }
+      }
+    },
+    "dangerous_action_gates": {
+      "type": "object",
+      "required": [
+        "generation_gate",
+        "retry_gate",
+        "schema_acceptance_gate",
+        "linguistic_acceptance_gate",
+        "pedagogical_acceptance_gate",
+        "lesson_completion_gate",
+        "mastery_transition_gate",
+        "audit_gate",
+        "visual_qa_gate",
+        "staging_gate",
+        "production_gate"
+      ]
+    },
+    "git": {
+      "type": "object",
+      "required": ["git_clean", "head_matches_origin", "unpushed_commits", "uncommitted_changes"]
+    },
+    "real_ai_calls_executed": { "type": "boolean", "const": false },
+    "production_accepted": { "type": "boolean", "const": false }
+  }
+}

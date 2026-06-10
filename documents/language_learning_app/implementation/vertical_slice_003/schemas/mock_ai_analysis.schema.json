@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Mock AI Analysis Output",
+  "description": "Schema for structured output from the mock AI analysis gateway",
+  "type": "object",
+  "required": [
+    "analysis_version",
+    "meaning_preserved",
+    "detected_issues",
+    "strengths",
+    "recommended_focus",
+    "confidence"
+  ],
+  "properties": {
+    "analysis_version": {
+      "type": "string",
+      "description": "Version identifier for the analysis format",
+      "pattern": "^mock-v\\d+$"
+    },
+    "meaning_preserved": {
+      "type": "boolean",
+      "description": "Whether the learner's intended meaning was preserved"
+    },
+    "detected_issues": {
+      "type": "array",
+      "description": "List of detected language issues",
+      "items": {
+        "type": "object",
+        "required": ["code", "severity", "span", "suggestion"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "VERB_FORM", "ARTICLE", "PREPOSITION", "WORD_ORDER",
+              "COLLOCATION", "SPELLING", "TENSE", "PLURAL",
+              "SUBJECT_VERB_AGREEMENT", "MODAL"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["major", "minor", "info"]
+          },
+          "span": {
+            "type": "string",
+            "description": "The text span containing the issue"
+          },
+          "suggestion": {
+            "type": "string",
+            "description": "Suggested correction"
+          }
+        }
+      }
+    },
+    "strengths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Positive aspects of the learner's text"
+    },
+    "recommended_focus": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Recommended areas for learner focus"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Analysis confidence score"
+    }
+  }
+}

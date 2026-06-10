@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Language Learning App",
+    "slug": "language-learning-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "llapp",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.llapp.mobile",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.llapp.mobile",
+      "permissions": []
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}

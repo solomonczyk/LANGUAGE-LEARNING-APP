@@ -1,0 +1,27 @@
+{
+  "analysis_version": "mock-v1",
+  "meaning_preserved": true,
+  "detected_issues": [
+    {
+      "code": "VERB_FORM",
+      "severity": "major",
+      "span": "wants to the water closet",
+      "suggestion": "wanted to go to the litter box"
+    },
+    {
+      "code": "PREPOSITION",
+      "severity": "minor",
+      "span": "jump on the bed",
+      "suggestion": "jumped on the bed"
+    }
+  ],
+  "strengths": [
+    "The sequence of events is understandable.",
+    "Good use of time markers."
+  ],
+  "recommended_focus": [
+    "Past tense",
+    "Natural verb phrase"
+  ],
+  "confidence": 0.91
+}

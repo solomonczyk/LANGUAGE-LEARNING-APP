@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lesson Processing Result",
+  "description": "Schema for the lesson processing pipeline result",
+  "type": "object",
+  "required": ["session_id", "status"],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Lesson session identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CREATED", "ACTIVE", "SUBMITTED", "ANALYSIS_PENDING",
+        "ANALYSIS_VALIDATED", "COMPLETED", "REJECTED", "FAILED"
+      ]
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["COMPLETE", "RETRY", "REJECT", "FAIL"],
+      "description": "Policy engine decision"
+    },
+    "corrections": {
+      "type": "array",
+      "description": "Detected corrections from analysis",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "severity": { "type": "string" },
+          "span": { "type": "string" },
+          "suggestion": { "type": "string" }
+        }
+      }
+    },
+    "strengths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "validation_results": {
+      "type": "object",
+      "description": "Results from validation pipeline steps"
+    }
+  }
+}

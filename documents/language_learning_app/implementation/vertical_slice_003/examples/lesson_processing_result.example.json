@@ -1,0 +1,43 @@
+{
+  "session_id": "00000000-0000-0000-0000-000000000020",
+  "status": "COMPLETED",
+  "decision": "COMPLETE",
+  "corrections": [
+    {
+      "code": "VERB_FORM",
+      "severity": "major",
+      "span": "wants to the water closet",
+      "suggestion": "wanted to go to the litter box"
+    }
+  ],
+  "strengths": [
+    "The sequence of events is understandable.",
+    "Good use of time markers."
+  ],
+  "validation_results": {
+    "linguistic": {
+      "passed": true,
+      "details": {
+        "checks": {
+          "output_consistency": true,
+          "issue_structure": true,
+          "confidence_range": true
+        },
+        "failed_checks": []
+      }
+    },
+    "pedagogical": {
+      "passed": true,
+      "details": {
+        "checks": {
+          "feedback_matches_goal": true,
+          "corrections_within_budget": true,
+          "no_unsupported_mastery_claim": true,
+          "no_reward_command": true,
+          "no_curriculum_mutation": true
+        },
+        "failed_checks": []
+      }
+    }
+  }
+}

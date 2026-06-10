@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: llapp-postgres
+    environment:
+      POSTGRES_USER: llapp
+      POSTGRES_PASSWORD: llapp_dev
+      POSTGRES_DB: llapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - llapp_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U llapp"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: llapp-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://llapp:llapp_dev@postgres:5432/llapp
+      AUTH_STUB_ENABLED: "true"
+      AUTH_STUB_USER_ID: "00000000-0000-0000-0000-000000000001"
+      MOCK_AI_ENABLED: "true"
+      MOCK_AI_FIXTURE_MODE: "valid"
+      DEBUG: "true"
+      SECRET_KEY: "dev-secret-key-not-for-production"
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "alembic upgrade head && python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+volumes:
+  llapp_postgres_data:
