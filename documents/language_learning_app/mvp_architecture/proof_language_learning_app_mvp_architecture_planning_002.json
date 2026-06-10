@@ -44,7 +44,7 @@
   "git": {
     "branch": "master",
     "starting_commit": "c331ff5ea54dfc497ef4e3c7097bca9d237953fa",
-    "final_commit": "PENDING",
+    "final_commit": "4beb587a2fb5098d724d13c0a46a72d4a986335b",
     "commit_created": true,
     "commit_pushed": true,
     "git_clean": true,
