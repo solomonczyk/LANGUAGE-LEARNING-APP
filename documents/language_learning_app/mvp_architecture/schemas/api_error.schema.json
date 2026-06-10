@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/api_error.schema.json",
+  "title": "API Error Response",
+  "description": "Unified error response contract for all API endpoints",
+  "type": "object",
+  "required": ["error"],
+  "properties": {
+    "error": {
+      "type": "object",
+      "required": ["code", "message", "trace_id", "retryable"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z_]+$",
+          "description": "Machine-readable error code, e.g. VALIDATION_ERROR"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Safe user-facing error message"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Optional structured error details"
+        },
+        "trace_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Correlation ID for tracing the request"
+        },
+        "retryable": {
+          "type": "boolean",
+          "description": "Whether the client may retry the request"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

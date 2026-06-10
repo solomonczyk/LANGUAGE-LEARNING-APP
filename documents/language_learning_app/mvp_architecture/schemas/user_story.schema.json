@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/user_story.schema.json",
+  "title": "User Story Schema",
+  "description": "Validates user story entries in the catalog",
+  "type": "object",
+  "required": ["id", "epic_id", "title", "as_a", "i_want", "so_that", "priority", "mvp_included", "acceptance_criteria", "linked_persona", "linked_functional_requirement", "linked_api", "linked_data_entity"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^US-\\d{3}$" },
+    "epic_id": { "type": "string", "pattern": "^EPIC-\\d{2}$" },
+    "title": { "type": "string", "minLength": 1 },
+    "as_a": { "type": "string", "minLength": 1 },
+    "i_want": { "type": "string", "minLength": 1 },
+    "so_that": { "type": "string", "minLength": 1 },
+    "priority": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+    "mvp_included": { "type": "boolean" },
+    "acceptance_criteria": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "linked_persona": { "type": "string", "pattern": "^P-\\d{2}$" },
+    "linked_functional_requirement": { "type": "string", "pattern": "^FR-\\d{3}$" },
+    "linked_api": { "type": "string", "minLength": 1 },
+    "linked_data_entity": { "type": "string", "minLength": 1 },
+    "linked_test_type": { "type": "array", "items": { "type": "string" } },
+    "failure_states": { "type": "array", "items": { "type": "string" } },
+    "security_privacy_notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

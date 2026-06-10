@@ -1,0 +1,717 @@
+openapi: "3.0.3"
+info:
+  title: Language Learning App MVP API
+  description: REST API for the Language Learning App MVP — planning-level specification
+  version: "1.0.0"
+  x-module: "api-architecture"
+
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Local development
+  - url: https://api-staging.llapp.com/api/v1
+    description: Staging environment
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Supabase Auth JWT access token
+
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, trace_id, retryable]
+          properties:
+            code:
+              type: string
+              pattern: "^[A-Z][A-Z_]+$"
+              example: VALIDATION_ERROR
+            message:
+              type: string
+              maxLength: 500
+              example: "The request body contains invalid fields."
+            details:
+              type: object
+              additionalProperties: true
+            trace_id:
+              type: string
+              format: uuid
+            retryable:
+              type: boolean
+              example: false
+
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded, error]
+        version:
+          type: string
+        uptime_seconds:
+          type: integer
+        dependencies:
+          type: object
+          properties:
+            database:
+              type: object
+              properties:
+                status: { type: string }
+                latency_ms: { type: integer }
+            redis:
+              type: object
+              properties:
+                status: { type: string }
+                latency_ms: { type: integer }
+            storage:
+              type: object
+              properties:
+                status: { type: string }
+                latency_ms: { type: integer }
+
+    RegisterRequest:
+      type: object
+      required: [email, password, target_language, native_language]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 8 }
+        target_language: { type: string, example: "en" }
+        native_language: { type: string, example: "it" }
+        display_name: { type: string, maxLength: 100 }
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string }
+
+    AuthResponse:
+      type: object
+      properties:
+        access_token: { type: string }
+        refresh_token: { type: string }
+        expires_in: { type: integer, example: 900 }
+        user:
+          type: object
+          properties:
+            id: { type: string, format: uuid }
+            email: { type: string }
+            display_name: { type: string }
+
+    LearnerProfileResponse:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        target_language: { type: string }
+        native_language: { type: string }
+        cefr_self_assessment: { type: string }
+        goals: { type: object }
+        interests: { type: array, items: { type: string } }
+        weekly_session_goal: { type: integer }
+        skill_dimensions:
+          type: array
+          items:
+            type: object
+            properties:
+              dimension: { type: string }
+              cefr_level: { type: string }
+              confidence: { type: number }
+              score: { type: integer }
+
+    DiagnosticSessionRequest:
+      type: object
+      properties:
+        session_type:
+          type: string
+          enum: [initial, reassessment]
+          default: initial
+
+    DiagnosticSessionResponse:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string }
+        current_question: { type: integer }
+        total_questions: { type: integer }
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              dimension: { type: string }
+              prompt: { type: string }
+              response_type: { type: string }
+
+    DiagnosticResponseRequest:
+      type: object
+      required: [question_id, response]
+      properties:
+        question_id: { type: string }
+        response:
+          type: object
+          additionalProperties: true
+
+    DiagnosticCompleteResponse:
+      type: object
+      properties:
+        session_id: { type: string, format: uuid }
+        overall_cefr: { type: string }
+        assessments:
+          type: array
+          items:
+            type: object
+            properties:
+              dimension: { type: string }
+              cefr_level: { type: string }
+              confidence: { type: number }
+              score: { type: integer }
+
+    LearningContractRequest:
+      type: object
+      required: [target_cefr, weekly_sessions, duration_weeks]
+      properties:
+        target_cefr: { type: string, example: "B1" }
+        weekly_sessions: { type: integer, example: 4 }
+        focus_areas: { type: array, items: { type: string } }
+        duration_weeks: { type: integer, example: 24 }
+
+    LessonSessionRequest:
+      type: object
+      required: [lesson_type]
+      properties:
+        lesson_type:
+          type: string
+          enum: [narrative, visual, audio, functional, writing]
+        lesson_id: { type: string, format: uuid }
+
+    LessonSessionResponse:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string }
+        lesson_type: { type: string }
+        prompt: { type: object }
+        attempt_count: { type: integer }
+        created_at: { type: string, format: date-time }
+
+    TextSubmissionRequest:
+      type: object
+      required: [session_id, text]
+      properties:
+        session_id: { type: string, format: uuid }
+        text: { type: string, minLength: 1, maxLength: 10000 }
+
+    SubmissionResponse:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string }
+        created_at: { type: string, format: date-time }
+
+    AnalysisResponse:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string }
+        analysis:
+          type: object
+          properties:
+            corrections: { type: array, items: { type: object } }
+            vocabulary_suggestions: { type: array, items: { type: object } }
+            grammar_notes: { type: array, items: { type: object } }
+            coherence_score: { type: number }
+            fluency_score: { type: number }
+            overall_feedback: { type: string }
+        xp_earned: { type: integer }
+        mastery_progress: { type: object }
+
+    ReviewDueResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string, format: uuid }
+              item_type: { type: string }
+              content: { type: object }
+              due_at: { type: string, format: date-time }
+
+    ReviewAttemptRequest:
+      type: object
+      required: [response, difficulty_rating]
+      properties:
+        response: { type: string }
+        difficulty_rating:
+          type: string
+          enum: [easy, medium, hard]
+
+    RewardLedgerEntry:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        transaction_type: { type: string }
+        xp_amount: { type: integer }
+        xp_balance_after: { type: integer }
+        created_at: { type: string, format: date-time }
+
+    MasteryProfileResponse:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            type: object
+            properties:
+              dimension: { type: string }
+              current_level: { type: string }
+              xp_in_level: { type: integer }
+              xp_to_next: { type: integer }
+              progress_percent: { type: number }
+
+paths:
+  /health:
+    get:
+      summary: System health check
+      operationId: healthCheck
+      tags: [Health]
+      responses:
+        "200":
+          description: Service health status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+      x-rate-limit: "none"
+
+  /auth/register:
+    post:
+      summary: Register new user
+      operationId: registerUser
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "409":
+          description: Email already registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-idempotent: true
+      x-us: US-001
+      x-module: identity
+
+  /auth/login:
+    post:
+      summary: Login with email and password
+      operationId: loginUser
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-us: US-004
+      x-module: identity
+
+  /learner-profile:
+    get:
+      summary: Get learner profile
+      operationId: getLearnerProfile
+      tags: [Learner Profile]
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Learner profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearnerProfileResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      x-us: US-011
+      x-module: learner_profile
+
+  /diagnostics/sessions:
+    post:
+      summary: Start diagnostic session
+      operationId: startDiagnostic
+      tags: [Diagnostics]
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiagnosticSessionRequest"
+      responses:
+        "201":
+          description: Diagnostic session created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiagnosticSessionResponse"
+      x-idempotent: true
+      x-us: US-007, US-010
+      x-module: diagnostics
+
+  /diagnostics/{sessionId}/responses:
+    parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    post:
+      summary: Submit diagnostic response
+      operationId: submitDiagnosticResponse
+      tags: [Diagnostics]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiagnosticResponseRequest"
+      responses:
+        "200":
+          description: Response recorded
+        "422":
+          $ref: "#/components/responses/ValidationError"
+      x-idempotent: true
+      x-us: US-008
+      x-module: diagnostics
+
+  /diagnostics/{sessionId}/complete:
+    parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    post:
+      summary: Complete diagnostic and get assessment
+      operationId: completeDiagnostic
+      tags: [Diagnostics]
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Diagnostic complete
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiagnosticCompleteResponse"
+      x-idempotent: true
+      x-us: US-009
+      x-module: diagnostics
+
+  /learning-contract/current:
+    get:
+      summary: Get current learning contract
+      operationId: getLearningContract
+      tags: [Learning Contract]
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Current contract
+      x-us: US-015
+      x-module: learning_contract
+    post:
+      summary: Create learning contract
+      operationId: createLearningContract
+      tags: [Learning Contract]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningContractRequest"
+      responses:
+        "201":
+          description: Contract created
+      x-idempotent: true
+      x-us: US-014
+      x-module: learning_contract
+
+  /lesson-sessions:
+    post:
+      summary: Start lesson session
+      operationId: startLessonSession
+      tags: [Lessons]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LessonSessionRequest"
+      responses:
+        "201":
+          description: Lesson session created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LessonSessionResponse"
+      x-idempotent: true
+      x-us: US-019, US-020, US-023, US-026, US-029, US-032, US-036
+      x-module: lesson_engine
+
+  /lesson-sessions/{id}:
+    get:
+      summary: Get lesson session state
+      operationId: getLessonSession
+      tags: [Lessons]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Lesson session state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LessonSessionResponse"
+      x-us: US-019
+      x-module: lesson_engine
+
+  /lesson-sessions/{id}/complete:
+    post:
+      summary: Complete lesson session
+      operationId: completeLessonSession
+      tags: [Lessons]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Lesson completed
+      x-idempotent: true
+      x-us: US-038, US-043, US-048, US-050
+      x-module: lesson_engine
+
+  /submissions/text:
+    post:
+      summary: Submit text response
+      operationId: submitText
+      tags: [Submissions]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TextSubmissionRequest"
+      responses:
+        "201":
+          description: Submission accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmissionResponse"
+      x-idempotent: true
+      x-us: US-021, US-024, US-033, US-035
+      x-module: submission
+
+  /submissions/{id}/analysis:
+    get:
+      summary: Get submission analysis
+      operationId: getAnalysis
+      tags: [Submissions]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysisResponse"
+      x-us: US-022, US-025, US-028, US-031, US-034
+      x-module: submission
+
+  /reviews/due:
+    get:
+      summary: Get due review items
+      operationId: getDueReviews
+      tags: [Reviews]
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Due review items
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewDueResponse"
+      x-us: US-045
+      x-module: review_scheduler
+
+  /reviews/{id}/attempt:
+    post:
+      summary: Submit review attempt
+      operationId: submitReviewAttempt
+      tags: [Reviews]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewAttemptRequest"
+      responses:
+        "200":
+          description: Review recorded
+      x-idempotent: true
+      x-us: US-046
+      x-module: review_scheduler
+
+  /mastery/profile:
+    get:
+      summary: Get mastery profile
+      operationId: getMasteryProfile
+      tags: [Mastery]
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Mastery profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MasteryProfileResponse"
+      x-us: US-042, US-044
+      x-module: mastery
+
+  /rewards/ledger:
+    get:
+      summary: Get reward transaction history
+      operationId: getRewardLedger
+      tags: [Rewards]
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: XP transaction history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RewardLedgerEntry"
+      x-us: US-049
+      x-module: reward_engine
+
+  /operator/diagnostics:
+    get:
+      summary: Read-only user diagnostic view (operator)
+      operationId: operatorDiagnostics
+      tags: [Operator]
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Diagnostic data
+        "403":
+          description: Forbidden — operator role required
+      x-us: US-060
+      x-module: operator
+
+responses:
+  Unauthorized:
+    description: Authentication required
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/ErrorResponse"
+  ValidationError:
+    description: Request validation failed
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/ErrorResponse"
+
+security:
+  - BearerAuth: []

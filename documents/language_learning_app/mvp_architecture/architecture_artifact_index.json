@@ -1,0 +1,308 @@
+{
+  "artifacts": [
+    {
+      "path": "documents/language_learning_app/mvp_architecture/00_mvp_architecture_index.md",
+      "type": "documentation",
+      "purpose": "MVP architecture planning master index",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/01_mvp_product_scope.md",
+      "type": "documentation",
+      "purpose": "MVP product definition with must-have capabilities and out-of-scope items",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/02_personas.md",
+      "type": "documentation",
+      "purpose": "Four learner personas with goals, frustrations, and needs",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/03_user_story_catalog.md",
+      "type": "documentation",
+      "purpose": "Complete user story catalog with 61 stories across 20 epics",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/04_user_journeys.md",
+      "type": "documentation",
+      "purpose": "Eight end-to-end user journeys with system decisions",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/05_functional_requirements.md",
+      "type": "documentation",
+      "purpose": "Functional requirements catalog with 65 requirements",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/06_non_functional_requirements.md",
+      "type": "documentation",
+      "purpose": "Non-functional requirements catalog with 28 NFRs and initial targets",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/07_technology_stack_comparison.md",
+      "type": "documentation",
+      "purpose": "Comparison matrix for all technology options",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/08_selected_technology_stack.md",
+      "type": "documentation",
+      "purpose": "Selected technology stack with version requirements and rationale",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/09_system_context.md",
+      "type": "documentation",
+      "purpose": "C4 system context diagram with external system interfaces",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/10_container_architecture.md",
+      "type": "documentation",
+      "purpose": "C4 container diagram and container responsibilities",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/11_module_architecture.md",
+      "type": "documentation",
+      "purpose": "20 bounded module definitions with contracts and dependencies",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/12_processing_pipeline.md",
+      "type": "documentation",
+      "purpose": "15-step processing pipeline with input, output, timeout, and retry",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/13_dangerous_action_gates.md",
+      "type": "documentation",
+      "purpose": "8 dangerous action gates with pass/fail criteria",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/14_api_architecture.md",
+      "type": "documentation",
+      "purpose": "REST API design, endpoint catalog, error model, rate limiting",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/15_data_model.md",
+      "type": "documentation",
+      "purpose": "28 core entity definitions with fields, indexes, privacy, and ERD",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/16_state_machines.md",
+      "type": "documentation",
+      "purpose": "7 entity state machines with transitions, guards, and forbidden transitions",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/17_llm_gateway_architecture.md",
+      "type": "documentation",
+      "purpose": "Provider-independent AI gateway with structured output and authority restrictions",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/18_prompt_management.md",
+      "type": "documentation",
+      "purpose": "Prompt versioning, content wrapping, evaluation, and security policies",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/19_security_threat_model.md",
+      "type": "documentation",
+      "purpose": "15 threat entries using STRIDE methodology",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/20_privacy_and_data_retention.md",
+      "type": "documentation",
+      "purpose": "Data classification, retention periods, deletion/export workflows",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/21_observability.md",
+      "type": "documentation",
+      "purpose": "Logging, metrics, tracing, alerting, dashboards, and cost tracking",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/22_deployment_topology.md",
+      "type": "documentation",
+      "purpose": "Local, test, and staging environment definitions",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/23_testing_strategy.md",
+      "type": "documentation",
+      "purpose": "11-layer test pyramid with 13 required test scenarios",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/24_first_implementation_sprint.md",
+      "type": "documentation",
+      "purpose": "Sprint 1 vertical slice scope with 12 deliverables",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/25_architecture_decision_log.md",
+      "type": "documentation",
+      "purpose": "12 ADRs covering all major technology and architecture decisions",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/26_risk_register.md",
+      "type": "documentation",
+      "purpose": "18 risks with likelihood, impact, mitigation, and contingency",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/27_acceptance_criteria.md",
+      "type": "documentation",
+      "purpose": "51 acceptance criteria organized by category",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/28_requirements_traceability_matrix.md",
+      "type": "documentation",
+      "purpose": "Complete traceability across US, FR, endpoints, entities, modules, NFRs, ADRs",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/schemas/api_error.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema for unified API error response",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/schemas/user_story.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema for user story validation",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/schemas/service_contract.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema for service contract definitions",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/schemas/state_machine.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema for state machine definitions",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/schemas/architecture_proof.schema.json",
+      "type": "schema",
+      "purpose": "JSON Schema for architecture planning proof validation",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/examples/user_story.example.json",
+      "type": "example",
+      "purpose": "Example user story JSON fixture",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/examples/service_contract.example.json",
+      "type": "example",
+      "purpose": "Example service contract JSON fixture",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/examples/state_machine.example.json",
+      "type": "example",
+      "purpose": "Example state machine JSON fixture",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/api/openapi_mvp.yaml",
+      "type": "api",
+      "purpose": "Planning-level OpenAPI 3.0 specification for MVP API",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    }
+  ]
+}

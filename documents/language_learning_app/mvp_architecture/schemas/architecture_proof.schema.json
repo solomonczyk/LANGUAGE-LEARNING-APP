@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/architecture_proof.schema.json",
+  "title": "Architecture Proof Schema",
+  "description": "Validates the MVP architecture planning proof JSON",
+  "type": "object",
+  "required": [
+    "task_id", "verdict", "feature_completed", "documentation_only",
+    "product_scope_defined", "personas_defined", "user_stories_defined", "user_story_count",
+    "user_journeys_defined", "functional_requirements_defined", "non_functional_requirements_defined",
+    "technology_stack_compared", "technology_stack_selected", "architecture_defined",
+    "api_contracts_defined", "data_model_defined", "state_machines_defined",
+    "llm_gateway_defined", "dangerous_action_gates_defined", "security_threat_model_defined",
+    "privacy_model_defined", "observability_defined", "deployment_topology_defined",
+    "testing_strategy_defined", "first_implementation_sprint_defined",
+    "application_code_changed", "runtime_code_added", "llm_calls_executed",
+    "deployment_executed", "secrets_added",
+    "tests", "traceability", "git",
+    "unresolved_blockers", "current_state", "next_allowed_action",
+    "application_implementation_allowed", "production_accepted"
+  ],
+  "properties": {
+    "task_id": { "type": "string", "pattern": "^LANGUAGE-LEARNING-APP-MVP-ARCHITECTURE-PLANNING-002$" },
+    "verdict": { "type": "string", "enum": ["ACCEPTED", "REJECTED"] },
+    "feature_completed": { "type": "boolean", "const": true },
+    "documentation_only": { "type": "boolean", "const": true },
+    "product_scope_defined": { "type": "boolean", "const": true },
+    "personas_defined": { "type": "boolean", "const": true },
+    "user_stories_defined": { "type": "boolean", "const": true },
+    "user_story_count": { "type": "integer", "minimum": 45 },
+    "user_journeys_defined": { "type": "boolean", "const": true },
+    "functional_requirements_defined": { "type": "boolean", "const": true },
+    "non_functional_requirements_defined": { "type": "boolean", "const": true },
+    "technology_stack_compared": { "type": "boolean", "const": true },
+    "technology_stack_selected": { "type": "boolean", "const": true },
+    "architecture_defined": { "type": "boolean", "const": true },
+    "api_contracts_defined": { "type": "boolean", "const": true },
+    "data_model_defined": { "type": "boolean", "const": true },
+    "state_machines_defined": { "type": "boolean", "const": true },
+    "llm_gateway_defined": { "type": "boolean", "const": true },
+    "dangerous_action_gates_defined": { "type": "boolean", "const": true },
+    "security_threat_model_defined": { "type": "boolean", "const": true },
+    "privacy_model_defined": { "type": "boolean", "const": true },
+    "observability_defined": { "type": "boolean", "const": true },
+    "deployment_topology_defined": { "type": "boolean", "const": true },
+    "testing_strategy_defined": { "type": "boolean", "const": true },
+    "first_implementation_sprint_defined": { "type": "boolean", "const": true },
+    "application_code_changed": { "type": "boolean", "const": false },
+    "runtime_code_added": { "type": "boolean", "const": false },
+    "llm_calls_executed": { "type": "boolean", "const": false },
+    "deployment_executed": { "type": "boolean", "const": false },
+    "secrets_added": { "type": "boolean", "const": false },
+    "tests": {
+      "type": "object",
+      "required": ["tests_total", "tests_passed", "tests_failed", "warnings"],
+      "properties": {
+        "tests_total": { "type": "integer", "minimum": 28 },
+        "tests_passed": { "type": "integer" },
+        "tests_failed": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "traceability": {
+      "type": "object",
+      "required": ["requirements_total", "requirements_traced", "requirements_untraced", "broken_links"],
+      "properties": {
+        "requirements_total": { "type": "integer", "minimum": 1 },
+        "requirements_traced": { "type": "integer" },
+        "requirements_untraced": { "type": "integer", "minimum": 0 },
+        "broken_links": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "git": {
+      "type": "object",
+      "required": ["branch", "starting_commit", "final_commit", "commit_created", "commit_pushed", "git_clean", "head_matches_origin"],
+      "properties": {
+        "branch": { "type": "string" },
+        "starting_commit": { "type": "string" },
+        "final_commit": { "type": "string" },
+        "commit_created": { "type": "boolean", "const": true },
+        "commit_pushed": { "type": "boolean", "const": true },
+        "git_clean": { "type": "boolean", "const": true },
+        "head_matches_origin": { "type": "boolean", "const": true }
+      }
+    },
+    "unresolved_blockers": { "type": "array" },
+    "current_state": { "type": "string", "const": "mvp_architecture_planning_complete" },
+    "next_allowed_action": { "type": "string", "const": "first_mvp_vertical_slice_implementation" },
+    "application_implementation_allowed": { "type": "boolean", "const": false },
+    "production_accepted": { "type": "boolean", "const": false }
+  },
+  "additionalProperties": false
+}

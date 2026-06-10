@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://language-learning.app/schemas/state_machine.schema.json",
+  "title": "State Machine Schema",
+  "description": "Defines a state machine for an entity",
+  "type": "object",
+  "required": ["entity", "states", "initial_state", "transitions"],
+  "properties": {
+    "entity": { "type": "string", "minLength": 1 },
+    "states": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+    "initial_state": { "type": "string" },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "event", "guard"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "event": { "type": "string" },
+          "guard": { "type": "string" },
+          "side_effects": { "type": "array", "items": { "type": "string" } },
+          "audit_event": { "type": "string" },
+          "retry_rule": { "type": "string" },
+          "forbidden": { "type": "boolean", "default": false }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

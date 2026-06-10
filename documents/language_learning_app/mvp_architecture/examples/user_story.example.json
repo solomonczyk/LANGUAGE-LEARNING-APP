@@ -1,0 +1,30 @@
+{
+  "id": "US-001",
+  "epic_id": "EPIC-01",
+  "title": "User Registration with Language Selection",
+  "as_a": "new learner",
+  "i_want": "to register using email or social login and select my target language and native language",
+  "so_that": "I can start my learning journey with content tailored to my language pair",
+  "priority": "critical",
+  "mvp_included": true,
+  "acceptance_criteria": [
+    "User can register with email + password or social login (Google, Apple)",
+    "User selects target language from a list of at least 10 supported languages",
+    "User selects native/support language",
+    "Onboarding progress is saved if interrupted",
+    "Registration completes within 5 seconds under normal conditions",
+    "Language selection is persisted in learner profile"
+  ],
+  "linked_persona": "P-02",
+  "linked_functional_requirement": "FR-001",
+  "linked_api": "POST /api/v1/auth/register",
+  "linked_data_entity": "User, AuthIdentity, LearnerProfile",
+  "linked_test_type": ["unit", "integration", "e2e"],
+  "failure_states": [
+    "Email already registered",
+    "Invalid email format",
+    "Unsupported language selected",
+    "Network timeout during registration"
+  ],
+  "security_privacy_notes": "Email and auth identity stored securely. Password hashed via auth provider. Language preference is personal data but not sensitive."
+}

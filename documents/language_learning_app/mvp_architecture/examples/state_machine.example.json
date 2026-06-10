@@ -1,0 +1,79 @@
+{
+  "entity": "LessonSession",
+  "states": ["created", "active", "paused", "submitting", "completed", "failed", "abandoned"],
+  "initial_state": "created",
+  "transitions": [
+    {
+      "from": "created",
+      "to": "active",
+      "event": "lesson.start",
+      "guard": "lesson_definition_valid AND learner_eligible",
+      "side_effects": ["emit_lesson_started_event", "create_audit_entry"],
+      "audit_event": "lesson_session.started",
+      "retry_rule": "no_retry"
+    },
+    {
+      "from": "active",
+      "to": "paused",
+      "event": "lesson.pause",
+      "guard": "session_age < 24h",
+      "side_effects": ["persist_progress", "emit_lesson_paused_event"],
+      "audit_event": "lesson_session.paused",
+      "retry_rule": "no_retry"
+    },
+    {
+      "from": "paused",
+      "to": "active",
+      "event": "lesson.resume",
+      "guard": "session_age < 48h",
+      "side_effects": ["restore_progress", "emit_lesson_resumed_event"],
+      "audit_event": "lesson_session.resumed",
+      "retry_rule": "no_retry"
+    },
+    {
+      "from": "active",
+      "to": "submitting",
+      "event": "lesson.submit",
+      "guard": "submission_valid AND no_active_submission",
+      "side_effects": ["create_submission", "emit_submission_created_event"],
+      "audit_event": "lesson_session.submitted",
+      "retry_rule": "no_retry"
+    },
+    {
+      "from": "submitting",
+      "to": "completed",
+      "event": "lesson.complete",
+      "guard": "all_validations_passed AND policy_approved",
+      "side_effects": ["compute_mastery", "schedule_review", "award_xp", "emit_lesson_completed_event"],
+      "audit_event": "lesson_session.completed",
+      "retry_rule": "no_retry"
+    },
+    {
+      "from": "submitting",
+      "to": "failed",
+      "event": "lesson.fail",
+      "guard": "validation_failed OR policy_rejected OR max_retries_exceeded",
+      "side_effects": ["record_failure_evidence", "emit_lesson_failed_event"],
+      "audit_event": "lesson_session.failed",
+      "retry_rule": "retry_allowed_up_to_3_times"
+    },
+    {
+      "from": "active",
+      "to": "abandoned",
+      "event": "session.timeout",
+      "guard": "session_age > 48h AND no_activity",
+      "side_effects": ["release_resources", "emit_session_abandoned_event"],
+      "audit_event": "lesson_session.abandoned",
+      "retry_rule": "no_retry"
+    },
+    {
+      "from": "failed",
+      "to": "active",
+      "event": "lesson.retry",
+      "guard": "retry_count < 3 AND retry_gate_passed",
+      "side_effects": ["reset_attempt_state", "emit_lesson_retried_event"],
+      "audit_event": "lesson_session.retried",
+      "retry_rule": "max_3_retries"
+    }
+  ]
+}

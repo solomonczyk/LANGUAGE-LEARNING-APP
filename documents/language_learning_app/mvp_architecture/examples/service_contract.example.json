@@ -1,0 +1,32 @@
+{
+  "module_name": "learner_profile",
+  "responsibility": "Manages the learner's multidimensional profile including skill dimensions, language preferences, and progression state",
+  "owned_entities": ["LearnerProfile", "SkillDimension", "XPBalance"],
+  "exposed_interfaces": [
+    { "endpoint": "GET /api/v1/learner-profile", "method": "GET", "request_schema": "None", "response_schema": "LearnerProfileResponse" },
+    { "endpoint": "PUT /api/v1/learner-profile", "method": "PUT", "request_schema": "LearnerProfileUpdate", "response_schema": "LearnerProfileResponse" },
+    { "endpoint": "GET /api/v1/mastery/profile", "method": "GET", "request_schema": "None", "response_schema": "MasteryProfileResponse" }
+  ],
+  "consumed_interfaces": ["identity.get_user", "diagnostics.get_assessment", "mastery.get_mastery_records"],
+  "forbidden_responsibilities": [
+    "Must not award rewards or XP directly",
+    "Must not modify lesson content",
+    "Must not determine lesson completion"
+  ],
+  "state_transitions": [
+    "LearnerProfile: created -> active -> dormant -> archived"
+  ],
+  "failure_behaviour": "Returns cached profile if available; otherwise returns 503 with retryable=true",
+  "events_emitted": [
+    "learner_profile.created",
+    "learner_profile.updated",
+    "learner_profile.skill_dimension_changed",
+    "learner_profile.dormant"
+  ],
+  "observability_signals": [
+    "profile_read_latency_seconds",
+    "profile_update_count",
+    "profile_read_count",
+    "profile_cache_hit_ratio"
+  ]
+}
