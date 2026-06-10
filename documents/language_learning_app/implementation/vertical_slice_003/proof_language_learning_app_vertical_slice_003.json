@@ -88,11 +88,11 @@
   "git": {
     "branch": "master",
     "starting_commit": "be20bad7dbf986f270836b5999fff90c61fb6924",
-    "final_commit": "PENDING",
-    "commit_created": false,
-    "commit_pushed": false,
-    "git_clean": false,
-    "head_matches_origin": false,
+    "final_commit": "78a597b14846d5c72ce8ebacd0a69d1fb55dd12b",
+    "commit_created": true,
+    "commit_pushed": true,
+    "git_clean": true,
+    "head_matches_origin": true,
     "unpushed_commits": 0,
     "uncommitted_changes": 0
   },
