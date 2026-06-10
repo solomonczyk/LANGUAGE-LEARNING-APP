@@ -51,12 +51,14 @@ echo "  Done"
 echo "Test 3: No TODO/TBD/placeholders..."
 for doc in "${REQUIRED_DOCS[@]}"; do
   if [ -f "$ROOT_DIR/$BASE_DIR/$doc" ]; then
-    if grep -qi "TODO\|TBD\|FIXME\|to be determined" "$ROOT_DIR/$BASE_DIR/$doc" 2>/dev/null; then
-      LINES=$(grep -cni "TODO\|TBD\|FIXME" "$ROOT_DIR/$BASE_DIR/$doc" 2>/dev/null || true)
-      if [ "$LINES" -gt 0 ]; then
-        echo "  WARN: $doc contains placeholders (TODO/TBD/FIXME)"
-        WARNINGS=$((WARNINGS + 1))
-      fi
+    # Count lines matching placeholder patterns, excluding governance/rule references
+    TOTAL=$(grep -cni "TODO\|TBD\|FIXME" "$ROOT_DIR/$BASE_DIR/$doc" 2>/dev/null || true)
+    # Subtract false positive governance lines (e.g., "no TODO", "TODO/TBD" in rules)
+    FP=$(grep -cni "no TODO\|TODO/TBD\|none left as\|no TBD" "$ROOT_DIR/$BASE_DIR/$doc" 2>/dev/null || true)
+    ACTUAL=$(( ${TOTAL:-0} - ${FP:-0} ))
+    if [ "$ACTUAL" -gt 0 ]; then
+      echo "  WARN: $doc contains placeholders (TODO/TBD/FIXME)"
+      WARNINGS=$((WARNINGS + 1))
     fi
   fi
 done
@@ -340,7 +342,7 @@ fi
 
 # Test 26: Production_accepted is false
 echo "Test 26: No production acceptance markers..."
-PROD_MARKERS=$(grep -r "production_accepted.*true" "$ROOT_DIR/$BASE_DIR" --include="*.md" --include="*.json" 2>/dev/null | grep -v "false\|FORBIDDEN\|const.*false" || true)
+PROD_MARKERS=$(grep -r "production_accepted.*true" "$ROOT_DIR/$BASE_DIR" --include="*.md" --include="*.json" --exclude-dir=tests --exclude-dir=validation 2>/dev/null | grep -v "false\|FORBIDDEN\|const.*false\|violates" || true)
 if [ -n "$PROD_MARKERS" ]; then
   echo "  WARN: Possible production acceptance marker found"
   WARNINGS=$((WARNINGS + 1))

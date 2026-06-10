@@ -303,6 +303,70 @@
       "version": "1.0.0",
       "status": "draft",
       "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/proof_language_learning_app_mvp_architecture_planning_002a.json",
+      "type": "documentation",
+      "purpose": "Warning reconciliation proof for task 002A — validation warnings eliminated",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/validation/warning_reconciliation_report.md",
+      "type": "documentation",
+      "purpose": "Root cause analysis and resolution documentation for all 3 validation warnings",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/scripts/validate_mvp_architecture.sh",
+      "type": "script",
+      "purpose": "MVP architecture validation script (updated with false positive fixes)",
+      "version": "1.0.1",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/scripts/test_regression.sh",
+      "type": "script",
+      "purpose": "Regression tests for false positive fixes",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/scripts/tests/fixture_todo_placeholder.md",
+      "type": "test_fixture",
+      "purpose": "Positive regression fixture — real TODO placeholder",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/scripts/tests/fixture_governance_reference.md",
+      "type": "test_fixture",
+      "purpose": "Negative regression fixture — governance reference to TBD",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/scripts/tests/fixture_production_forbidden.md",
+      "type": "test_fixture",
+      "purpose": "Negative regression fixture — production gate FORBIDDEN reference",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
+    },
+    {
+      "path": "documents/language_learning_app/mvp_architecture/scripts/tests/fixture_production_real.md",
+      "type": "test_fixture",
+      "purpose": "Positive regression fixture — real production acceptance marker",
+      "version": "1.0.0",
+      "status": "draft",
+      "sha256": "PENDING"
     }
   ]
 }
