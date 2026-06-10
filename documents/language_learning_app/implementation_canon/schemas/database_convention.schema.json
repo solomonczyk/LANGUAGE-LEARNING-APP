@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DatabaseConvention",
+  "description": "Database naming and structure conventions",
+  "type": "object",
+  "required": ["naming", "migrations", "rules"],
+  "properties": {
+    "naming": {
+      "type": "object",
+      "required": ["tables", "columns", "primaryKeys", "foreignKeys"],
+      "properties": {
+        "tables": { "type": "string", "description": "snake_case, plural" },
+        "columns": { "type": "string", "description": "snake_case" },
+        "primaryKeys": { "type": "string", "description": "UUID v4, column name: id" },
+        "foreignKeys": { "type": "string", "description": "{table}_id" },
+        "indexes": { "type": "string", "description": "idx_{table}_{column}" }
+      }
+    },
+    "migrations": {
+      "type": "object",
+      "required": ["tool", "location", "naming", "rules"],
+      "properties": {
+        "tool": { "type": "string", "enum": ["alembic"] },
+        "location": { "type": "string" },
+        "naming": { "type": "string" },
+        "rules": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "uuidPrimaryKeys": { "type": "boolean" },
+        "createdUpdatedTimestamps": { "type": "boolean" },
+        "softDeleteColumn": { "type": "string" },
+        "auditLinkage": { "type": "boolean" }
+      },
+      "required": ["uuidPrimaryKeys", "createdUpdatedTimestamps"]
+    }
+  }
+}

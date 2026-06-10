@@ -1,0 +1,10 @@
+{
+  "name": "lesson_engine",
+  "responsibility": "Lesson session lifecycle management from creation through completion",
+  "ownedEntities": ["LessonSession", "LessonAttempt"],
+  "publicInterfaces": ["create_session()", "get_session()", "submit_attempt()", "complete_session()"],
+  "consumedInterfaces": ["curriculum.get_lesson()", "content.get_content()", "submission.accept_submission()", "mastery.record_evidence()"],
+  "forbidden": ["Direct AI Gateway calls", "Reward modifications"],
+  "events": { "emitted": ["lesson_session.created", "lesson_session.completed", "lesson_session.failed"], "consumed": [] },
+  "observability": ["lesson_duration", "lesson_completion_rate", "lesson_retry_rate"]
+}

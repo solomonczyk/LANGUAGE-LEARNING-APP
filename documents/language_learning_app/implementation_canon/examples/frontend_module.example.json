@@ -1,0 +1,9 @@
+{
+  "name": "lesson-session",
+  "path": "src/features/lesson-session/",
+  "responsibility": "Active lesson session UI, submission, and progress tracking",
+  "publicComponents": ["LessonScreen", "LessonHeader", "LessonProgress"],
+  "internalModules": ["hooks/", "components/", "screens/"],
+  "allowedImports": ["entities", "shared", "services", "state"],
+  "forbiddenImports": ["features/auth", "features/diagnostic", "features/reviews"]
+}

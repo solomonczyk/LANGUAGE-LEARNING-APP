@@ -1,0 +1,10 @@
+{
+  "checks": [
+    { "name": "lint", "tool": "ruff", "warningsAllowed": 0, "failOn": "Any error or warning" },
+    { "name": "type-check", "tool": "mypy --strict", "warningsAllowed": 0, "failOn": "Any type error" },
+    { "name": "unit-tests", "tool": "pytest", "warningsAllowed": 0, "failOn": "Any test failure" },
+    { "name": "schema-validation", "tool": "pytest + jsonschema", "warningsAllowed": 0, "failOn": "Any schema mismatch" },
+    { "name": "secret-scan", "tool": "trufflehog", "warningsAllowed": 0, "failOn": "Any secret detected" }
+  ],
+  "branchRules": ["master is protected", "All CI checks must pass before merge", "Rebase-only merge"]
+}

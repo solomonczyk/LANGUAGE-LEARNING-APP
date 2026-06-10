@@ -1,0 +1,9 @@
+{
+  "id": "T-INT-001",
+  "type": "integration",
+  "scope": "Lesson completion flow: submit → validate → AI analyze (mock) → complete",
+  "tool": "pytest + pytest-asyncio",
+  "owner": "Backend",
+  "blocking": true,
+  "coverageTarget": 100
+}

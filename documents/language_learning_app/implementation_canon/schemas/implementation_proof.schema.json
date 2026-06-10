@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ImplementationProof",
+  "description": "Implementation canon proof JSON schema for task 002B",
+  "type": "object",
+  "required": [
+    "task_id",
+    "verdict",
+    "documentation_only",
+    "implementation_canon_complete",
+    "application_code_changed",
+    "runtime_code_added",
+    "database_migrations_added",
+    "real_llm_calls_executed",
+    "deployment_executed",
+    "staging_modified",
+    "production_modified",
+    "secrets_added",
+    "tests",
+    "traceability",
+    "git",
+    "current_state",
+    "next_allowed_action",
+    "application_implementation_allowed",
+    "production_accepted"
+  ],
+  "properties": {
+    "task_id": { "type": "string", "pattern": "^LANGUAGE-LEARNING-APP-IMPLEMENTATION-CANON-AND-READINESS-002B$" },
+    "verdict": { "type": "string", "enum": ["ACCEPTED", "REJECTED"] },
+    "documentation_only": { "type": "boolean", "const": true },
+    "implementation_canon_complete": { "type": "boolean", "const": true },
+    "platform_canon_complete": { "type": "boolean" },
+    "responsive_layout_canon_complete": { "type": "boolean" },
+    "design_system_complete": { "type": "boolean" },
+    "accessibility_canon_complete": { "type": "boolean" },
+    "navigation_canon_complete": { "type": "boolean" },
+    "frontend_architecture_complete": { "type": "boolean" },
+    "backend_architecture_complete": { "type": "boolean" },
+    "api_canon_complete": { "type": "boolean" },
+    "database_canon_complete": { "type": "boolean" },
+    "authentication_canon_complete": { "type": "boolean" },
+    "ai_gateway_canon_complete": { "type": "boolean" },
+    "dangerous_action_gates_complete": { "type": "boolean" },
+    "audio_canon_complete": { "type": "boolean" },
+    "notification_canon_complete": { "type": "boolean" },
+    "offline_recovery_canon_complete": { "type": "boolean" },
+    "security_canon_complete": { "type": "boolean" },
+    "privacy_canon_complete": { "type": "boolean" },
+    "testing_canon_complete": { "type": "boolean" },
+    "device_matrix_complete": { "type": "boolean" },
+    "ci_quality_gates_complete": { "type": "boolean" },
+    "observability_canon_complete": { "type": "boolean" },
+    "environment_canon_complete": { "type": "boolean" },
+    "code_quality_canon_complete": { "type": "boolean" },
+    "git_delivery_canon_complete": { "type": "boolean" },
+    "change_control_complete": { "type": "boolean" },
+    "vertical_slice_003_readiness_verified": { "type": "boolean" },
+    "application_code_changed": { "type": "boolean", "const": false },
+    "runtime_code_added": { "type": "boolean", "const": false },
+    "database_migrations_added": { "type": "boolean", "const": false },
+    "real_llm_calls_executed": { "type": "boolean", "const": false },
+    "deployment_executed": { "type": "boolean", "const": false },
+    "staging_modified": { "type": "boolean", "const": false },
+    "production_modified": { "type": "boolean", "const": false },
+    "secrets_added": { "type": "boolean", "const": false },
+    "tests": {
+      "type": "object",
+      "required": ["tests_total", "tests_passed", "tests_failed", "warnings"],
+      "properties": {
+        "tests_total": { "type": "integer" },
+        "tests_passed": { "type": "integer" },
+        "tests_failed": { "type": "integer", "const": 0 },
+        "warnings": { "type": "integer", "const": 0 }
+      }
+    },
+    "traceability": {
+      "type": "object",
+      "required": ["requirements_total", "requirements_traced", "requirements_untraced", "broken_links"],
+      "properties": {
+        "requirements_total": { "type": "integer" },
+        "requirements_traced": { "type": "integer" },
+        "requirements_untraced": { "type": "integer", "const": 0 },
+        "broken_links": { "type": "integer", "const": 0 }
+      }
+    },
+    "git": {
+      "type": "object",
+      "required": ["branch", "starting_commit", "final_commit", "commit_created", "commit_pushed", "git_clean", "head_matches_origin", "unpushed_commits", "uncommitted_changes"],
+      "properties": {
+        "branch": { "type": "string", "pattern": "^master$" },
+        "starting_commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "final_commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "commit_created": { "type": "boolean" },
+        "commit_pushed": { "type": "boolean" },
+        "git_clean": { "type": "boolean", "const": true },
+        "head_matches_origin": { "type": "boolean", "const": true },
+        "unpushed_commits": { "type": "integer", "const": 0 },
+        "uncommitted_changes": { "type": "integer", "const": 0 }
+      }
+    },
+    "unresolved_blockers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 0
+    },
+    "current_state": { "type": "string", "pattern": "^implementation_canon_complete$" },
+    "next_allowed_action": { "type": "string", "pattern": "^first_mvp_vertical_slice_implementation_003$" },
+    "application_implementation_allowed": { "type": "boolean", "const": true },
+    "production_accepted": { "type": "boolean", "const": false }
+  }
+}

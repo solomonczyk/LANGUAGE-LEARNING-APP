@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DeviceMatrix",
+  "description": "Device acceptance matrix for mobile app testing",
+  "type": "object",
+  "required": ["devices", "testRequirements"],
+  "properties": {
+    "devices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["profile", "deviceClass", "screenWidthMin", "screenWidthMax", "platform", "osVersion", "emulator", "realDevice"],
+        "properties": {
+          "profile": { "type": "string" },
+          "deviceClass": { "type": "string", "enum": ["compact", "regular", "expanded", "tablet-compact", "tablet-expanded"] },
+          "screenWidthMin": { "type": "integer" },
+          "screenWidthMax": { "type": "integer" },
+          "platform": { "type": "string", "enum": ["android", "ios"] },
+          "osVersion": { "type": "string" },
+          "emulator": { "type": "boolean" },
+          "realDevice": { "type": "boolean" }
+        }
+      }
+    },
+    "testRequirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["testId", "description", "required"],
+        "properties": {
+          "testId": { "type": "string" },
+          "description": { "type": "string" },
+          "required": { "type": "boolean" },
+          "platforms": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["android", "ios", "both"] }
+          }
+        }
+      }
+    }
+  }
+}

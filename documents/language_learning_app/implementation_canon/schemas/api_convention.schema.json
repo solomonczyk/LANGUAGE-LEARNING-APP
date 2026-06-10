@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApiConvention",
+  "description": "API endpoint convention validation",
+  "type": "object",
+  "required": ["endpoints"],
+  "properties": {
+    "endpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "method", "module", "auth", "description"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^/api/v1/" },
+          "method": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+          "module": { "type": "string" },
+          "auth": { "type": "boolean" },
+          "description": { "type": "string" },
+          "idempotent": { "type": "boolean" },
+          "rateLimited": { "type": "boolean" },
+          "requestSchema": { "type": "string" },
+          "responseSchema": { "type": "string" },
+          "errorCodes": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

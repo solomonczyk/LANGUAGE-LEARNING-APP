@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QualityGate",
+  "description": "CI/CD quality gate definition",
+  "type": "object",
+  "required": ["checks"],
+  "properties": {
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "tool", "warningsAllowed", "failOn"],
+        "properties": {
+          "name": { "type": "string" },
+          "tool": { "type": "string" },
+          "warningsAllowed": { "type": "integer", "minimum": 0 },
+          "failOn": { "type": "string" },
+          "timeout": { "type": "integer" },
+          "optional": { "type": "boolean" }
+        }
+      }
+    },
+    "branchRules": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TestRequirement",
+  "description": "Test requirement definition for the testing canon",
+  "type": "object",
+  "required": ["id", "type", "scope", "tool", "owner", "blocking"],
+  "properties": {
+    "id": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": ["unit", "schema", "contract", "integration", "state-machine", "database", "migration", "security", "prompt-evaluation", "frontend-component", "mobile-e2e", "accessibility", "device", "recovery", "load", "visual-regression", "audit-completeness"]
+    },
+    "scope": { "type": "string" },
+    "tool": { "type": "string" },
+    "owner": { "type": "string" },
+    "blocking": { "type": "boolean" },
+    "coverageTarget": { "type": "number", "minimum": 0, "maximum": 100 }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "devices": [
+    { "profile": "small-phone", "deviceClass": "compact", "screenWidthMin": 320, "screenWidthMax": 374, "platform": "android", "osVersion": "Android 12+", "emulator": true, "realDevice": false },
+    { "profile": "regular-phone", "deviceClass": "regular", "screenWidthMin": 375, "screenWidthMax": 427, "platform": "android", "osVersion": "Android 12+", "emulator": true, "realDevice": true },
+    { "profile": "regular-iphone", "deviceClass": "regular", "screenWidthMin": 375, "screenWidthMax": 427, "platform": "ios", "osVersion": "iOS 16+", "emulator": true, "realDevice": true },
+    { "profile": "tablet", "deviceClass": "tablet-compact", "screenWidthMin": 600, "screenWidthMax": 719, "platform": "android", "osVersion": "Android 12+", "emulator": true, "realDevice": false }
+  ],
+  "testRequirements": [
+    { "testId": "T01", "description": "Auth flow completes successfully", "required": true, "platforms": ["both"] },
+    { "testId": "T02", "description": "Lesson flow end-to-end", "required": true, "platforms": ["both"] },
+    { "testId": "T03", "description": "Audio recording permission flow", "required": true, "platforms": ["both"] },
+    { "testId": "T04", "description": "Offline banner appears on network loss", "required": true, "platforms": ["both"] }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BackendModule",
+  "description": "Backend bounded module definition",
+  "type": "object",
+  "required": ["name", "responsibility", "ownedEntities", "publicInterfaces", "forbidden"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z_]+$" },
+    "responsibility": { "type": "string" },
+    "ownedEntities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "publicInterfaces": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "consumedInterfaces": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "forbidden": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "events": {
+      "type": "object",
+      "properties": {
+        "emitted": { "type": "array", "items": { "type": "string" } },
+        "consumed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "observability": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FrontendModule",
+  "description": "Frontend feature module definition",
+  "type": "object",
+  "required": ["name", "path", "responsibility", "publicComponents", "internalModules"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z-]+$" },
+    "path": { "type": "string" },
+    "responsibility": { "type": "string" },
+    "publicComponents": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "internalModules": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "allowedImports": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["entities", "shared", "services", "state"] }
+    },
+    "forbiddenImports": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
