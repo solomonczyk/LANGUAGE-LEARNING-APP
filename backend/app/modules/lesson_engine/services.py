@@ -120,16 +120,25 @@ async def process_lesson_session(
     # Update submission status
     submission.status = "VALIDATED"
 
-    # Transition to SUBMITTED then ANALYSIS_PENDING
+    # Transition through necessary states to ANALYSIS_PENDING
     sm = _create_lesson_machine(session.status)
     try:
-        sm.transition("submit")
-        session.status = sm.current_state
-        await db.flush()
+        # If still in ACTIVE, transition to SUBMITTED first
+        if session.status == "ACTIVE":
+            sm.transition("submit")
+            session.status = sm.current_state
+            await db.flush()
+            sm = _create_lesson_machine(session.status)
 
-        sm.transition("start_analysis")
-        session.status = sm.current_state
-        await db.flush()
+        # Transition from SUBMITTED to ANALYSIS_PENDING
+        if session.status == "SUBMITTED":
+            sm.transition("start_analysis")
+            session.status = sm.current_state
+            await db.flush()
+        elif session.status != "ANALYSIS_PENDING":
+            raise InvalidStateTransitionError(
+                f"Cannot process in state: {session.status}"
+            )
     except ValueError as e:
         raise InvalidStateTransitionError(str(e))
 

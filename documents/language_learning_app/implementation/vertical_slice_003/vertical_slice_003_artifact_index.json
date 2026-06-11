@@ -1,0 +1,567 @@
+{
+  "schema_version": "1.0.0",
+  "layer": "003",
+  "layer_name": "First MVP Vertical Slice",
+  "status": "ACCEPTED",
+  "last_updated": "2026-06-11",
+  "artifacts": [
+    {
+      "path": "docker-compose.yml",
+      "type": "infrastructure",
+      "purpose": "Docker Compose stack definition (PostgreSQL 16 + Backend)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "209e78bcd8b2eb15d100ea705fac956f0241e0e74d25bab74db59e7b74f8f71d",
+      "related_requirements": ["RUNTIME-001", "DEPLOY-001"]
+    },
+    {
+      "path": "backend/Dockerfile",
+      "type": "infrastructure",
+      "purpose": "Backend container image definition",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "b1496ee37451ab15c3d048d7d52405be83a896393169bbfbcbe3b1a4b429f57e",
+      "related_requirements": ["RUNTIME-001"]
+    },
+    {
+      "path": "backend/pyproject.toml",
+      "type": "configuration",
+      "purpose": "Python project configuration with dependencies",
+      "version": "0.1.0",
+      "status": "verified",
+      "sha256": "229b4df0168555add55d2758f98aa19b949a33b7e35543112dffce0feaf050f6",
+      "related_requirements": ["BACKEND-001"]
+    },
+    {
+      "path": "backend/alembic/env.py",
+      "type": "migration",
+      "purpose": "Alembic async environment configuration",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "cf2da9ab927b935b7e54f665cde7cfe29f96d7d4c71046eacf85285afb8d9878",
+      "related_requirements": ["DB-001"]
+    },
+    {
+      "path": "backend/alembic/versions/001_initial_schema.py",
+      "type": "migration",
+      "purpose": "Initial schema — 17 tables for vertical slice 003",
+      "version": "001",
+      "status": "verified",
+      "sha256": "c6546766f0754b2a3aa0b3f9dbc9d8572268e08dfa52207fe2e434adb2a142e6",
+      "related_requirements": ["DB-001", "DB-002", "DB-003"]
+    },
+    {
+      "path": "backend/app/main.py",
+      "type": "source",
+      "purpose": "FastAPI application entry point",
+      "version": "0.1.0",
+      "status": "verified",
+      "sha256": "6cee184b3496ac442771927029b27104b631f5f0c02f5de1a7e5c02ede8fc4de",
+      "related_requirements": ["API-001"]
+    },
+    {
+      "path": "backend/app/config.py",
+      "type": "configuration",
+      "purpose": "Application settings (Pydantic Settings)",
+      "version": "0.1.0",
+      "status": "verified",
+      "sha256": "d24219bae0d1c67828cf9c604ca4d10077635c7483583805ecbce67917327716",
+      "related_requirements": ["CONFIG-001"]
+    },
+    {
+      "path": "backend/app/models.py",
+      "type": "source",
+      "purpose": "SQLAlchemy ORM models — all 17 tables",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "4a62e99ee8bb30cd4fb1ba7e1209dc8bc3a798cd9a2a5dcf09bff30f6f723bb6",
+      "related_requirements": ["DB-001", "DB-002", "DB-003"]
+    },
+    {
+      "path": "backend/app/shared/state_machine.py",
+      "type": "source",
+      "purpose": "Deterministic state machine implementation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "824422c341029d1d9856872eae163d8735bd27a71bbc0a13a15c51fb4a50abae",
+      "related_requirements": ["STATE-001"]
+    },
+    {
+      "path": "backend/app/modules/identity/services.py",
+      "type": "source",
+      "purpose": "Identity services (register, login, get user)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "e22c9ed34f2744812692d4457802708128ebf9905b468aa28e78b38e0d79b746",
+      "related_requirements": ["AUTH-001"]
+    },
+    {
+      "path": "backend/app/modules/learner_profile/services.py",
+      "type": "source",
+      "purpose": "Learner profile CRUD services",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "529c2a694d7decb8c61ad9460105e74ecb058fe155dc23e3b86d7fcc78e851fe",
+      "related_requirements": ["PROFILE-001"]
+    },
+    {
+      "path": "backend/app/modules/diagnostics/services.py",
+      "type": "source",
+      "purpose": "Diagnostic session flow with deterministic scoring",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "125dd48c521c60d5b1a2d51479c3930accfc14be591aa6b0cac554ffe6634b91",
+      "related_requirements": ["DIAG-001", "DIAG-002"]
+    },
+    {
+      "path": "backend/app/modules/lesson_engine/services.py",
+      "type": "source",
+      "purpose": "Lesson engine processing pipeline",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "7b99bf0fa85e836419cc93dc61bd4c4e38dd7d2364f270aca39e685b8b3adde7",
+      "related_requirements": ["LESSON-001", "LESSON-002", "LESSON-003"]
+    },
+    {
+      "path": "backend/app/modules/submission/services.py",
+      "type": "source",
+      "purpose": "Text submission with validation and dedup",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "f84bd50e8800e497fa7fa94d1a579c2a13814886631a4e8ddd4960e70fac8f87",
+      "related_requirements": ["SUBMIT-001", "SUBMIT-002"]
+    },
+    {
+      "path": "backend/app/modules/ai_gateway/services.py",
+      "type": "source",
+      "purpose": "Mock AI Gateway with deterministic fixtures",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "b7e3a36a688ab6b7c2949b17f10ef70bb48650616b90809b042561a9c9ba0d5c",
+      "related_requirements": ["AI-001", "AI-002"]
+    },
+    {
+      "path": "backend/app/modules/linguistic_validation/services.py",
+      "type": "source",
+      "purpose": "Linguistic validation (6 checks)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "acb5f05ffaeefeb4997639b859c00d4fb2958ddf09880318d79996ff1b271a63",
+      "related_requirements": ["VALID-001"]
+    },
+    {
+      "path": "backend/app/modules/pedagogical_validation/services.py",
+      "type": "source",
+      "purpose": "Pedagogical validation (5 checks)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "d3e217773432c88174674f67977bff845cb1246d6b5483f701efa7c2e096fce6",
+      "related_requirements": ["VALID-002"]
+    },
+    {
+      "path": "backend/app/modules/policy_engine/services.py",
+      "type": "source",
+      "purpose": "Policy decision engine (COMPLETE/REJECT/FAIL)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "db45797a83a31b7d362eafbd9aa29fe1c6dc8301535bc5297780045bac46b080",
+      "related_requirements": ["POLICY-001"]
+    },
+    {
+      "path": "backend/app/modules/mastery/services.py",
+      "type": "source",
+      "purpose": "Mastery evidence recording",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "de8f51df2dbad122685e38477124adf073901180f2930927be13ece01d6a147a",
+      "related_requirements": ["MASTERY-001"]
+    },
+    {
+      "path": "backend/app/modules/audit/services.py",
+      "type": "source",
+      "purpose": "Audit event recording and retrieval",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "6c8e7d2507180879f322ee1fe85191761b0c7d716da9f31f63790e974aa2263d",
+      "related_requirements": ["AUDIT-001"]
+    },
+    {
+      "path": "backend/app/modules/operator/router.py",
+      "type": "source",
+      "purpose": "Operator endpoints with authorization",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "98aa7cdd990a83bc75de165b2a906b04ff33b16ba0aaf4a113895d8c8a5f6cce",
+      "related_requirements": ["AUTH-002", "AUDIT-002"]
+    },
+    {
+      "path": "backend/app/shared/exceptions/domain.py",
+      "type": "source",
+      "purpose": "Domain exception definitions",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "990f18ab77b6c01af93f7938281996ceb4a94288ff797d1a7840938883f9247e",
+      "related_requirements": ["API-002"]
+    },
+    {
+      "path": "backend/app/shared/middleware/error_handler.py",
+      "type": "source",
+      "purpose": "Canonical error response handler",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "b36f8ea868ba52f8d6da61d9c050d3bb32da7cc1bc10d3517e7b84b888ab1300",
+      "related_requirements": ["API-002"]
+    },
+    {
+      "path": "backend/app/shared/schemas/common.py",
+      "type": "source",
+      "purpose": "Shared Pydantic schemas (ErrorResponse, etc.)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "7abd96a810228ca5c4f751bd3e76d49137a61af48d881fe21618c87893ea657f",
+      "related_requirements": ["API-002"]
+    },
+    {
+      "path": "mobile/src/state/appState.ts",
+      "type": "source",
+      "purpose": "Zustand stores for local UI state",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "760295e5adb1a53d28fc03fd905c69260034c8ccd73a6ab8ffe04f7e1932c64f",
+      "related_requirements": ["MOBILE-001"]
+    },
+    {
+      "path": "mobile/src/services/api.ts",
+      "type": "source",
+      "purpose": "API client (fetch wrapper with auth)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "6613c6fc3113e42bd377284c5f024530e73bef75c84a310c54f29d973cdc3784",
+      "related_requirements": ["MOBILE-002"]
+    },
+    {
+      "path": "mobile/app/onboarding.tsx",
+      "type": "source",
+      "purpose": "Onboarding screen with draft recovery",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "3def6b6e980c39d462a3523238987cad256c3e99e815bfce8d3f127d7c905fd4",
+      "related_requirements": ["MOBILE-003"]
+    },
+    {
+      "path": "mobile/app/diagnostic.tsx",
+      "type": "source",
+      "purpose": "Diagnostic assessment screen",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "c9e5289fdedf36b1aa3ff6fac4514f7d846d1511699d45df599d1bac43d352ba",
+      "related_requirements": ["MOBILE-004"]
+    },
+    {
+      "path": "mobile/app/home.tsx",
+      "type": "source",
+      "purpose": "Home screen with available lessons",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "028fc38b2553904592b32115b4327f5e91e8ab0876873f0dbd4def1cece68400",
+      "related_requirements": ["MOBILE-005"]
+    },
+    {
+      "path": "mobile/app/learning-contract.tsx",
+      "type": "source",
+      "purpose": "Learning entry contract display",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "ba2431b4894dc290847f3b9fd42184175d1d979a1a7cf77e91d75a069a04a447",
+      "related_requirements": ["MOBILE-006"]
+    },
+    {
+      "path": "mobile/app/lesson/[id].tsx",
+      "type": "source",
+      "purpose": "Lesson narrative input and submission",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "7caa730bc2e8cbde60960dd44c94f3d5e02b455bc1b619cab41db7c226e0c78d",
+      "related_requirements": ["MOBILE-007"]
+    },
+    {
+      "path": "mobile/app/lesson-session/[id].tsx",
+      "type": "source",
+      "purpose": "Lesson session status and processing",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "0a6e8ab38511046dd7fb525cb2dd67af24ddf823f63f0331f8e8f91dd633b8e3",
+      "related_requirements": ["MOBILE-008"]
+    },
+    {
+      "path": "mobile/app/result/[id].tsx",
+      "type": "source",
+      "purpose": "Results screen with backend response",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "cf92c3d39123b249bee733253bfc122d65c0ab1b137aed567d0c2031853bd817",
+      "related_requirements": ["MOBILE-009"]
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "type": "ci",
+      "purpose": "CI workflow definition",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "ebf1fd95e435badc1e56ed679a4362e12fb1dbe28fc967f17b74c892386c5db7",
+      "related_requirements": ["CI-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/proof_language_learning_app_vertical_slice_003.json",
+      "type": "proof",
+      "purpose": "Vertical slice 003 implementation proof",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "be0563121ca1be7addca9ef1d3f343306fba11c240ae2fefb8cc029fc6de9b32",
+      "related_requirements": ["ACCEPT-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/proof_language_learning_app_vertical_slice_003a.json",
+      "type": "proof",
+      "purpose": "Vertical slice 003 acceptance proof (runtime + visual)",
+      "version": "003a",
+      "status": "verified",
+      "sha256": "ba1714716f1d28c1cd847920dd1becb15013c173d15a1eee9aff468f85f1e5d8",
+      "related_requirements": ["ACCEPT-002"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/00_vertical_slice_003_index.md",
+      "type": "documentation",
+      "purpose": "Vertical slice 003 index and overview",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/01_implemented_scope.md",
+      "type": "documentation",
+      "purpose": "Implemented scope description",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/02_runtime_architecture.md",
+      "type": "documentation",
+      "purpose": "Runtime architecture documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-002"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/03_mobile_flow.md",
+      "type": "documentation",
+      "purpose": "Mobile flow documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-003"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/04_backend_modules.md",
+      "type": "documentation",
+      "purpose": "Backend modules documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-004"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/05_database_schema.md",
+      "type": "documentation",
+      "purpose": "Database schema documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-005"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/06_api_contracts.md",
+      "type": "documentation",
+      "purpose": "API contracts documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-006"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/07_state_machines.md",
+      "type": "documentation",
+      "purpose": "State machine documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-007"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/08_mock_ai_gateway.md",
+      "type": "documentation",
+      "purpose": "Mock AI Gateway documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-008"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/09_validation_pipeline.md",
+      "type": "documentation",
+      "purpose": "Validation pipeline documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-009"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/10_security_controls.md",
+      "type": "documentation",
+      "purpose": "Security controls documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-010"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/11_test_matrix.md",
+      "type": "documentation",
+      "purpose": "Test matrix documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-011"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/12_local_runbook.md",
+      "type": "documentation",
+      "purpose": "Local runbook instructions",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-012"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/13_known_limitations.md",
+      "type": "documentation",
+      "purpose": "Known limitations documentation",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DOC-013"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/14_acceptance_report.md",
+      "type": "documentation",
+      "purpose": "Final acceptance report",
+      "version": "1.0.0",
+      "status": "finalized",
+      "sha256": "",
+      "related_requirements": ["ACCEPT-003"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/diagrams/runtime_architecture.mmd",
+      "type": "diagram",
+      "purpose": "Runtime architecture diagram (Mermaid)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DIAG-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/diagrams/valid_flow_sequence.mmd",
+      "type": "diagram",
+      "purpose": "Valid E2E flow sequence diagram (Mermaid)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DIAG-002"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/diagrams/failed_flow_sequence.mmd",
+      "type": "diagram",
+      "purpose": "Failed flow sequence diagram (Mermaid)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DIAG-003"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/diagrams/lesson_state_machine.mmd",
+      "type": "diagram",
+      "purpose": "Lesson state machine diagram (Mermaid)",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["DIAG-004"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/schemas/vertical_slice_003_proof.schema.json",
+      "type": "schema",
+      "purpose": "Proof JSON schema for vertical slice 003",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["SCHEMA-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/schemas/mock_ai_analysis.schema.json",
+      "type": "schema",
+      "purpose": "Mock AI analysis output schema",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["SCHEMA-002"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/schemas/lesson_processing_result.schema.json",
+      "type": "schema",
+      "purpose": "Lesson processing result schema",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["SCHEMA-003"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/examples/mock_ai_analysis.valid.json",
+      "type": "example",
+      "purpose": "Valid mock AI analysis example",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["EXAMPLE-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/examples/mock_ai_analysis.invalid.json",
+      "type": "example",
+      "purpose": "Invalid mock AI analysis example",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["EXAMPLE-002"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/examples/lesson_processing_result.example.json",
+      "type": "example",
+      "purpose": "Lesson processing result example",
+      "version": "1.0.0",
+      "status": "verified",
+      "sha256": "",
+      "related_requirements": ["EXAMPLE-003"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/vertical_slice_003_artifact_index.json",
+      "type": "index",
+      "purpose": "Complete artifact index for vertical slice 003",
+      "version": "1.0.0",
+      "status": "finalized",
+      "sha256": "",
+      "related_requirements": ["INDEX-001"]
+    }
+  ]
+}

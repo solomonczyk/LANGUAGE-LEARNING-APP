@@ -1,0 +1,59 @@
+sequenceDiagram
+    participant U as User
+    participant M as Mobile App
+    participant B as Backend API
+    participant DB as PostgreSQL
+    participant AI as Mock AI Gateway
+
+    U->>M: Open app
+    M->>M: Onboarding form
+    U->>M: Fill profile
+    M->>B: POST /learner-profile
+    B->>DB: INSERT learner_profiles
+    DB-->>B: Profile created
+    B-->>M: ProfileResponse
+    M->>B: POST /diagnostics/sessions
+    B->>DB: INSERT diagnostic_session
+    B-->>M: CreateSessionResponse
+
+    loop 4 diagnostic steps
+        U->>M: Submit response
+        M->>B: POST /diagnostics/sessions/{id}/responses
+        B->>DB: INSERT diagnostic_response
+        B-->>M: SubmitResponseResponse
+    end
+
+    M->>B: POST /diagnostics/sessions/{id}/complete
+    B->>DB: SELECT all responses
+    B->>B: _assess_responses() → CEFR
+    B->>DB: INSERT skill_assessments
+    B->>DB: UPDATE diagnostic_session → COMPLETED
+    B-->>M: CompleteSessionResponse
+
+    M->>B: GET /learning-contract/current
+    B->>DB: SELECT or CREATE learning_entry_contract
+    B-->>M: ContractResponse
+
+    M->>B: POST /lesson-sessions
+    B->>DB: INSERT lesson_session
+    B-->>M: SessionResponse
+
+    U->>M: Write narrative text
+    M->>B: POST /lesson-sessions/{id}/submissions
+    B->>DB: INSERT submission
+    B-->>M: SubmitTextResponse
+
+    M->>B: POST /lesson-sessions/{id}/process
+    B->>DB: SELECT submission
+    B->>B: State: SUBMITTED → ANALYSIS_PENDING
+    B->>AI: analyze_submission()
+    AI-->>B: Analysis result (deterministic)
+    B->>B: Linguistic validation
+    B->>B: Pedagogical validation
+    B->>B: Policy decision → COMPLETE
+    B->>DB: INSERT validation_results
+    B->>DB: UPDATE session → COMPLETED
+    B->>DB: INSERT mastery_evidence
+    B-->>M: ProcessResponse (status: COMPLETED)
+
+    M->>M: Navigate to result screen

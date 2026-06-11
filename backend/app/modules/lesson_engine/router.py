@@ -32,6 +32,7 @@ async def start_lesson_session(
 ):
     """Start a new lesson session."""
     session = await create_session(db, user_id, body.lesson_definition_id)
+    await db.commit()
     return SessionResponse(
         session_id=str(session.id),
         lesson_definition_id=str(session.lesson_definition_id),
@@ -76,6 +77,7 @@ async def submit_learner_text(
         source_text=body.text,
         idempotency_key=idempotency_key,
     )
+    await db.commit()
 
     return SubmitTextResponse(
         submission_id=str(submission.id),
@@ -117,6 +119,7 @@ async def process_lesson(
     session = await process_lesson_session(
         db, session_id, user_id, str(submission.id)
     )
+    await db.commit()
 
     # Fetch validation results for response
     from app.models import ValidationResult

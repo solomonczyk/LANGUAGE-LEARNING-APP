@@ -36,6 +36,7 @@ async def submit_text(
         source_text=text,
         idempotency_key=idempotency_key,
     )
+    await db.commit()
 
     return SubmissionResponse(
         id=str(submission.id),

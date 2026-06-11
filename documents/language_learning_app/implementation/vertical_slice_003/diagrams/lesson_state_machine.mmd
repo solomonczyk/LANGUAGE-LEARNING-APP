@@ -1,0 +1,22 @@
+stateDiagram-v2
+    [*] --> CREATED
+
+    CREATED --> ACTIVE : activate
+    CREATED --> FAILED : fail
+
+    ACTIVE --> SUBMITTED : submit
+    ACTIVE --> FAILED : fail
+
+    SUBMITTED --> ANALYSIS_PENDING : start_analysis
+    SUBMITTED --> FAILED : fail
+
+    ANALYSIS_PENDING --> ANALYSIS_VALIDATED : validate
+    ANALYSIS_PENDING --> FAILED : fail
+
+    ANALYSIS_VALIDATED --> COMPLETED : complete
+    ANALYSIS_VALIDATED --> REJECTED : reject
+    ANALYSIS_VALIDATED --> FAILED : fail
+
+    COMPLETED --> [*]
+    REJECTED --> [*]
+    FAILED --> [*]

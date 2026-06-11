@@ -23,6 +23,7 @@ async def create_profile(body: ProfileCreateRequest, user_id: CurrentUserId, db:
         preferred_lesson_duration=body.preferred_lesson_duration,
         self_reported_level=body.self_reported_level,
     )
+    await db.commit()
     return ProfileResponse(
         id=str(profile.id),
         user_id=str(profile.user_id),

@@ -293,7 +293,7 @@ function getLevelDescription(level: string): string {
   }
 }
 
-function canProceed(step: number, store: ReturnType<typeof useOnboardingStore>): boolean {
+function canProceed(step: number, store: { targetLanguage: string; nativeLanguage: string; learningGoal: string; selfReportedLevel: string }): boolean {
   switch (step) {
     case 0:
       return !!store.targetLanguage;

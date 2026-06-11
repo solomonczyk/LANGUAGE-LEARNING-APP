@@ -103,7 +103,10 @@ async def validate_linguistic(
     passed = len(failed_checks) == 0
 
     # Save validation result
-    sid = UUID(submission_id)
+    try:
+        sid = UUID(submission_id) if isinstance(submission_id, str) else submission_id
+    except (ValueError, AttributeError):
+        sid = submission_id
     vr = ValidationResult(
         submission_id=sid,
         validation_type="linguistic",
@@ -116,7 +119,7 @@ async def validate_linguistic(
     return {"passed": passed, "details": {"checks": checks, "failed_checks": failed_checks}}
 
 
-async def validate_linguistic_standalone(
+def validate_linguistic_standalone(
     analysis_result: dict,
 ) -> dict:
     """Standalone linguistic validation without DB persistence."""

@@ -1,0 +1,45 @@
+sequenceDiagram
+    participant U as User
+    participant M as Mobile App
+    participant B as Backend API
+    participant DB as PostgreSQL
+    participant AI as Mock AI Gateway (malformed)
+
+    U->>M: Open lesson
+    M->>B: POST /lesson-sessions
+    B->>DB: INSERT lesson_session
+    B-->>M: SessionResponse
+
+    U->>M: Submit narrative text
+    M->>B: POST /lesson-sessions/{id}/submissions
+    B->>DB: INSERT submission
+    B-->>M: SubmitTextResponse
+
+    M->>B: POST /lesson-sessions/{id}/process
+    B->>DB: SELECT submission
+    B->>AI: analyze_submission()
+
+    Note over AI: MOCK_AI_FIXTURE_MODE=malformed
+    AI-->>B: Malformed analysis result
+
+    B->>B: schema_valid = false
+    B->>DB: UPDATE session → FAILED
+    B->>DB: INSERT audit_event (failure)
+    B-->>M: ProcessResponse (status: FAILED)
+
+    M->>M: Show safe error state
+    Note over M: No lesson completion<br/>No mastery evidence<br/>No policy decision
+
+    alt Pedagogical validation failure
+        B->>B: pedagogical → passed: false
+        B->>DB: INSERT validation_result (pedagogical:FAILED)
+        B->>DB: UPDATE session → REJECTED
+        B-->>M: ProcessResponse (status: REJECTED)
+    end
+
+    alt Linguistic validation failure
+        B->>B: linguistic → passed: false
+        B->>DB: INSERT validation_result (linguistic:FAILED)
+        B->>DB: UPDATE session → REJECTED
+        B-->>M: ProcessResponse (status: REJECTED)
+    end

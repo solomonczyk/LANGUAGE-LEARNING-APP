@@ -26,6 +26,7 @@ async def create_mastery_evidence(
         skill_name=body.skill_name,
         evidence_type=body.evidence_type,
     )
+    await db.commit()
     return EvidenceResponse(
         id=str(evidence.id),
         skill_name=evidence.skill_name,

@@ -28,6 +28,7 @@ async def create_audit_event(
         data=body.get("data"),
         trace_id=body.get("trace_id"),
     )
+    await db.commit()
     return {"id": str(event.id), "status": "recorded"}
 
 

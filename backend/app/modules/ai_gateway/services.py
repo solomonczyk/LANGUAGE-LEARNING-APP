@@ -122,7 +122,10 @@ async def analyze_submission(
     Returns the analysis result dict. If in malformed mode, returns
     intentionally invalid output to test the validation pipeline.
     """
-    sid = UUID(submission_id)
+    try:
+        sid = UUID(submission_id) if isinstance(submission_id, str) else submission_id
+    except (ValueError, AttributeError):
+        sid = submission_id
 
     # Create analysis request
     request = AIAnalysisRequest(
@@ -180,7 +183,10 @@ async def analyze_submission(
 
 async def get_analysis_result(db: AsyncSession, submission_id: str) -> dict | None:
     """Get the latest analysis result for a submission."""
-    sid = UUID(submission_id)
+    try:
+        sid = UUID(submission_id) if isinstance(submission_id, str) else submission_id
+    except (ValueError, AttributeError):
+        sid = submission_id
     stmt = (
         select(AIAnalysisResult)
         .where(AIAnalysisResult.submission_id == sid)

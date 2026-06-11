@@ -24,11 +24,17 @@ class Base(DeclarativeBase):
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """Dependency that yields a database session."""
+    """Dependency that yields a database session.
+
+    Session commit is delegated to route handlers to ensure
+    data is committed before the HTTP response is sent.
+    FastAPI yields dependency cleanup runs AFTER response delivery,
+    so committing here would create a race condition where the
+    next request cannot find data the previous request wrote.
+    """
     async with async_session_factory() as session:
         try:
             yield session
-            await session.commit()
         except Exception:
             await session.rollback()
             raise

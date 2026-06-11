@@ -1,0 +1,44 @@
+flowchart TD
+    subgraph Docker_Compose["Docker Compose"]
+        PG[(PostgreSQL 16)]
+        API[FastAPI Backend]
+        PG <--> API
+    end
+
+    subgraph Mobile["Mobile App (Expo/RN)"]
+        ON[Onboarding]
+        DG[Diagnostic]
+        LC[Learning Contract]
+        LS[Lesson]
+        RS[Result]
+    end
+
+    subgraph Backend_Modules["Backend Modules"]
+        ID[Identity]
+        LP[Learner Profile]
+        DX[Diagnostics]
+        LE[Lesson Engine]
+        SUB[Submission]
+        AI[AiGateway<br/>Mock AI]
+        LV[Linguistic Validation]
+        PV[Pedagogical Validation]
+        PE[Policy Engine]
+        MY[Mastery]
+        AU[Audit]
+    end
+
+    Mobile <-->|HTTP REST :8000| API
+    API --> ID
+    API --> LP
+    API --> DX
+    API --> LE
+    API --> SUB
+    API --> MY
+    API --> AU
+
+    LE --> AI --> LV --> PV --> PE --> MY
+
+    SUB --> LS
+    PE -->|COMPLETE| MY
+    MY -->|Audit Event| AU
+    LS -->|Processing Chain| LE

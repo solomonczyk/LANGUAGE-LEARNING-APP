@@ -47,21 +47,24 @@ async def validate_pedagogical(
     if not corrections_ok:
         failed_checks.append("corrections_within_budget")
 
-    # 3. No unsupported mastery claim
-    raw = str(analysis_result.get("raw_output", analysis_result))
-    no_mastery_claim = "mastery" not in raw.lower() and "independent_use" not in raw.lower()
+    # 3-5. Checks based on raw_output string content
+    raw_str = str(analysis_result.get("raw_output", ""))
+    raw_lower = raw_str.lower()
+
+    no_mastery_claim = (
+        "mastery" not in raw_lower
+        and "independent_use" not in raw_lower
+    )
     checks["no_unsupported_mastery_claim"] = no_mastery_claim
     if not no_mastery_claim:
         failed_checks.append("no_unsupported_mastery_claim")
 
-    # 4. No reward command
-    no_reward = "reward" not in raw.lower() and "xp" not in raw.lower()
+    no_reward = "reward" not in raw_lower and "xp" not in raw_lower
     checks["no_reward_command"] = no_reward
     if not no_reward:
         failed_checks.append("no_reward_command")
 
-    # 5. No curriculum mutation
-    no_curriculum = "curriculum" not in raw.lower() and "syllabus" not in raw.lower()
+    no_curriculum = "curriculum" not in raw_lower and "syllabus" not in raw_lower
     checks["no_curriculum_mutation"] = no_curriculum
     if not no_curriculum:
         failed_checks.append("no_curriculum_mutation")
@@ -69,7 +72,10 @@ async def validate_pedagogical(
     passed = len(failed_checks) == 0
 
     # Save validation result
-    sid = UUID(submission_id)
+    try:
+        sid = UUID(submission_id) if isinstance(submission_id, str) else submission_id
+    except (ValueError, AttributeError):
+        sid = submission_id
     vr = ValidationResult(
         submission_id=sid,
         validation_type="pedagogical",

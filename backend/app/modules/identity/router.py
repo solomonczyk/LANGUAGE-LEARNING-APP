@@ -15,6 +15,7 @@ router = APIRouter(prefix="/identity", tags=["identity"])
 async def register(body: RegisterRequest, db: DbSession):
     """Register a new local user."""
     user = await register_user(db, body.username, body.display_name, body.email)
+    await db.commit()
     return UserResponse(
         id=str(user.id),
         username=user.username,

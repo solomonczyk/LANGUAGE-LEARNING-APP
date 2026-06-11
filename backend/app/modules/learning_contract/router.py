@@ -22,6 +22,7 @@ async def read_current_contract(user_id: CurrentUserId, db: DbSession):
 async def create_new_contract(user_id: CurrentUserId, db: DbSession):
     """Create a new learning entry contract."""
     contract = await create_contract(db, user_id)
+    await db.commit()
     return _contract_to_response(contract)
 
 

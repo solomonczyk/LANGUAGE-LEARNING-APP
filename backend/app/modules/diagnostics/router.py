@@ -27,6 +27,7 @@ router = APIRouter(prefix="/diagnostics", tags=["diagnostics"])
 async def create_diagnostic_session(user_id: CurrentUserId, db: DbSession):
     """Create a new diagnostic session."""
     session = await create_session(db, user_id)
+    await db.commit()
     return CreateSessionResponse(
         session_id=str(session.id),
         status=session.status,
@@ -46,6 +47,7 @@ async def submit_diagnostic_response(
     session = await submit_response(
         db, session_id, user_id, body.question_key, body.response_data
     )
+    await db.commit()
     return SubmitResponseResponse(
         session_id=str(session.id),
         question_key=body.question_key,
@@ -63,6 +65,7 @@ async def complete_diagnostic_session(
 ):
     """Complete a diagnostic session."""
     session = await complete_session(db, session_id, user_id)
+    await db.commit()
 
     from sqlalchemy import select
 

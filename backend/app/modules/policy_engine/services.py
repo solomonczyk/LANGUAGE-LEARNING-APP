@@ -24,7 +24,10 @@ async def make_decision(
     - Pedagogical fails → REJECT (needs contract adjustment)
     - Both fail → FAIL
     """
-    sid = UUID(submission_id)
+    try:
+        sid = UUID(submission_id) if isinstance(submission_id, str) else submission_id
+    except (ValueError, AttributeError):
+        sid = submission_id
 
     # Get the submission
     submission = await db.get(Submission, sid)

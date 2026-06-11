@@ -8,6 +8,7 @@ class TestDiagnosticStateMachine:
     def setup_method(self):
         self.sm = StateMachine("CREATED", {"CREATED", "IN_PROGRESS", "COMPLETED", "FAILED"})
         self.sm.add_transition("CREATED", "start", "IN_PROGRESS")
+        self.sm.add_transition("CREATED", "fail", "FAILED")
         self.sm.add_transition("IN_PROGRESS", "complete", "COMPLETED")
         self.sm.add_transition("IN_PROGRESS", "fail", "FAILED")
 
