@@ -1,0 +1,65 @@
+{
+  "layer": "006c",
+  "title": "Onboarding Step 3 Continue Gate Fix",
+  "status": "ACCEPTED",
+  "acceptance_criteria": {
+    "onboarding_step_3_continue_gate_fixed": true,
+    "learning_goal_selectable": true,
+    "learning_goal_selected_state_visible": true,
+    "duration_selectable": true,
+    "continue_enabled_after_valid_selection": true,
+    "continue_disabled_when_required_fields_missing": true,
+    "onboarding_payload_correct": true,
+    "user_can_reach_diagnostic": true,
+    "tests_failed": 0,
+    "real_ai_calls": false,
+    "staging": false,
+    "production_accepted": false,
+    "git_clean": true,
+    "head_matches_origin": true
+  },
+  "root_cause": {
+    "primary": "TouchableChip uses <Text onPress> instead of <Pressable> — touch events on learning goal chips do not reliably propagate, preventing Zustand store update",
+    "secondary": [
+      "No visible selected state feedback",
+      "No validation helper text when Continue disabled"
+    ],
+    "rejected_candidates": [
+      "custom goal field required incorrectly",
+      "duration selected but not persisted",
+      "validation checks wrong field name",
+      "onboarding step index/state mismatch",
+      "stale Zustand/local state",
+      "form schema mismatch with backend payload"
+    ]
+  },
+  "fix_summary": {
+    "file_changed": "mobile/app/onboarding.tsx",
+    "file_created": "mobile/app/__tests__/onboarding.test.tsx",
+    "key_changes": [
+      "Replaced <Text onPress> with <Pressable> in TouchableChip",
+      "Added checkmark (✓) visual indicator for selected state",
+      "Added press feedback for unselected chips",
+      "Added persistent validation helper text when Continue disabled",
+      "Updated canProceed to validate both learningGoal and preferredDuration"
+    ]
+  },
+  "test_results": {
+    "suites_passed": 1,
+    "tests_passed": 23,
+    "tests_failed": 0,
+    "pass_rate": "100%"
+  },
+  "expected_final_state": {
+    "layer_006c": "ACCEPTED_OR_NEEDS_FIX",
+    "onboarding_flow_unblocked": true,
+    "diagnostic_accessible_after_onboarding": true,
+    "s3_allowed_after_006c_acceptance_only": true,
+    "real_ai_allowed": false,
+    "staging_allowed": false,
+    "production_accepted": false
+  },
+  "evidence_paths": {
+    "test_output": "evidence/test_outputs/jest_verbose_output.txt"
+  }
+}

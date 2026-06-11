@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -215,6 +216,12 @@ export default function OnboardingScreen() {
             disabled={!canProceed(step, store)}
             loading={loading}
           />
+          {(() => {
+            const msg = getStepValidationMessage(step, store);
+            return msg && !canProceed(step, store)
+              ? <Text style={styles.validationText}>{msg}</Text>
+              : null;
+          })()}
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -233,14 +240,30 @@ function TouchableChip({
   wide?: boolean;
 }) {
   return (
-    <View style={wide ? styles.chipWide : undefined}>
-      <Text
-        style={[styles.chip, selected && styles.chipSelected]}
-        onPress={onPress}
-      >
-        {label}
-      </Text>
-    </View>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.chip,
+        selected && styles.chipSelected,
+        pressed && !selected && styles.chipPressed,
+        wide && styles.chipWide,
+      ]}
+    >
+      {({ pressed }) => (
+        <>
+          <Text
+            style={[
+              styles.chipText,
+              selected && styles.chipTextSelected,
+              pressed && !selected && styles.chipTextPressed,
+            ]}
+          >
+            {selected ? "✓  " : ""}
+            {label}
+          </Text>
+        </>
+      )}
+    </Pressable>
   );
 }
 
@@ -293,19 +316,25 @@ function getLevelDescription(level: string): string {
   }
 }
 
-function canProceed(step: number, store: { targetLanguage: string; nativeLanguage: string; learningGoal: string; selfReportedLevel: string }): boolean {
+function canProceed(step: number, store: { targetLanguage: string; nativeLanguage: string; learningGoal: string; preferredDuration: number; selfReportedLevel: string }): boolean {
   switch (step) {
     case 0:
       return !!store.targetLanguage;
     case 1:
       return !!store.nativeLanguage;
     case 2:
-      return !!store.learningGoal;
+      return !!store.learningGoal && !!store.preferredDuration;
     case 3:
       return !!store.selfReportedLevel;
     default:
       return false;
   }
+}
+
+function getStepValidationMessage(step: number, store: { learningGoal: string }): string | null {
+  if (step !== 2) return null;
+  if (!store.learningGoal) return "Please select or describe your learning goal.";
+  return null;
 }
 
 const styles = StyleSheet.create({
@@ -324,17 +353,28 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 24,
     backgroundColor: "#f5f5f5",
-    color: "#333",
-    fontSize: 14,
-    fontWeight: "500",
     overflow: "hidden",
     borderWidth: 2,
     borderColor: "transparent",
   },
+  chipPressed: {
+    backgroundColor: "#e8e8e8",
+  },
   chipSelected: {
     backgroundColor: "#E8F0FE",
-    color: "#007AFF",
     borderColor: "#007AFF",
+  },
+  chipText: {
+    color: "#333",
+    fontSize: 14,
+    fontWeight: "500",
+  },
+  chipTextSelected: {
+    color: "#007AFF",
+    fontWeight: "600",
+  },
+  chipTextPressed: {
+    color: "#555",
   },
   chipWide: { width: "100%", marginBottom: 4 },
   levelItem: { width: "30%", alignItems: "center", marginBottom: 16 },
@@ -349,6 +389,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fafafa",
   },
   error: { color: "#dc3545", fontSize: 14, textAlign: "center", marginTop: 8 },
+  validationText: { color: "#dc3545", fontSize: 13, textAlign: "center", marginTop: 8 },
   footer: {
     padding: 24,
     paddingBottom: Platform.OS === "ios" ? 36 : 24,
