@@ -101,7 +101,7 @@
     "commit_pushed": true,
     "git_clean": false,
     "head_matches_origin": true,
-    "unpushed_commits": 0,
+    "unpushed_commits": 1,
     "uncommitted_changes": 0
   },
   "unresolved_blockers": [],
