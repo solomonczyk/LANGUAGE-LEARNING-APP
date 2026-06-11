@@ -89,8 +89,10 @@ class TestAssessmentCalculation:
             {"question_key": "narrative_coherence", "response_data": {"correct_order": True}},
         ]
         result = _assess_responses(responses)
-        assert len(result) == 4
-        assert all(r["cefr"] in ("A2", "B1") for r in result.values())
+        assert len(result) >= 4  # At least the 4 primary dimensions
+        # Primary dimensions should be A2 or B1; secondary might be lower
+        primary = {k: v for k, v in result.items() if k in ("grammar_recognition", "active_vocabulary", "written_production", "narrative_coherence")}
+        assert all(p["cefr"] in ("A2", "B1") for p in primary.values()), f"Primary dims had wrong levels: {primary}"
 
     def test_empty_responses(self):
         result = _assess_responses([])

@@ -9,7 +9,7 @@ class CreateSessionResponse(BaseModel):
     session_id: str
     status: str
     current_step: int = 0
-    total_steps: int = 4
+    total_steps: int = 10
 
 
 class DiagnosticStep(BaseModel):
@@ -33,11 +33,22 @@ class SubmitResponseResponse(BaseModel):
     status: str
 
 
+class DimensionResultResponse(BaseModel):
+    raw_score: float | None = None
+    estimated_level: str = "not_measured_yet"
+    confidence: float = 0.0
+    evidence_count: int = 0
+    contradictions: list[str] = []
+    needs_follow_up: bool = True
+    status: str = "not_measured_yet"
+    deferred: bool = False
+
+
 class CompleteSessionResponse(BaseModel):
     session_id: str
     status: str
     assessments: list[dict]
-    overall_level: str
+    dimension_results: dict[str, DimensionResultResponse] | None = None
 
 
 class SessionStatusResponse(BaseModel):

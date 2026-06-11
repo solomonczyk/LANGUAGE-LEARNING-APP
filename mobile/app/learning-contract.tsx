@@ -7,6 +7,29 @@ import Button from "../src/shared/components/Button";
 import LoadingScreen from "../src/shared/components/LoadingScreen";
 import ErrorScreen from "../src/shared/components/ErrorScreen";
 import { learningContract } from "../src/services/api";
+import type { DimensionResultResponse } from "../src/components/diagnostics/types";
+
+/** Format a dimension key as a display label. */
+function formatSkillName(key: string): string {
+  const labels: Record<string, string> = {
+    grammar_recognition: "Grammar Recognition",
+    productive_grammar: "Productive Grammar",
+    passive_vocabulary: "Passive Vocabulary",
+    active_vocabulary: "Active Vocabulary",
+    reading_comprehension: "Reading Comprehension",
+    listening_comprehension: "Listening Comprehension",
+    visual_comprehension: "Visual Comprehension",
+    written_production: "Written Production",
+    narrative_coherence: "Narrative Coherence",
+    mediation: "Mediation",
+    communication_strategies: "Communication Strategies",
+    confidence_and_anxiety: "Confidence & Anxiety",
+    spoken_production: "Spoken Production",
+    spoken_interaction: "Spoken Interaction",
+    pronunciation: "Pronunciation",
+  };
+  return labels[key] || key.replace(/_/g, " ");
+}
 
 export default function LearningContractScreen() {
   const router = useRouter();
@@ -56,74 +79,65 @@ export default function LearningContractScreen() {
     }
   }, [needsContract, creating, contract, handleCreate]);
 
-  // Show loading while fetching or creating contract
   if (isLoading || creating || needsContract) {
     return (
       <LoadingScreen
-        message={
-          creating || needsContract
-            ? "Creating your learning plan..."
-            : "Loading your learning plan..."
-        }
+        message={creating || needsContract ? "Creating your learning plan..." : "Loading your learning plan..."}
       />
     );
   }
 
-  // Show error for non-404 failures
   if (error) {
     return (
       <SafeAreaView style={styles.container}>
-        <ErrorScreen
-          message={createError || "Could not load learning contract."}
-          onRetry={() => {
-            setNeedsContract(true);
-          }}
-        />
+        <ErrorScreen message={createError || "Could not load learning contract."} onRetry={() => setNeedsContract(true)} />
       </SafeAreaView>
     );
   }
 
   const contractData = contract as Record<string, any> | undefined;
+  const snapshot = contractData?.diagnostic_profile_snapshot as Record<string, any> | undefined;
+  const snapshotVersion = snapshot?.version || "1.0.0";
 
-  // Determine learner level from contract data
-  const rawAssessments = (contractData?.diagnostic_profile_snapshot as any)?.assessments || [];
+  // Parse dimensions from snapshot (v2.0.0) or fall back to assessments (v1.0.0)
+  let measured: [string, any][] = [];
+  let uncertain: [string, any][] = [];
+  let notMeasured: [string, any][] = [];
+  let deferred: [string, any][] = [];
 
-  // Client-side deduplication safety net: keep only the first occurrence per skill
-  const seenSkills = new Set<string>();
-  const assessments = rawAssessments.filter((a: any) => {
-    const key = a.skill || "";
-    if (!key || seenSkills.has(key)) return false;
-    seenSkills.add(key);
-    return true;
-  });
+  if (snapshotVersion === "2.0.0" && snapshot?.dimensions) {
+    const allDims = Object.entries(snapshot.dimensions) as [string, any][];
+    measured = allDims.filter(([_, info]) => info?.status === "measured" || info?.status === "estimated");
+    uncertain = allDims.filter(([_, info]) => info?.status === "uncertain" || (info?.needs_follow_up && !info?.deferred && info?.status !== "not_measured_yet"));
+    deferred = allDims.filter(([_, info]) => info?.deferred === true);
+    notMeasured = allDims.filter(([_, info]) => info?.status === "not_measured_yet" && !info?.deferred);
+  } else {
+    // Legacy v1.0.0 — use assessments array
+    const rawAssessments = snapshot?.assessments || [];
+    const seenSkills = new Set<string>();
+    const uniqueAssessments = rawAssessments.filter((a: any) => {
+      const key = a.skill || "";
+      if (!key || seenSkills.has(key)) return false;
+      seenSkills.add(key);
+      return true;
+    });
+    measured = uniqueAssessments.map((a: any) => [a.skill, { estimated_level: a.cefr, confidence: a.confidence, status: "measured" }]);
+    uncertain = [];
+    deferred = [];
+    notMeasured = [];
+  }
 
-  const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
-  const cefrValues = assessments.map((a: any) => a.cefr).filter(Boolean);
-  const learnerLevel = cefrValues.length > 0
-    ? cefrValues.reduce((lowest: string, level: string) =>
-        levels.indexOf(level) < levels.indexOf(lowest) ? level : lowest
-      , "C2")
-    : "A1";
-  const isA1 = learnerLevel === "A1";
+  // Determine if this is an older-format snapshot for A1-friendly wording
+  const isLegacySimple = snapshotVersion === "1.0.0" && measured.length > 0 && measured.every(([_, info]) => info?.estimated_level === "A1");
 
   /** Plain-language explanations for contract terms. */
   function getTermExplanation(label: string): string {
     const explanations: Record<string, string> = {
-      "Active Vocabulary Budget": isA1
-        ? "New words you will learn in each lesson"
-        : "Number of new vocabulary items introduced per lesson",
-      "Grammar Focus Count": isA1
-        ? "Grammar topics we will practice"
-        : "Number of grammar areas covered in each lesson",
-      "Max Corrections per Lesson": isA1
-        ? "How many small fixes we suggest (gentle feedback)"
-        : "Maximum number of primary corrections shown per submission",
-      "Scaffolding Level": isA1
-        ? "How much help and support you get"
-          : "Amount of structural support provided during lessons",
-      "Lesson Complexity": isA1
-        ? "How challenging the lesson will be"
-        : "Cognitive complexity level of lesson content",
+      "Active Vocabulary Budget": "Number of new vocabulary items introduced per lesson",
+      "Grammar Focus Count": "Number of grammar areas covered in each lesson",
+      "Max Corrections per Lesson": "Maximum number of primary corrections shown per submission",
+      "Scaffolding Level": "Amount of structural support provided during lessons",
+      "Lesson Complexity": "Cognitive complexity level of lesson content",
       "Lesson Duration": "How long each lesson is designed to take",
       "Target Language": "The language you are learning",
       "Support Language": "Your native language — used for explanations",
@@ -146,82 +160,138 @@ export default function LearningContractScreen() {
       ]
     : [];
 
+  const hasMeasured = measured.length > 0;
+  const hasUncertain = uncertain.length > 0;
+  const hasNotMeasured = notMeasured.length > 0;
+  const hasDeferred = deferred.length > 0;
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.badge}>{isA1 ? "Your Learning Plan" : "Learning Entry Contract"}</Text>
-        <Text style={styles.title}>
-          {isA1 ? "Your Personal Learning Plan" : "Learning Entry Contract"}
-        </Text>
+        <Text style={styles.badge}>Your Learning Plan</Text>
+        <Text style={styles.title}>Learning Entry Contract</Text>
         <Text style={styles.subtitle}>
-          {isA1
-            ? "Based on your answers, we made a plan just for you. Here's what you can expect."
-            : "Based on your diagnostic results, we've created a personalized learning plan for you."
-          }
+          Based on your diagnostic results, we've created a personalized learning plan.
+          {hasNotMeasured || hasDeferred ? " Some skills weren't assessed yet and will be explored in future lessons." : ""}
         </Text>
 
+        {/* Contract terms card */}
         {contractData && (
           <View style={styles.card}>
             {items.map((item, index) => {
               const explanation = getTermExplanation(item.label);
               return (
                 <View key={item.label}>
-                  <View
-                    style={[styles.row, index < items.length - 1 && styles.borderRow]}
-                  >
+                  <View style={[styles.row, index < items.length - 1 && styles.borderRow]}>
                     <View style={styles.rowLabelGroup}>
                       <Text style={styles.rowLabel}>{item.label}</Text>
-                      {isA1 && explanation ? (
-                        <Text style={styles.rowExplanation}>{explanation}</Text>
-                      ) : null}
+                      {explanation ? <Text style={styles.rowExplanation}>{explanation}</Text> : null}
                     </View>
                     <Text style={styles.rowValue}>{item.value}</Text>
                   </View>
-                  {!isA1 && explanation && index < items.length - 1 ? (
-                    <Text style={styles.hintText}>{explanation}</Text>
-                  ) : null}
                 </View>
               );
             })}
           </View>
         )}
 
-        {assessments.length > 0 && (
+        {/* ===== Measured Skills ===== */}
+        {hasMeasured && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>
-              {isA1 ? "Your Skills" : "Skill Profile"}
-            </Text>
-            {assessments.map((a: any) => (
-              <View key={a.skill || a.cefr} style={styles.skillRow}>
-                <Text style={styles.skillName}>
-                  {a.skill?.replace(/_/g, " ") || "Skill"}
-                </Text>
+            <Text style={styles.sectionTitle}>✅ Measured Skills</Text>
+            <Text style={styles.sectionSubtitle}>We have enough information about these skills.</Text>
+            {measured.map(([key, info]) => (
+              <View key={key} style={styles.skillRow}>
+                <Text style={styles.skillName}>{formatSkillName(key)}</Text>
                 <View style={styles.levelBadge}>
-                  <Text style={styles.levelText}>{a.cefr || "N/A"}</Text>
+                  <Text style={styles.levelText}>{info.estimated_level || "N/A"}</Text>
                 </View>
-                <Text style={styles.confidence}>
-                  {(a.confidence * 100).toFixed(0)}% confidence
-                </Text>
+                <Text style={styles.confidence}>{(info.confidence * 100).toFixed(0)}%</Text>
               </View>
             ))}
           </View>
         )}
 
-        {/* Summary explanation for A1 */}
-        {isA1 && (
+        {/* ===== Uncertain Skills ===== */}
+        {hasUncertain && (
+          <View style={[styles.section, styles.uncertainSection]}>
+            <Text style={[styles.sectionTitle, styles.uncertainTitle]}>⚠️ Needs More Information</Text>
+            <Text style={styles.sectionSubtitle}>
+              We're not entirely sure about your level in these areas. They may be checked in future lessons.
+            </Text>
+            {uncertain.map(([key, info]) => (
+              <View key={key} style={[styles.skillRow, styles.uncertainRow]}>
+                <Text style={styles.skillName}>{formatSkillName(key)}</Text>
+                <View style={[styles.levelBadge, styles.uncertainBadge]}>
+                  <Text style={[styles.levelText, styles.uncertainLevelText]}>{info.estimated_level || "?"}</Text>
+                </View>
+                <Text style={styles.confidence}>{(info.confidence * 100).toFixed(0)}%</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {/* ===== Not Measured Yet ===== */}
+        {hasNotMeasured && (
+          <View style={[styles.section, styles.notMeasuredSection]}>
+            <Text style={[styles.sectionTitle, styles.notMeasuredTitle]}>📋 Not Assessed Yet</Text>
+            <Text style={styles.sectionSubtitle}>
+              These skills weren't measured in this screening. They may be explored later.
+            </Text>
+            {notMeasured.map(([key, _]) => (
+              <View key={key} style={[styles.skillRow, styles.notMeasuredRow]}>
+                <Text style={[styles.skillName, styles.notMeasuredText]}>{formatSkillName(key)}</Text>
+                <Text style={styles.notMeasuredLabel}>waiting</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {/* ===== Deferred Skills ===== */}
+        {hasDeferred && (
+          <View style={[styles.section, styles.deferredSection]}>
+            <Text style={[styles.sectionTitle, styles.deferredTitle]}>🎤 Speaking Skills</Text>
+            <Text style={styles.sectionSubtitle}>
+              Speaking and pronunciation require audio recording, which is not available in this version. These will be noted for future expansion.
+            </Text>
+            {deferred.map(([key, _]) => (
+              <View key={key} style={[styles.skillRow, styles.deferredRow]}>
+                <Text style={[styles.skillName, styles.deferredText]}>{formatSkillName(key)}</Text>
+                <Text style={styles.deferredLabel}>requires audio</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {/* Summary for legacy A1 */}
+        {isLegacySimple && (
           <View style={styles.summaryBox}>
             <Text style={styles.summaryBoxTitle}>What this means for you</Text>
+            <Text style={styles.summaryBoxText}>✓ Lessons will be {contractData?.lesson_duration_minutes || 10} minutes long.</Text>
+            <Text style={styles.summaryBoxText}>✓ You'll learn {contractData?.active_vocabulary_budget || 3} new words each lesson.</Text>
+            <Text style={styles.summaryBoxText}>✓ Extra support is available whenever you need it.</Text>
+            <Text style={styles.summaryBoxText}>✓ You can repeat lessons if you want more practice.</Text>
+          </View>
+        )}
+
+        {snapshotVersion === "2.0.0" && hasMeasured && (
+          <View style={styles.summaryBox}>
+            <Text style={styles.summaryBoxTitle}>Your Learning Path</Text>
             <Text style={styles.summaryBoxText}>
-              ✓ Lessons will be {contractData?.lesson_duration_minutes || 10} minutes long.
+              ✓ Lessons are tailored to your current level across {measured.length} measured skill dimensions.
             </Text>
+            {hasUncertain && (
+              <Text style={styles.summaryBoxText}>
+                ⚠️ We'll check {uncertain.length} area{uncertain.length > 1 ? "s" : ""} where we need more information.
+              </Text>
+            )}
+            {hasNotMeasured && (
+              <Text style={styles.summaryBoxText}>
+                📋 {notMeasured.length} skill{notMeasured.length > 1 ? "s" : ""} {notMeasured.length > 1 ? "were" : "was"} not assessed — they may be added later.
+              </Text>
+            )}
             <Text style={styles.summaryBoxText}>
-              ✓ You'll learn {contractData?.active_vocabulary_budget || 3} new words each lesson.
-            </Text>
-            <Text style={styles.summaryBoxText}>
-              ✓ Extra support is available whenever you need it.
-            </Text>
-            <Text style={styles.summaryBoxText}>
-              ✓ You can repeat lessons if you want more practice.
+              ✓ You can repeat lessons and your profile will update as you progress.
             </Text>
           </View>
         )}
@@ -237,80 +307,46 @@ export default function LearningContractScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   scroll: { padding: 24 },
-  badge: {
-    fontSize: 13,
-    color: "#007AFF",
-    fontWeight: "600",
-    marginBottom: 8,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-  },
+  badge: { fontSize: 13, color: "#007AFF", fontWeight: "600", marginBottom: 8, textTransform: "uppercase", letterSpacing: 1 },
   title: { fontSize: 26, fontWeight: "700", marginBottom: 8, color: "#1a1a1a" },
   subtitle: { fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 22 },
-  card: {
-    backgroundColor: "#f8f9fa",
-    borderRadius: 16,
-    padding: 4,
-    marginBottom: 24,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-  },
+  card: { backgroundColor: "#f8f9fa", borderRadius: 16, padding: 4, marginBottom: 24 },
+  row: { flexDirection: "row", justifyContent: "space-between", paddingVertical: 14, paddingHorizontal: 16 },
   borderRow: { borderBottomWidth: 1, borderBottomColor: "#e9ecef" },
   rowLabelGroup: { flex: 1, marginRight: 8 },
   rowLabel: { fontSize: 15, color: "#666" },
   rowExplanation: { fontSize: 12, color: "#999", marginTop: 2, lineHeight: 16 },
   rowValue: { fontSize: 15, fontWeight: "600", color: "#1a1a1a" },
-  hintText: { fontSize: 12, color: "#999", paddingHorizontal: 16, paddingBottom: 8, lineHeight: 16 },
   section: { marginBottom: 24 },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 12,
-    color: "#333",
-  },
-  skillRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
-  },
+  sectionTitle: { fontSize: 18, fontWeight: "600", marginBottom: 4, color: "#333" },
+  sectionSubtitle: { fontSize: 13, color: "#888", marginBottom: 12, lineHeight: 18 },
+  skillRow: { flexDirection: "row", alignItems: "center", paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: "#f0f0f0" },
   skillName: { flex: 1, fontSize: 14, color: "#333", textTransform: "capitalize" },
-  levelBadge: {
-    backgroundColor: "#E8F0FE",
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 8,
-    marginRight: 8,
-  },
+  levelBadge: { backgroundColor: "#E8F0FE", paddingHorizontal: 10, paddingVertical: 4, borderRadius: 8, marginRight: 8 },
   levelText: { fontSize: 13, fontWeight: "600", color: "#007AFF" },
   confidence: { fontSize: 12, color: "#999" },
-  summaryBox: {
-    backgroundColor: "#E8F5E9",
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 24,
-  },
-  summaryBoxTitle: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#2E7D32",
-    marginBottom: 12,
-  },
-  summaryBoxText: {
-    fontSize: 14,
-    color: "#33691E",
-    lineHeight: 22,
-    marginBottom: 4,
-  },
-  footer: {
-    padding: 24,
-    paddingBottom: 36,
-    borderTopWidth: 1,
-    borderTopColor: "#f0f0f0",
-  },
+  // Uncertain section
+  uncertainSection: { backgroundColor: "#FFF8E1", borderRadius: 16, padding: 16, marginBottom: 24 },
+  uncertainTitle: { color: "#E65100" },
+  uncertainRow: { borderBottomColor: "#FFE0B2" },
+  uncertainBadge: { backgroundColor: "#FFE0B2" },
+  uncertainLevelText: { color: "#E65100" },
+  // Not measured
+  notMeasuredSection: { backgroundColor: "#F5F5F5", borderRadius: 16, padding: 16, marginBottom: 24 },
+  notMeasuredTitle: { color: "#757575" },
+  notMeasuredRow: { borderBottomColor: "#E0E0E0" },
+  notMeasuredText: { color: "#999" },
+  notMeasuredLabel: { fontSize: 12, color: "#bbb", fontStyle: "italic" },
+  // Deferred
+  deferredSection: { backgroundColor: "#ECEFF1", borderRadius: 16, padding: 16, marginBottom: 24 },
+  deferredTitle: { color: "#546E7A" },
+  deferredRow: { borderBottomColor: "#CFD8DC" },
+  deferredText: { color: "#78909C" },
+  deferredLabel: { fontSize: 12, color: "#90A4AE", fontStyle: "italic" },
+  // Summary
+  summaryBox: { backgroundColor: "#E8F5E9", borderRadius: 16, padding: 20, marginBottom: 24 },
+  summaryBoxTitle: { fontSize: 16, fontWeight: "600", color: "#2E7D32", marginBottom: 12 },
+  summaryBoxText: { fontSize: 14, color: "#33691E", lineHeight: 22, marginBottom: 4 },
+  // Footer
+  footer: { padding: 24, paddingBottom: 36, borderTopWidth: 1, borderTopColor: "#f0f0f0" },
 });

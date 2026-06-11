@@ -18,6 +18,7 @@ class MockSkillAssessment:
         self.cefr_level = cefr_level
         self.skill_name = skill_name
         self.confidence = confidence
+        self.evidence = {"status": "measured", "score": 50.0}
 
 
 def test_a2_contract_params():

@@ -11,6 +11,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import LearningEntryContract, SkillAssessment
 from app.shared.exceptions.domain import NotFoundError
 
+from app.modules.diagnostics.scoring import (
+    DIMENSION_REGISTRY,
+    ITEM_SCORERS,
+    EvidenceContribution,
+    compute_dimension_results,
+    compute_legacy_assessments,
+    _calculate_cefr,
+    _calculate_cefr_extended,
+)
+
 
 def _deduplicate_assessments(
     assessments: list[SkillAssessment],
@@ -33,10 +43,22 @@ def _deduplicate_assessments(
 def _derive_contract_params(assessments: list[SkillAssessment]) -> dict:
     """Deterministically derive contract parameters from diagnostic assessments.
 
-    Uses the lowest CEFR level across all dimensions as the baseline.
+    Uses the lowest CEFR level across measured dimensions as the baseline.
+    Dimensions that are not_measured_yet are ignored.
     """
     levels = ["A1", "A2", "B1", "B2", "C1", "C2"]
-    cefr_values = [a.cefr_level for a in assessments] if assessments else ["A1"]
+
+    # Filter to only measured/estimated dimensions
+    measured_cefr = []
+    for a in assessments:
+        status = a.evidence.get("status", "measured") if isinstance(a.evidence, dict) else "measured"
+        if status in ("measured", "estimated") and a.cefr_level in levels:
+            measured_cefr.append(a.cefr_level)
+
+    cefr_values = measured_cefr if measured_cefr else (["A1"] if not assessments else [a.cefr_level for a in assessments if a.cefr_level in levels])
+
+    if not cefr_values:
+        cefr_values = ["A1"]
 
     # Find lowest level
     lowest = min(cefr_values, key=lambda x: levels.index(x) if x in levels else 0)
@@ -70,6 +92,84 @@ def _derive_contract_params(assessments: list[SkillAssessment]) -> dict:
         })
 
     return params
+
+
+async def _build_multidimensional_snapshot(
+    db: AsyncSession,
+    assessments: list[SkillAssessment],
+) -> dict:
+    """Build a version 2.0.0 snapshot with a full dimension map.
+
+    Re-runs the item scorers on the original diagnostic responses to
+    capture cross-dimension contributions, then fills in
+    not_measured_yet for any unmeasured dimension.
+    """
+    # Find the latest completed diagnostic session from assessments
+    if not assessments:
+        # No assessments — return all not_measured_yet
+        dims = _build_empty_dimensions_map()
+        return {"version": "2.0.0", "dimensions": dims, "assessments": []}
+
+    # Get the session from the first (newest) assessment
+    session_id = assessments[0].session_id
+
+    # Fetch original diagnostic responses
+    from app.models import DiagnosticResponse
+
+    resp_stmt = (
+        select(DiagnosticResponse)
+        .where(DiagnosticResponse.session_id == session_id)
+    )
+    resp_result = await db.execute(resp_stmt)
+    response_records = resp_result.scalars().all()
+
+    # Re-run scorers on original responses
+    all_contributions: list[EvidenceContribution] = []
+    for r in response_records:
+        scorer = ITEM_SCORERS.get(r.question_key)
+        if scorer:
+            all_contributions.extend(scorer(r.response_data))
+
+    dimension_results = compute_dimension_results(all_contributions)
+    legacy_assessments = compute_legacy_assessments(dimension_results)
+
+    dims = {}
+    for dim_name in DIMENSION_REGISTRY:
+        r = dimension_results.get(dim_name)
+        if r:
+            dims[dim_name] = {
+                "raw_score": r.raw_score,
+                "estimated_level": r.estimated_level,
+                "confidence": r.confidence,
+                "evidence_count": r.evidence_count,
+                "contradictions": r.contradictions,
+                "needs_follow_up": r.needs_follow_up,
+                "status": r.status,
+                "deferred": r.deferred,
+            }
+
+    return {
+        "version": "2.0.0",
+        "dimensions": dims,
+        "assessments": legacy_assessments,
+    }
+
+
+def _build_empty_dimensions_map() -> dict:
+    """Return a dimensions dict with all dimensions as not_measured_yet."""
+    dims = {}
+    for dim_name, info in DIMENSION_REGISTRY.items():
+        dims[dim_name] = {
+            "raw_score": None,
+            "estimated_level": "not_measured_yet",
+            "confidence": 0.0,
+            "evidence_count": 0,
+            "contradictions": [],
+            "needs_follow_up": not info["deferred"],
+            "status": "not_measured_yet",
+            "deferred": info["deferred"],
+        }
+    return dims
 
 
 async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContract:
@@ -111,8 +211,6 @@ async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContra
         raise NotFoundError("No completed diagnostic found. Complete diagnostic first.")
 
     # Deduplicate: keep only the latest assessment per skill_name
-    # (the list is already ordered by created_at.desc() so the first
-    #  occurrence of each skill_name is the most recent one)
     unique_assessments = _deduplicate_assessments(assessments)
 
     # Get learner profile for language info
@@ -126,18 +224,9 @@ async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContra
         raise NotFoundError("Learner profile not found.")
 
     params = _derive_contract_params(unique_assessments)
-    diagnostic_snapshot = {
-        "assessments": [
-            {
-                "skill": a.skill_name,
-                "cefr": a.cefr_level,
-                "confidence": a.confidence,
-            }
-            for a in unique_assessments
-        ]
-    }
+    diagnostic_snapshot = await _build_multidimensional_snapshot(db, unique_assessments)
 
-    # Build contract
+    # Build contract with version 2.0.0
     contract = LearningEntryContract(
         user_id=uid,
         target_language=profile.target_language,
@@ -149,7 +238,7 @@ async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContra
         scaffolding_mode=params["scaffolding_mode"],
         lesson_complexity=params["lesson_complexity"],
         diagnostic_profile_snapshot=diagnostic_snapshot,
-        version="1.0.0",
+        version="2.0.0",
         status="active",
     )
     db.add(contract)

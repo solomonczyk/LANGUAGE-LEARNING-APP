@@ -63,28 +63,67 @@ async def complete_diagnostic_session(
     user_id: CurrentUserId,
     db: DbSession,
 ):
-    """Complete a diagnostic session."""
+    """Complete a diagnostic session and produce multidimensional results."""
     session = await complete_session(db, session_id, user_id)
     await db.commit()
 
     from sqlalchemy import select
 
     from app.models import SkillAssessment
+    from app.modules.diagnostics.scoring import (
+        compute_dimension_results,
+        EvidenceContribution,
+        ITEM_SCORERS,
+        DIMENSION_REGISTRY,
+        _calculate_cefr,
+    )
 
+    # Fetch all responses to rebuild dimension_results
+    from app.models import DiagnosticResponse
+
+    resp_stmt = select(DiagnosticResponse).where(DiagnosticResponse.session_id == session.id)
+    resp_result = await db.execute(resp_stmt)
+    response_records = resp_result.scalars().all()
+
+    all_contributions: list[EvidenceContribution] = []
+    for r in response_records:
+        scorer = ITEM_SCORERS.get(r.question_key)
+        if scorer:
+            all_contributions.extend(scorer(r.response_data))
+
+    dimension_results = compute_dimension_results(all_contributions)
+
+    # Also fetch SkillAssessments for backward compat
     stmt = select(SkillAssessment).where(SkillAssessment.session_id == session.id)
     result = await db.execute(stmt)
     assessments = result.scalars().all()
-
-    overall = min((a.cefr_level for a in assessments), key=lambda x: ["A1", "A2", "B1", "B2", "C1", "C2"].index(x))
 
     return CompleteSessionResponse(
         session_id=str(session.id),
         status=session.status,
         assessments=[
-            {"skill": a.skill_name, "cefr": a.cefr_level, "confidence": a.confidence}
+            {
+                "skill": a.skill_name,
+                "cefr": a.cefr_level,
+                "confidence": a.confidence,
+                "status": a.evidence.get("status", "measured"),
+                "needs_follow_up": a.evidence.get("needs_follow_up", False),
+            }
             for a in assessments
         ],
-        overall_level=overall,
+        dimension_results={
+            dim: {
+                "raw_score": r.raw_score,
+                "estimated_level": r.estimated_level,
+                "confidence": r.confidence,
+                "evidence_count": r.evidence_count,
+                "contradictions": r.contradictions,
+                "needs_follow_up": r.needs_follow_up,
+                "status": r.status,
+                "deferred": r.deferred,
+            }
+            for dim, r in dimension_results.items()
+        },
     )
 
 

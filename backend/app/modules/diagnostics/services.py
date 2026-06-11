@@ -1,4 +1,4 @@
-"""Diagnostics services with state machine and deterministic scoring."""
+"""Diagnostics services with state machine and multidimensional scoring."""
 
 from __future__ import annotations
 
@@ -12,14 +12,20 @@ from app.models import DiagnosticResponse, DiagnosticSession, SkillAssessment
 from app.shared.exceptions.domain import InvalidStateTransitionError, NotFoundError
 from app.shared.state_machine import StateMachine
 
+from app.modules.diagnostics.scoring import (
+    ITEM_CATALOG,
+    ITEM_SCORERS,
+    compute_dimension_results,
+    compute_legacy_assessments,
+    EvidenceContribution,
+    _calculate_cefr,
+    _calculate_cefr_extended,
+)
+
 DIAGNOSTIC_STATES = {"CREATED", "IN_PROGRESS", "COMPLETED", "FAILED"}
 
-DIAGNOSTIC_STEPS = [
-    {"key": "grammar_recognition", "prompt": "Select the correct sentence."},
-    {"key": "active_vocabulary", "prompt": "Choose the correct word for the picture."},
-    {"key": "written_production", "prompt": "Write a short sentence about what you see."},
-    {"key": "narrative_coherence", "prompt": "Arrange these sentences in the correct order."},
-]
+# Expose for router backward compat
+DIAGNOSTIC_STEPS = ITEM_CATALOG
 
 
 def _create_machine(initial: str = "CREATED") -> StateMachine:
@@ -31,64 +37,32 @@ def _create_machine(initial: str = "CREATED") -> StateMachine:
     return sm
 
 
-def _calculate_cefr(score: float) -> str:
-    """Convert a numeric score (0-100) to a CEFR level."""
-    if score >= 85:
-        return "B1"
-    if score >= 65:
-        return "A2"
-    return "A1"
-
-
 def _assess_responses(responses: list[dict]) -> dict[str, dict]:
-    """Deterministically assess each skill dimension based on responses."""
-    assessments = {}
+    """Deterministically assess each skill dimension based on responses.
 
+    Uses the multidimensional scoring engine from scoring.py.
+    Returns the legacy flat dict format for backward compatibility.
+    """
+    # Collect evidence contributions from all responses
+    all_contributions: list[EvidenceContribution] = []
     for response in responses:
         key = response.get("question_key", "")
         data = response.get("response_data", {})
+        scorer = ITEM_SCORERS.get(key)
+        if scorer:
+            all_contributions.extend(scorer(data))
 
-        if key == "grammar_recognition":
-            correct = data.get("is_correct", False)
-            score = 80.0 if correct else 45.0
-            assessments[key] = {
-                "score": score,
-                "cefr": _calculate_cefr(score),
-                "confidence": 0.75,
-            }
+    # Compute full dimension profile
+    dimension_results = compute_dimension_results(all_contributions)
 
-        elif key == "active_vocabulary":
-            correct_count = data.get("correct_count", 0)
-            total_words = data.get("total_words", 5)
-            ratio = correct_count / max(total_words, 1)
-            score = ratio * 100
-            assessments[key] = {
-                "score": score,
-                "cefr": _calculate_cefr(score),
-                "confidence": 0.8,
-            }
-
-        elif key == "written_production":
-            word_count = data.get("word_count", 0)
-            has_structure = data.get("has_structure", False)
-            score = 50.0
-            if word_count >= 20:
-                score += 20.0
-            if has_structure:
-                score += 15.0
-            assessments[key] = {
-                "score": min(score, 100),
-                "cefr": _calculate_cefr(score),
-                "confidence": 0.65,
-            }
-
-        elif key == "narrative_coherence":
-            correct_order = data.get("correct_order", False)
-            score = 85.0 if correct_order else 40.0
-            assessments[key] = {
-                "score": score,
-                "cefr": _calculate_cefr(score),
-                "confidence": 0.7,
+    # Build backward-compatible flat dict
+    assessments = {}
+    for dim_name, result in dimension_results.items():
+        if result.status in ("measured", "estimated") and result.raw_score is not None:
+            assessments[dim_name] = {
+                "score": result.raw_score,
+                "cefr": _calculate_cefr(result.raw_score),
+                "confidence": result.confidence,
             }
 
     return assessments
@@ -202,19 +176,33 @@ async def complete_session(
         for r in responses
     ]
 
-    # Assess each dimension
-    assessments = _assess_responses(response_list)
+    # Assess each dimension using the multidimensional scoring engine
+    all_contributions: list[EvidenceContribution] = []
+    for resp in response_list:
+        key = resp.get("question_key", "")
+        scorer = ITEM_SCORERS.get(key)
+        if scorer:
+            all_contributions.extend(scorer(resp.get("response_data", {})))
 
-    # Save skill assessments
-    for skill_key, assessment in assessments.items():
-        skill_assessment = SkillAssessment(
-            session_id=sid,
-            skill_name=skill_key,
-            cefr_level=assessment["cefr"],
-            confidence=assessment["confidence"],
-            evidence={"score": assessment["score"]},
-        )
-        db.add(skill_assessment)
+    dimension_results = compute_dimension_results(all_contributions)
+
+    # Save SkillAssessment rows for all measured/estimated dimensions (backward compat)
+    for dim_name, result_dr in dimension_results.items():
+        if result_dr.status in ("measured", "estimated") and result_dr.raw_score is not None:
+            skill_assessment = SkillAssessment(
+                session_id=sid,
+                skill_name=dim_name,
+                cefr_level=_calculate_cefr(result_dr.raw_score),
+                confidence=result_dr.confidence,
+                evidence={
+                    "score": result_dr.raw_score,
+                    "status": result_dr.status,
+                    "needs_follow_up": result_dr.needs_follow_up,
+                    "contradictions": result_dr.contradictions,
+                    "evidence_count": result_dr.evidence_count,
+                },
+            )
+            db.add(skill_assessment)
 
     # Transition to COMPLETED
     sm = _create_machine("IN_PROGRESS")
@@ -222,6 +210,16 @@ async def complete_session(
     session.status = sm.current_state
     await db.flush()
 
+    # Audit event with the full dimension profile (no single overall_level)
+    dim_snapshot = {
+        dim: {
+            "estimated_level": result.estimated_level,
+            "confidence": result.confidence,
+            "status": result.status,
+            "needs_follow_up": result.needs_follow_up,
+        }
+        for dim, result in dimension_results.items()
+    }
     await record_event(
         db,
         event_type="DIAGNOSTIC_COMPLETED",
@@ -229,7 +227,7 @@ async def complete_session(
         module="diagnostics",
         entity_type="diagnostic_session",
         entity_id=session_id,
-        data={"overall_level": assessments.get(list(assessments.keys())[0], {}).get("cefr", "A1") if assessments else "A1"},
+        data={"dimensions": dim_snapshot},
     )
 
     await db.refresh(session)

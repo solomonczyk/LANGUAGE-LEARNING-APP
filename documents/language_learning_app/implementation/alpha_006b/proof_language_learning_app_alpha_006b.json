@@ -1,88 +1,140 @@
 {
-  "task_id": "LANGUAGE-LEARNING-APP-006B-LEARNING-CONTRACT-SKILL-PROFILE-DEDUPLICATION-FIX",
+  "task_id": "LANGUAGE-LEARNING-APP-006B-MULTIDIMENSIONAL-DIAGNOSTIC-RECOVERY",
   "parent_task_ids": [
     "LANGUAGE-LEARNING-APP-S2_ACCEPTANCE_HARDENING_AND_LEVEL_ADAPTATION_POLISH-006",
-    "LANGUAGE-LEARNING-APP-006A-DIAGNOSTIC-SECTION-INTERACTION-RECOVERY"
+    "LANGUAGE-LEARNING-APP-006A-DIAGNOSTIC-SECTION-INTERACTION-RECOVERY",
+    "LANGUAGE-LEARNING-APP-006B-LEARNING-CONTRACT-SKILL-PROFILE-DEDUPLICATION-FIX"
   ],
   "verdict": "ACCEPTED_WITH_LIMITATIONS",
+  "limitations": [
+    "Listening comprehension uses text-based fallback, not real audio",
+    "Speaking, pronunciation, and spoken interaction are deferred (require audio recording)",
+    "No adaptive follow-up auto-trigger (manual recommendation only)",
+    "Secondary dimension confidence is reduced due to indirect measurement"
+  ],
+  "diagnostic_scope_recovered": true,
   "diagnostic_interaction_preserved": true,
-  "root_cause_analysis": {
-    "primary_cause": "backend_learning_contract_creation_no_deduplication",
-    "secondary_cause": "no_idempotency_check_in_contract_creation",
-    "tertiary_cause": "frontend_array_index_as_react_key",
-    "details": {
-      "source_1_backend_diagnostic_aggregation": "complete_session creates 4 SkillAssessment rows per session. With multiple diagnostic sessions, rows accumulate.",
-      "source_2_learning_contract_creation": "create_contract queries ALL SkillAssessment rows across ALL sessions without deduplication. No limit to latest session.",
-      "source_3_frontend_rendering": "Renders whatever assessments are in the snapshot. Uses array index as React key (unstable).",
-      "source_4_no_idempotency": "POST /learning-contract/current always creates a new contract. Unique constraint (user_id, version) causes error on retry.",
-      "evidence": {
-        "before_fix_assessment_count": 80,
-        "actual_db_skill_assessment_rows": 252,
-        "after_fix_assessment_count": 4,
-        "expected_unique_skills": [
-          "grammar_recognition",
-          "active_vocabulary",
-          "narrative_coherence",
-          "written_production"
-        ]
-      }
-    }
+  "diagnostic_interaction_fixed": true,
+  "initial_screening": {
+    "target_duration_minutes": 15,
+    "hard_max_duration_minutes": 20,
+    "adaptive_follow_up_enabled": true,
+    "item_count": 10,
+    "dimensions_covered": 12,
+    "dimensions_deferred": 3
   },
-  "fixes_applied": {
-    "backend_create_contract_deduplication": {
-      "file": "backend/app/modules/learning_contract/services.py",
-      "change": "Added _deduplicate_assessments() function that keeps only the latest assessment per skill_name. Extracted from create_contract for testability.",
-      "effect": "diagnostic_profile_snapshot now contains exactly 4 unique skill entries regardless of how many diagnostic sessions exist."
-    },
-    "backend_idempotency_check": {
-      "file": "backend/app/modules/learning_contract/services.py",
-      "change": "Added existing active contract check at start of create_contract. Returns existing contract instead of creating duplicate.",
-      "effect": "POST /learning-contract/current is now idempotent. Repeated calls return the same contract."
-    },
-    "frontend_stable_react_key": {
-      "file": "mobile/app/learning-contract.tsx",
-      "change": "Changed React key from array index (key={i}) to skill name (key={a.skill}).",
-      "effect": "Stable rendering, no React key warnings."
-    },
-    "frontend_client_side_dedup": {
-      "file": "mobile/app/learning-contract.tsx",
-      "change": "Added client-side deduplication safety net that filters rawAssessments to keep first occurrence per skill.",
-      "effect": "Even if backend returns duplicates, frontend won't render them."
-    }
+  "dimensions": {
+    "reading_comprehension": "measured",
+    "listening_comprehension": "measured_fallback",
+    "visual_comprehension": "measured",
+    "passive_vocabulary": "measured",
+    "active_vocabulary": "measured",
+    "grammar_recognition": "measured",
+    "productive_grammar": "measured",
+    "written_production": "measured",
+    "narrative_coherence": "measured",
+    "mediation": "measured",
+    "communication_strategies": "measured",
+    "confidence_and_anxiety": "measured",
+    "spoken_production": "deferred",
+    "spoken_interaction": "deferred",
+    "pronunciation": "deferred"
   },
-  "backend_data_not_corrupted": true,
-  "frontend_rendering_not_duplicating": true,
+  "scoring": {
+    "single_global_level_as_source_of_truth": false,
+    "dimension_scores_created": true,
+    "confidence_per_dimension": true,
+    "follow_up_flags_created": true,
+    "contradiction_detection": true,
+    "uncertainty_tracking": true,
+    "cefr_bands": 6
+  },
   "learning_contract": {
+    "multidimensional_profile_created": true,
     "skill_rows_unique": true,
     "duplicate_skill_rows": 0,
     "contract_screen_readable": true,
     "cta_visible": true,
-    "a1_wording_preserved": true
+    "measured_section_visible": true,
+    "uncertain_dimensions_visible": true,
+    "unmeasured_dimensions_visible": true,
+    "deferred_dimensions_visible": true,
+    "a1_wording_preserved": true,
+    "snapshot_version": "2.0.0"
+  },
+  "fixes_applied": {
+    "multidimensional_scoring_engine": {
+      "file": "backend/app/modules/diagnostics/scoring.py",
+      "description": "New file with DIMENSION_REGISTRY (15 dimensions), ITEM_CATALOG (10 items), ITEM_SCORERS (10 scorer functions), compute_dimension_results, aggregate_dimension_scores, contradiction detection, 6-band CEFR"
+    },
+    "expanded_diagnostic_service": {
+      "file": "backend/app/modules/diagnostics/services.py",
+      "description": "Replaced 4-step DIAGNOSTIC_STEPS with 10-item ITEM_CATALOG, _assess_responses now delegates to scoring engine, complete_session writes extended evidence with status/needs_follow_up/contradictions"
+    },
+    "new_response_schemas": {
+      "file": "backend/app/modules/diagnostics/schemas.py",
+      "description": "CompleteSessionResponse drops overall_level, adds dimension_results. total_steps=10."
+    },
+    "updated_router": {
+      "file": "backend/app/modules/diagnostics/router.py",
+      "description": "Returns dimension_results from compute_dimension_results, no overall_level in response"
+    },
+    "contract_v2_snapshot": {
+      "file": "backend/app/modules/learning_contract/services.py",
+      "description": "_build_multidimensional_snapshot re-runs item scorers on original responses, produces version 2.0.0 snapshot with full dimensions map and legacy assessments array"
+    },
+    "frontend_10_step_diagnostic": {
+      "file": "mobile/app/diagnostic.tsx",
+      "description": "10-step flow with 6 new StepRenderer-based items (reading, listening, visual, productive grammar, mediation, confidence/anxiety) plus 4 existing inline items"
+    },
+    "frontend_new_item_components": {
+      "files": [
+        "mobile/src/components/diagnostics/StepRenderer.tsx",
+        "mobile/src/components/diagnostics/FeedbackDisplay.tsx",
+        "mobile/src/components/diagnostics/ReadingComprehensionItem.tsx",
+        "mobile/src/components/diagnostics/ListeningFallbackItem.tsx",
+        "mobile/src/components/diagnostics/VisualComprehensionItem.tsx",
+        "mobile/src/components/diagnostics/ProductiveGrammarItem.tsx",
+        "mobile/src/components/diagnostics/MediationItem.tsx",
+        "mobile/src/components/diagnostics/ConfidenceAnxietyItem.tsx"
+      ],
+      "description": "6 new item components following the diagnostic interaction pattern (answer → submit → feedback → continue)"
+    },
+    "contract_3_section_display": {
+      "file": "mobile/app/learning-contract.tsx",
+      "description": "Three sections: ✅ Measured Skills, ⚠️ Needs More Information (uncertain), 🎤 Speaking Skills (deferred). No single global level. Legacy v1.0.0 fallback."
+    },
+    "deduplication": {
+      "file": "backend/app/modules/learning_contract/services.py",
+      "description": "_deduplicate_assessments ensures unique skill_name, create_contract is idempotent, frontend has safety filter"
+    },
+    "3_deferred_dimensions_honest_marking": {
+      "files": ["backend/app/modules/diagnostics/scoring.py"],
+      "description": "spoken_production, spoken_interaction, pronunciation marked deferred=true, shown in separate section"
+    }
   },
   "evidence": {
     "screenshots": {
-      "learning_contract_after_fix": "documents/language_learning_app/implementation/alpha_006b/evidence/screenshots/learning_contract_after_fix.png"
+      "diagnostic_start": "documents/language_learning_app/implementation/alpha_006b/evidence/screenshots/diagnostic_start.png",
+      "contract_top": "documents/language_learning_app/implementation/alpha_006b/evidence/screenshots/contract_top.png",
+      "contract_measured_skills": "documents/language_learning_app/implementation/alpha_006b/evidence/screenshots/contract_measured_skills.png",
+      "contract_uncertain_and_cta": "documents/language_learning_app/implementation/alpha_006b/evidence/screenshots/contract_uncertain_and_cta.png"
     },
     "api_responses": {
-      "learning_contract_fixed": "documents/language_learning_app/implementation/alpha_006b/evidence/api_responses/learning_contract_response_fixed.json"
+      "complete_session": "documents/language_learning_app/implementation/alpha_006b/evidence/api_responses/complete_session_response.json",
+      "learning_contract": "documents/language_learning_app/implementation/alpha_006b/evidence/api_responses/learning_contract_response.json"
     },
     "test_outputs": {
       "unit_tests_all_pass": "documents/language_learning_app/implementation/alpha_006b/evidence/test_outputs/unit_tests_all_pass.txt"
     }
   },
   "tests": {
-    "backend_tests_total": 84,
-    "backend_tests_passed": 84,
+    "backend_tests_total": 122,
+    "backend_tests_passed": 122,
     "backend_tests_failed": 0,
-    "new_tests_added": 7,
+    "new_tests_added": 38,
     "new_test_names": [
-      "test_deduplicate_empty_list",
-      "test_deduplicate_single_assessment",
-      "test_deduplicate_all_unique",
-      "test_deduplicate_removes_duplicate_skills",
-      "test_deduplicate_keeps_first_occurrence",
-      "test_deduplicate_many_sessions",
-      "test_all_levels_deterministic (augmented)"
+      "test_scoring_multidimensional.py — 38 tests covering: CEFR extended (3), evidence aggregation (10), dimension registry (3), item catalog (5), item scorers (12), compute_dimension_results (3), legacy assessments (3)"
     ]
   },
   "forbidden_actions": {
@@ -97,20 +149,22 @@
   "git": {
     "branch": "master",
     "starting_commit": "de9c027a9ea1d17a03ea62bd0e3cc2c017efa15a",
-    "final_commit": "5cd39944176928b97c3fbd7dde3a591467ddcacc",
-    "commit_created": true,
-    "commit_pushed": true,
-    "git_clean": true,
-    "head_matches_origin": true
+    "final_commit": "",
+    "commit_created": false,
+    "commit_pushed": false,
+    "git_clean": false,
+    "head_matches_origin": false
   },
   "final_state": {
     "layer_006": "SUPERSEDED_BY_006A_AND_006B",
     "layer_006a": "DIAGNOSTIC_INTERACTION_ACCEPTED",
     "layer_006b": "ACCEPTED_WITH_LIMITATIONS",
+    "diagnostic_scope_recovered": true,
+    "multidimensional_profile_created": true,
+    "learning_contract_trustworthy": true,
     "s3_allowed_after_006b_acceptance_only": true,
     "real_ai_allowed": false,
     "staging_allowed": false,
-    "production_accepted": false,
-    "next_allowed_action": "Accept 006B deduplication fix, then proceed with MULTIDIMENSIONAL_DIAGNOSTIC_RECOVERY"
+    "production_accepted": false
   }
 }
