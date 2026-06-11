@@ -149,11 +149,11 @@
   "git": {
     "branch": "master",
     "starting_commit": "de9c027a9ea1d17a03ea62bd0e3cc2c017efa15a",
-    "final_commit": "",
-    "commit_created": false,
-    "commit_pushed": false,
-    "git_clean": false,
-    "head_matches_origin": false
+    "final_commit": "900cbcf0c539c5f11ebc86c382d3fc180d9b7b50",
+    "commit_created": true,
+    "commit_pushed": true,
+    "git_clean": true,
+    "head_matches_origin": true
   },
   "final_state": {
     "layer_006": "SUPERSEDED_BY_006A_AND_006B",
