@@ -12,6 +12,24 @@ from app.models import LearningEntryContract, SkillAssessment
 from app.shared.exceptions.domain import NotFoundError
 
 
+def _deduplicate_assessments(
+    assessments: list[SkillAssessment],
+) -> list[SkillAssessment]:
+    """Keep only the latest assessment per skill_name.
+
+    Assumes the input list is ordered newest-first (e.g. by
+    created_at.desc()).  The first occurrence of each skill_name is
+    kept — that is the most recent assessment for that dimension.
+    """
+    seen: set[str] = set()
+    unique: list[SkillAssessment] = []
+    for a in assessments:
+        if a.skill_name not in seen:
+            seen.add(a.skill_name)
+            unique.append(a)
+    return unique
+
+
 def _derive_contract_params(assessments: list[SkillAssessment]) -> dict:
     """Deterministically derive contract parameters from diagnostic assessments.
 
@@ -55,8 +73,29 @@ def _derive_contract_params(assessments: list[SkillAssessment]) -> dict:
 
 
 async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContract:
-    """Create a Learning Entry Contract based on diagnostic results."""
+    """Create a Learning Entry Contract based on diagnostic results.
+
+    Idempotent: if an active contract already exists for this user it is
+    returned instead of creating a duplicate.  Skill assessments are
+    deduplicated so each skill dimension appears exactly once (the latest
+    assessment per skill_name is kept).
+    """
     uid = UUID(user_id)
+
+    # Idempotency: return existing active contract if one already exists
+    existing_stmt = (
+        select(LearningEntryContract)
+        .where(
+            LearningEntryContract.user_id == uid,
+            LearningEntryContract.status == "active",
+        )
+        .order_by(LearningEntryContract.created_at.desc())
+        .limit(1)
+    )
+    existing_result = await db.execute(existing_stmt)
+    existing = existing_result.scalar_one_or_none()
+    if existing:
+        return existing
 
     # Get latest diagnostic skill assessments
     stmt = (
@@ -71,6 +110,11 @@ async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContra
     if not assessments:
         raise NotFoundError("No completed diagnostic found. Complete diagnostic first.")
 
+    # Deduplicate: keep only the latest assessment per skill_name
+    # (the list is already ordered by created_at.desc() so the first
+    #  occurrence of each skill_name is the most recent one)
+    unique_assessments = _deduplicate_assessments(assessments)
+
     # Get learner profile for language info
     from app.models import LearnerProfile
 
@@ -81,7 +125,7 @@ async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContra
     if not profile:
         raise NotFoundError("Learner profile not found.")
 
-    params = _derive_contract_params(assessments)
+    params = _derive_contract_params(unique_assessments)
     diagnostic_snapshot = {
         "assessments": [
             {
@@ -89,7 +133,7 @@ async def create_contract(db: AsyncSession, user_id: str) -> LearningEntryContra
                 "cefr": a.cefr_level,
                 "confidence": a.confidence,
             }
-            for a in assessments
+            for a in unique_assessments
         ]
     }
 

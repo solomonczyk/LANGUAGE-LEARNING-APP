@@ -1,0 +1,65 @@
+{
+  "task": "LANGUAGE-LEARNING-APP-006B-LEARNING-CONTRACT-SKILL-PROFILE-DEDUPLICATION-FIX",
+  "version": "1.0.0",
+  "created": "2026-06-11",
+  "artifacts": {
+    "implementation": {
+      "backend_services": {
+        "path": "backend/app/modules/learning_contract/services.py",
+        "description": "Learning contract services with deduplication and idempotency",
+        "changes": [
+          "Added _deduplicate_assessments() pure function",
+          "Added idempotency check for existing active contracts",
+          "Deduplication applied during diagnostic_profile_snapshot construction"
+        ]
+      },
+      "backend_tests": {
+        "path": "backend/tests/unit/test_learning_contract.py",
+        "description": "Unit tests for deduplication and contract params",
+        "changes": [
+          "7 new deduplication tests covering empty, single, unique, duplicate, multi-session scenarios"
+        ]
+      },
+      "frontend_contract_screen": {
+        "path": "mobile/app/learning-contract.tsx",
+        "description": "Learning contract display screen",
+        "changes": [
+          "Switched from array index to skill name as React key",
+          "Added client-side deduplication safety filter"
+        ]
+      }
+    },
+    "evidence": {
+      "screenshot_after_fix": {
+        "path": "documents/language_learning_app/implementation/alpha_006b/evidence/screenshots/learning_contract_after_fix.png",
+        "description": "Screenshot of contract screen showing 4 unique skill rows"
+      },
+      "api_response_fixed": {
+        "path": "documents/language_learning_app/implementation/alpha_006b/evidence/api_responses/learning_contract_response_fixed.json",
+        "description": "Fixed API response with 4 unique skill assessments"
+      },
+      "test_output": {
+        "path": "documents/language_learning_app/implementation/alpha_006b/evidence/test_outputs/unit_tests_all_pass.txt",
+        "description": "Full unit test run output — 84 passed"
+      }
+    },
+    "proof": {
+      "proof_json": {
+        "path": "documents/language_learning_app/implementation/alpha_006b/proof_language_learning_app_alpha_006b.json",
+        "description": "Proof JSON with root cause analysis, fix details, and acceptance criteria"
+      }
+    }
+  },
+  "acceptance_summary": {
+    "diagnostic_interaction_fixed": true,
+    "learning_contract_skill_rows_unique": true,
+    "duplicate_skill_rows": 0,
+    "contract_screen_readable": true,
+    "backend_data_not_corrupted": true,
+    "frontend_rendering_not_duplicating": true,
+    "tests_failed": 0,
+    "real_ai_calls": false,
+    "staging": false,
+    "production_accepted": false
+  }
+}

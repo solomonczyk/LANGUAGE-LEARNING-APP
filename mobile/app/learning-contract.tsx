@@ -86,7 +86,17 @@ export default function LearningContractScreen() {
   const contractData = contract as Record<string, any> | undefined;
 
   // Determine learner level from contract data
-  const assessments = (contractData?.diagnostic_profile_snapshot as any)?.assessments || [];
+  const rawAssessments = (contractData?.diagnostic_profile_snapshot as any)?.assessments || [];
+
+  // Client-side deduplication safety net: keep only the first occurrence per skill
+  const seenSkills = new Set<string>();
+  const assessments = rawAssessments.filter((a: any) => {
+    const key = a.skill || "";
+    if (!key || seenSkills.has(key)) return false;
+    seenSkills.add(key);
+    return true;
+  });
+
   const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
   const cefrValues = assessments.map((a: any) => a.cefr).filter(Boolean);
   const learnerLevel = cefrValues.length > 0
@@ -181,8 +191,8 @@ export default function LearningContractScreen() {
             <Text style={styles.sectionTitle}>
               {isA1 ? "Your Skills" : "Skill Profile"}
             </Text>
-            {assessments.map((a: any, i: number) => (
-              <View key={i} style={styles.skillRow}>
+            {assessments.map((a: any) => (
+              <View key={a.skill || a.cefr} style={styles.skillRow}>
                 <Text style={styles.skillName}>
                   {a.skill?.replace(/_/g, " ") || "Skill"}
                 </Text>

@@ -1,0 +1,116 @@
+{
+  "task_id": "LANGUAGE-LEARNING-APP-006B-LEARNING-CONTRACT-SKILL-PROFILE-DEDUPLICATION-FIX",
+  "parent_task_ids": [
+    "LANGUAGE-LEARNING-APP-S2_ACCEPTANCE_HARDENING_AND_LEVEL_ADAPTATION_POLISH-006",
+    "LANGUAGE-LEARNING-APP-006A-DIAGNOSTIC-SECTION-INTERACTION-RECOVERY"
+  ],
+  "verdict": "ACCEPTED_WITH_LIMITATIONS",
+  "diagnostic_interaction_preserved": true,
+  "root_cause_analysis": {
+    "primary_cause": "backend_learning_contract_creation_no_deduplication",
+    "secondary_cause": "no_idempotency_check_in_contract_creation",
+    "tertiary_cause": "frontend_array_index_as_react_key",
+    "details": {
+      "source_1_backend_diagnostic_aggregation": "complete_session creates 4 SkillAssessment rows per session. With multiple diagnostic sessions, rows accumulate.",
+      "source_2_learning_contract_creation": "create_contract queries ALL SkillAssessment rows across ALL sessions without deduplication. No limit to latest session.",
+      "source_3_frontend_rendering": "Renders whatever assessments are in the snapshot. Uses array index as React key (unstable).",
+      "source_4_no_idempotency": "POST /learning-contract/current always creates a new contract. Unique constraint (user_id, version) causes error on retry.",
+      "evidence": {
+        "before_fix_assessment_count": 80,
+        "actual_db_skill_assessment_rows": 252,
+        "after_fix_assessment_count": 4,
+        "expected_unique_skills": [
+          "grammar_recognition",
+          "active_vocabulary",
+          "narrative_coherence",
+          "written_production"
+        ]
+      }
+    }
+  },
+  "fixes_applied": {
+    "backend_create_contract_deduplication": {
+      "file": "backend/app/modules/learning_contract/services.py",
+      "change": "Added _deduplicate_assessments() function that keeps only the latest assessment per skill_name. Extracted from create_contract for testability.",
+      "effect": "diagnostic_profile_snapshot now contains exactly 4 unique skill entries regardless of how many diagnostic sessions exist."
+    },
+    "backend_idempotency_check": {
+      "file": "backend/app/modules/learning_contract/services.py",
+      "change": "Added existing active contract check at start of create_contract. Returns existing contract instead of creating duplicate.",
+      "effect": "POST /learning-contract/current is now idempotent. Repeated calls return the same contract."
+    },
+    "frontend_stable_react_key": {
+      "file": "mobile/app/learning-contract.tsx",
+      "change": "Changed React key from array index (key={i}) to skill name (key={a.skill}).",
+      "effect": "Stable rendering, no React key warnings."
+    },
+    "frontend_client_side_dedup": {
+      "file": "mobile/app/learning-contract.tsx",
+      "change": "Added client-side deduplication safety net that filters rawAssessments to keep first occurrence per skill.",
+      "effect": "Even if backend returns duplicates, frontend won't render them."
+    }
+  },
+  "backend_data_not_corrupted": true,
+  "frontend_rendering_not_duplicating": true,
+  "learning_contract": {
+    "skill_rows_unique": true,
+    "duplicate_skill_rows": 0,
+    "contract_screen_readable": true,
+    "cta_visible": true,
+    "a1_wording_preserved": true
+  },
+  "evidence": {
+    "screenshots": {
+      "learning_contract_after_fix": "documents/language_learning_app/implementation/alpha_006b/evidence/screenshots/learning_contract_after_fix.png"
+    },
+    "api_responses": {
+      "learning_contract_fixed": "documents/language_learning_app/implementation/alpha_006b/evidence/api_responses/learning_contract_response_fixed.json"
+    },
+    "test_outputs": {
+      "unit_tests_all_pass": "documents/language_learning_app/implementation/alpha_006b/evidence/test_outputs/unit_tests_all_pass.txt"
+    }
+  },
+  "tests": {
+    "backend_tests_total": 84,
+    "backend_tests_passed": 84,
+    "backend_tests_failed": 0,
+    "new_tests_added": 7,
+    "new_test_names": [
+      "test_deduplicate_empty_list",
+      "test_deduplicate_single_assessment",
+      "test_deduplicate_all_unique",
+      "test_deduplicate_removes_duplicate_skills",
+      "test_deduplicate_keeps_first_occurrence",
+      "test_deduplicate_many_sessions",
+      "test_all_levels_deterministic (augmented)"
+    ]
+  },
+  "forbidden_actions": {
+    "real_ai_provider_connected": false,
+    "real_llm_calls_executed": false,
+    "s3_started": false,
+    "staging_deployment": false,
+    "production_deployment": false,
+    "production_modified": false,
+    "production_accepted": false
+  },
+  "git": {
+    "branch": "master",
+    "starting_commit": "de9c027a9ea1d17a03ea62bd0e3cc2c017efa15a",
+    "final_commit": "",
+    "commit_created": false,
+    "commit_pushed": false,
+    "git_clean": false,
+    "head_matches_origin": false
+  },
+  "final_state": {
+    "layer_006": "SUPERSEDED_BY_006A_AND_006B",
+    "layer_006a": "DIAGNOSTIC_INTERACTION_ACCEPTED",
+    "layer_006b": "ACCEPTED_WITH_LIMITATIONS",
+    "s3_allowed_after_006b_acceptance_only": true,
+    "real_ai_allowed": false,
+    "staging_allowed": false,
+    "production_accepted": false,
+    "next_allowed_action": "Accept 006B deduplication fix, then proceed with MULTIDIMENSIONAL_DIAGNOSTIC_RECOVERY"
+  }
+}
