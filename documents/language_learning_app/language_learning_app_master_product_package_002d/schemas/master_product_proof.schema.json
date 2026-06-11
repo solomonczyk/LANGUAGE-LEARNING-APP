@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/master_product_proof.schema.json",
+  "title": "Master Product Canon Proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "verdict",
+    "managed_product_closed",
+    "marketing_strategy_complete",
+    "commercial_model_complete",
+    "roadmap_complete",
+    "deadlines_complete",
+    "budgets_complete",
+    "stage_acceptance_complete",
+    "fundamental_documentation_layers_remaining",
+    "production_accepted"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "verdict": {
+      "enum": [
+        "ACCEPTED",
+        "REJECTED",
+        "NEEDS_FIX"
+      ]
+    },
+    "managed_product_closed": {
+      "type": "boolean"
+    },
+    "marketing_strategy_complete": {
+      "type": "boolean"
+    },
+    "commercial_model_complete": {
+      "type": "boolean"
+    },
+    "roadmap_complete": {
+      "type": "boolean"
+    },
+    "deadlines_complete": {
+      "type": "boolean"
+    },
+    "budgets_complete": {
+      "type": "boolean"
+    },
+    "stage_acceptance_complete": {
+      "type": "boolean"
+    },
+    "fundamental_documentation_layers_remaining": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "next_allowed_action": {
+      "type": "string"
+    },
+    "real_ai_allowed": {
+      "type": "boolean"
+    },
+    "staging_allowed": {
+      "type": "boolean"
+    },
+    "production_accepted": {
+      "type": "boolean"
+    }
+  }
+}

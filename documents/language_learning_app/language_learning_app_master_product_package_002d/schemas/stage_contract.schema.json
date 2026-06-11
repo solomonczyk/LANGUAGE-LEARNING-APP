@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/stage_contract.schema.json",
+  "title": "Managed Product Stage Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "stage_id",
+    "name",
+    "goal",
+    "start_date",
+    "deadline",
+    "maximum_timebox_days",
+    "planned_budget_eur",
+    "maximum_budget_eur",
+    "entry_criteria",
+    "deliverables",
+    "kpi_thresholds",
+    "go_conditions",
+    "hold_conditions",
+    "pivot_conditions",
+    "stop_conditions",
+    "next_allowed_stage"
+  ],
+  "properties": {
+    "stage_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "goal": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date"
+    },
+    "maximum_timebox_days": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "planned_budget_eur": {
+      "type": "number",
+      "minimum": 0
+    },
+    "maximum_budget_eur": {
+      "type": "number",
+      "minimum": 0
+    },
+    "entry_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "deliverables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "kpi_thresholds": {
+      "type": "object"
+    },
+    "zero_tolerance": {
+      "type": "object"
+    },
+    "go_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hold_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pivot_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stop_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_allowed_stage": {
+      "type": "string"
+    }
+  }
+}

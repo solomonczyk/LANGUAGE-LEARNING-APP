@@ -1923,6 +1923,286 @@
         "R600"
       ],
       "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/00_MASTER_INDEX.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 00_MASTER_INDEX.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "40cb1680761622da2a349faf8890ce2b845aff4f2733f47d707db7aca09dcc3f",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/01_EXECUTIVE_PRODUCT_CANON.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 01_EXECUTIVE_PRODUCT_CANON.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "3858165b9757ff9f62757903ab0a93a0d6335277407f15fc4577a947bf9b582b",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/02_PRIMARY_CUSTOMER_AND_JOBS.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 02_PRIMARY_CUSTOMER_AND_JOBS.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "2b14f6fc589a7b297263c3be51bd29b2a9ca5a0445477e0c798b95a9a57e53df",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/03_POSITIONING_AND_VALUE_PROPOSITION.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 03_POSITIONING_AND_VALUE_PROPOSITION.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "b7c249718f253caebca197e48c8ac2a9a8619c32d75998b039fbedcc776eaba3",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/04_MARKET_AND_COMPETITOR_STRATEGY.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 04_MARKET_AND_COMPETITOR_STRATEGY.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "ad40efbace32d89a0e0a31f348b292972a65b5fc9a1f87290812032b7baf6e11",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/05_MVP_SCOPE_AND_CUT_LINE.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 05_MVP_SCOPE_AND_CUT_LINE.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e480c7a0b57ec4de24ee34ee49b1c339317e26346d477c9289ed5f2f2be7df4f",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/06_COMMERCIAL_MODEL_AND_PRICING.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 06_COMMERCIAL_MODEL_AND_PRICING.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "3fb0e7f810f7bccd08140a4744ff2828cf73b2714cce92bb8a6d0c3e72279f27",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/07_GO_TO_MARKET_STRATEGY.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 07_GO_TO_MARKET_STRATEGY.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "52020cc6beb0f46d43fd918afd184419abafbd497b82bce6eb4ddd383eadd0ad",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/08_CUSTOMER_VALIDATION_PLAN.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 08_CUSTOMER_VALIDATION_PLAN.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "581be93e33e85d09f740f95ebed41856cc9c42b0f97642e27c44f34255bc7b90",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/09_MASTER_ROADMAP_AND_DEADLINES.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 09_MASTER_ROADMAP_AND_DEADLINES.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c3385f153b2db9b31c058e96c3781c2259164533094de5638a92ec572f998ecb",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/10_STAGE_GATES_AND_ACCEPTANCE.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 10_STAGE_GATES_AND_ACCEPTANCE.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "9d521e743ca18a6ccf23fdcd2f33b2b3d6a1835ad641928d67a42ca1403b9d88",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/11_BUDGET_AND_RESOURCE_LIMITS.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 11_BUDGET_AND_RESOURCE_LIMITS.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7b44f59ace18c51127ea4e5616e75578c3586a38126543a9545c315474361c1d",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/12_KPI_AND_DECISION_SYSTEM.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 12_KPI_AND_DECISION_SYSTEM.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "8c5f68688867087891a86675249f0e0970ea615a609b688f8fb52120adc9c917",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/13_ANALYTICS_AND_EXPERIMENTATION.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 13_ANALYTICS_AND_EXPERIMENTATION.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e2e76b62c1ce5bc4b68ce59d30e0feeca31ecd2e5703e7451da8ab8d6c2acbad",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/14_OPERATIONS_SUPPORT_AND_CONTENT.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 14_OPERATIONS_SUPPORT_AND_CONTENT.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7130146a07ba2150098f0cdb7e78cbb1f8813ed5442b9ca34fdd258038facdd4",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/15_LEGAL_PRIVACY_AND_SAFETY_BOUNDARIES.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 15_LEGAL_PRIVACY_AND_SAFETY_BOUNDARIES.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "04ded7b2992dab75e9728d0f9abe8046be8afcf1d1a0609a627057153de9d97a",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/16_RISK_REGISTER.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 16_RISK_REGISTER.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "67eee528355350e5d58d92219631478801214cf673ca69cfd9bd2741403c3a4f",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/17_CHANGE_CONTROL_AND_SCOPE_GOVERNANCE.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 17_CHANGE_CONTROL_AND_SCOPE_GOVERNANCE.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d7cb2e553345a9d99d70a9df19bcf1894f76f5e737ec0128a292550df1e9316b",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/18_FINAL_DOCUMENTATION_ACCEPTANCE.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: 18_FINAL_DOCUMENTATION_ACCEPTANCE.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "d65a8b26228e5e87798528c4b391656f6fab129c15f24c107327bdae603b730c",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/matrices/master_traceability_matrix.md",
+      "type": "documentation",
+      "purpose": "Master Product Package 002D: matrices/master_traceability_matrix.md",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "368ba618f6b779699032cd1f96d95fc89716e15cf60e55dcecfc361a7f2bec43",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/matrices/stage_contracts.json",
+      "type": "contract",
+      "purpose": "Master Product Package 002D: matrices/stage_contracts.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "cc09aceee52835d46346b6e5a45ad14278b8f010cdabac82226dd0314613d597",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/proof/proof_master_product_canon_002d.json",
+      "type": "config",
+      "purpose": "Master Product Package 002D: proof/proof_master_product_canon_002d.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "70b164bf22b85f9e25e13f1b994b20fb706ceed1ba478de9c57ec9aaea1dd4ed",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/schemas/master_product_proof.schema.json",
+      "type": "schema",
+      "purpose": "Master Product Package 002D: schemas/master_product_proof.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "99ce3fbc7174c1b4e8c890e2e862a9a9f3cd4e0500a00192fa448f02e28063aa",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/schemas/stage_contract.schema.json",
+      "type": "schema",
+      "purpose": "Master Product Package 002D: schemas/stage_contract.schema.json",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "03a7e058d3562b358ea1f435508e572a91357b9660b7db3799a05156ddd1054d",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/validation/master_product_package_002d_validation_report.md",
+      "type": "validation",
+      "purpose": "Master Product Package 002D: Master Product Package 002D validation report",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "e662d8e5ddec4ea75d67357a92664cacc46441cbe60250e59348fc5d3cb502e1",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/validation/final_documentation_lock_report_002d.md",
+      "type": "validation",
+      "purpose": "Master Product Package 002D: Master Product Package 002D final documentation lock report",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "7e2fcd6ee6455de4782dc3ba9a1c580386d83f54ad853bd053ec059bbbd283fe",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/validation/validate_master_product_package_002d.py",
+      "type": "validation",
+      "purpose": "Master Product Package 002D: Master Product Package 002D validation script",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "f6b773f9e9aadda342f607ced3d6e9bb79ea8eed6571657b8a881da00d737273",
+      "related_requirements": [],
+      "dependencies": []
+    },
+    {
+      "path": "documents/language_learning_app/language_learning_app_master_product_package_002d/proof/proof_master_product_package_002d_integration.json",
+      "type": "proof",
+      "purpose": "Master Product Package 002D: Master Product Package 002D integration proof",
+      "version": "1.0.0",
+      "status": "approved",
+      "sha256": "c3117cd48cfc0e72ef5a62e3958727bb1fcc96f14057d491949c25ac334d4f81",
+      "related_requirements": [],
+      "dependencies": []
     }
   ]
 }

@@ -1,0 +1,335 @@
+[
+  {
+    "stage_id": "S0",
+    "name": "Master canon closure",
+    "goal": "Close the project as a managed product",
+    "start_date": "2026-06-10",
+    "deadline": "2026-06-17",
+    "maximum_timebox_days": 10,
+    "planned_budget_eur": 50,
+    "maximum_budget_eur": 150,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S1"
+  },
+  {
+    "stage_id": "S1",
+    "name": "First vertical slice",
+    "goal": "Deliver local end-to-end product slice",
+    "start_date": "2026-06-18",
+    "deadline": "2026-07-15",
+    "maximum_timebox_days": 28,
+    "planned_budget_eur": 150,
+    "maximum_budget_eur": 350,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S2"
+  },
+  {
+    "stage_id": "S2",
+    "name": "Evidence and usability acceptance",
+    "goal": "Prove device, visual, accessibility and recovery quality",
+    "start_date": "2026-07-16",
+    "deadline": "2026-07-29",
+    "maximum_timebox_days": 14,
+    "planned_budget_eur": 50,
+    "maximum_budget_eur": 150,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S3"
+  },
+  {
+    "stage_id": "S3",
+    "name": "Controlled real-AI integration",
+    "goal": "Integrate one bounded provider safely",
+    "start_date": "2026-07-30",
+    "deadline": "2026-08-19",
+    "maximum_timebox_days": 21,
+    "planned_budget_eur": 100,
+    "maximum_budget_eur": 250,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S4"
+  },
+  {
+    "stage_id": "S4",
+    "name": "Internal alpha",
+    "goal": "Reach reliable first-value completion internally",
+    "start_date": "2026-08-20",
+    "deadline": "2026-09-09",
+    "maximum_timebox_days": 21,
+    "planned_budget_eur": 100,
+    "maximum_budget_eur": 250,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S5"
+  },
+  {
+    "stage_id": "S5",
+    "name": "Learner alpha",
+    "goal": "Validate with 10–20 real learners",
+    "start_date": "2026-09-10",
+    "deadline": "2026-10-07",
+    "maximum_timebox_days": 28,
+    "planned_budget_eur": 200,
+    "maximum_budget_eur": 500,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S6"
+  },
+  {
+    "stage_id": "S6",
+    "name": "Closed beta",
+    "goal": "Validate retention and learning at 30–100 users",
+    "start_date": "2026-10-08",
+    "deadline": "2026-12-02",
+    "maximum_timebox_days": 56,
+    "planned_budget_eur": 500,
+    "maximum_budget_eur": 1200,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S7"
+  },
+  {
+    "stage_id": "S7",
+    "name": "Paid pilot",
+    "goal": "Validate real payment and unit economics",
+    "start_date": "2026-12-03",
+    "deadline": "2027-01-20",
+    "maximum_timebox_days": 49,
+    "planned_budget_eur": 500,
+    "maximum_budget_eur": 1500,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "S8"
+  },
+  {
+    "stage_id": "S8",
+    "name": "Public MVP decision",
+    "goal": "Make GO/HOLD/PIVOT/STOP decision",
+    "start_date": "2027-01-21",
+    "deadline": "2027-02-03",
+    "maximum_timebox_days": 14,
+    "planned_budget_eur": 100,
+    "maximum_budget_eur": 300,
+    "entry_criteria": [
+      "Previous stage explicitly accepted or S0 baseline"
+    ],
+    "deliverables": [
+      "Stage-specific accepted artifacts and evidence"
+    ],
+    "kpi_thresholds": {},
+    "zero_tolerance": {
+      "cross_user_data_leaks": 0,
+      "production_gate_bypass": 0,
+      "fake_completion": 0
+    },
+    "go_conditions": [
+      "All blocking acceptance criteria pass",
+      "No unresolved critical blocker"
+    ],
+    "hold_conditions": [
+      "Correctable blocker within remaining timebox"
+    ],
+    "pivot_conditions": [
+      "Core hypothesis fails but an evidence-backed alternative exists"
+    ],
+    "stop_conditions": [
+      "Two bounded experiments fail the same core hypothesis",
+      "Safety or economics remain unacceptable"
+    ],
+    "next_allowed_stage": "NONE"
+  }
+]
