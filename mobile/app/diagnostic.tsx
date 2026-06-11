@@ -52,14 +52,20 @@ const VOCABULARY_QUESTIONS: VocabQuestion[] = [
 ];
 
 // ── Narrative Coherence ──────────────────────────────────────────────
+// Uses a plant-growing sequence with one unambiguous causal/temporal order.
+// Each step logically depends on the previous — no cultural or personal variation.
 const NARRATIVE_EVENTS = [
-  { id: "1", text: "Wake up" },
-  { id: "2", text: "Get out of bed" },
-  { id: "3", text: "Have breakfast" },
-  { id: "4", text: "Brush teeth" },
-  { id: "5", text: "Leave home" },
+  { id: "1", text: "Dig a small hole in the soil" },
+  { id: "2", text: "Place the seed in the hole" },
+  { id: "3", text: "Cover the seed with soil" },
+  { id: "4", text: "Water the soil gently" },
+  { id: "5", text: "Wait for the seed to sprout" },
 ];
 const CORRECT_NARRATIVE_ORDER = ["1", "2", "3", "4", "5"];
+// accepted_alternatives allows multiple valid orders if a sequence genuinely
+// supports more than one correct temporal/causal arrangement.
+// Each alternative must include all event IDs in a valid order.
+const ACCEPTED_NARRATIVE_ALTERNATIVES: string[][] = [];
 const SCRAMBLED_DISPLAY_ORDER = ["3", "5", "1", "4", "2"];
 
 // ── Feedback helpers ─────────────────────────────────────────────────
@@ -77,9 +83,11 @@ function getVocabularyFeedback(correctCount: number, total: number): FeedbackDat
 }
 
 function getNarrativeFeedback(correctOrder: boolean): FeedbackData {
-  return correctOrder
-    ? { correct: true, text: "Correct order!" }
-    : { correct: false, text: "Correct order: Wake up → Get out of bed → Have breakfast → Brush teeth → Leave home" };
+  if (correctOrder) {
+    return { correct: true, text: "Correct order!" };
+  }
+  const correctSeq = NARRATIVE_EVENTS.map((e) => e.text).join(" → ");
+  return { correct: false, text: `Correct order: ${correctSeq}` };
 }
 
 function isNewStep(key: string): boolean {
@@ -163,7 +171,12 @@ export default function DiagnosticScreen() {
             break;
           }
           case "narrative_coherence": {
-            const isCorrectOrder = narrativeOrder.length === CORRECT_NARRATIVE_ORDER.length && narrativeOrder.every((id, i) => id === CORRECT_NARRATIVE_ORDER[i]);
+            const matchesExact = narrativeOrder.length === CORRECT_NARRATIVE_ORDER.length &&
+              narrativeOrder.every((id, i) => id === CORRECT_NARRATIVE_ORDER[i]);
+            const matchesAlternative = ACCEPTED_NARRATIVE_ALTERNATIVES.some(
+              (alt) => narrativeOrder.length === alt.length && narrativeOrder.every((id, i) => id === alt[i])
+            );
+            const isCorrectOrder = matchesExact || matchesAlternative;
             responseData = { correct_order: isCorrectOrder, user_order: [...narrativeOrder] };
             feedback = getNarrativeFeedback(isCorrectOrder);
             break;
@@ -200,6 +213,7 @@ export default function DiagnosticScreen() {
         setLoading(true);
         setError(null);
         try {
+          if (!store.sessionId) throw new Error("No session ID");
           await diagnostics.complete(store.sessionId);
           store.markComplete();
           router.replace("/learning-contract");
