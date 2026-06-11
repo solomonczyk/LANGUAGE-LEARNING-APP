@@ -206,7 +206,7 @@ ITEM_CATALOG: list[dict] = [
     {
         "key": "productive_grammar",
         "type": "sentence_rewrite",
-        "prompt": "Rewrite each sentence correctly.",
+        "prompt": "Rewrite the full sentence correctly.",
         "estimated_seconds": 120,
         "dimension_weights": {"productive_grammar": 1.0, "grammar_recognition": 0.4},
     },

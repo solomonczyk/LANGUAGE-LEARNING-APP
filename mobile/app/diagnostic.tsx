@@ -28,7 +28,7 @@ const STEPS = [
   { key: "reading_comprehension", type: "passage",           label: "Reading",       prompt: "Read the passage and answer the questions." },
   { key: "listening_fallback",    type: "transcript",        label: "Listening",     prompt: "Read the conversation and answer the questions." },
   { key: "visual_comprehension",  type: "visual",            label: "Visual",        prompt: "Read the scene description and choose the best answer." },
-  { key: "productive_grammar",    type: "sentence_rewrite",  label: "Grammar (Write)", prompt: "Rewrite each sentence correctly." },
+  { key: "productive_grammar",    type: "sentence_rewrite",  label: "Grammar (Write)", prompt: "Rewrite the full sentence correctly." },
   { key: "mediation",             type: "mediation",         label: "Explain",       prompt: "Read the message and explain it simply." },
   { key: "confidence_anxiety",   type: "self_assessment",   label: "Confidence",    prompt: "Rate your confidence in these language situations." },
 ];
