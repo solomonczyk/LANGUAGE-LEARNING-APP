@@ -1,4 +1,8 @@
 {
+  "superseded_by": "004A_VISUAL_RUNTIME_FIX",
+  "superseded_reason": "Manual visual review found runtime/UX blockers not captured in automated validation. See alpha_004a for corrected status.",
+  "manual_visual_review_found_blockers": true,
+  "closed_learner_alpha_candidate_before_004a": false,
   "task_id": "LANGUAGE-LEARNING-APP-S1-ACCEPTANCE-HARDENING-AND-CLOSED-LEARNER-ALPHA-PREP-004",
   "parent_tasks": [
     "MASTER-PRODUCT-PACKAGE-002D-INTEGRATION-AND-FINAL-DOCUMENTATION-LOCK",

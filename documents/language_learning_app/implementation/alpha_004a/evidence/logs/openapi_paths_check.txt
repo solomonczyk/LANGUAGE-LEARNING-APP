@@ -1,0 +1,54 @@
+OpenAPI Paths vs Frontend API Client Verification
+=================================================
+Date: 2026-06-11
+
+All paths verified against running backend OpenAPI schema at http://localhost:8000/openapi.json
+
+Backend OpenAPI Paths:
+  /api/v1/audit/events                               [post, get]
+  /api/v1/diagnostics/sessions                       [post]
+  /api/v1/diagnostics/sessions/{session_id}          [get]
+  /api/v1/diagnostics/sessions/{session_id}/complete [post]
+  /api/v1/diagnostics/sessions/{session_id}/responses [post]
+  /api/v1/health                                     [get]
+  /api/v1/identity/login                             [post]
+  /api/v1/identity/me                                [get]
+  /api/v1/identity/register                          [post]
+  /api/v1/learner-profile                            [post]
+  /api/v1/learner-profile/me                         [get]
+  /api/v1/learning-contract/current                  [get, post]
+  /api/v1/lesson-sessions                            [post]
+  /api/v1/lesson-sessions/{session_id}               [get]
+  /api/v1/lesson-sessions/{session_id}/process       [post]
+  /api/v1/lesson-sessions/{session_id}/submissions   [post]
+  /api/v1/mastery/evidence                           [post]
+  /api/v1/mastery/profile                            [get]
+  /api/v1/operator/audit-events                      [get]
+  /api/v1/operator/health                            [get]
+  /api/v1/submissions                                [post]
+  /api/v1/submissions/{submission_id}                [get]
+
+Frontend API Client Paths (mobile/src/services/api.ts):
+  All paths use API_BASE = "http://localhost:8000/api/v1"
+
+  identity.register  → POST /identity/register          → /api/v1/identity/register     ✓
+  identity.login     → POST /identity/login              → /api/v1/identity/login        ✓
+  identity.me        → GET  /identity/me                 → /api/v1/identity/me           ✓
+  learnerProfile     → POST /learner-profile             → /api/v1/learner-profile       ✓
+  learnerProfile.me  → GET  /learner-profile/me          → /api/v1/learner-profile/me    ✓
+  diagnostics.create → POST /diagnostics/sessions        → /api/v1/diagnostics/sessions  ✓
+  diagnostics.submit → POST /diagnostics/sessions/{id}/responses                         ✓
+  diagnostics.complt → POST /diagnostics/sessions/{id}/complete                          ✓
+  diagnostics.get    → GET  /diagnostics/sessions/{id}                                   ✓
+  contract.getCurrent→ GET  /learning-contract/current                                   ✓
+  contract.create    → POST /learning-contract/current                                   ✓
+  lesson.create      → POST /lesson-sessions             → /api/v1/lesson-sessions       ✓
+  lesson.get         → GET  /lesson-sessions/{id}        → /api/v1/lesson-sessions/{id}  ✓
+  lesson.submitText  → POST /lesson-sessions/{id}/submissions                            ✓
+  lesson.process     → POST /lesson-sessions/{id}/process                                ✓
+  mastery.getProfile → GET  /mastery/profile             → /api/v1/mastery/profile       ✓
+  mastery.evidence   → POST /mastery/evidence            → /api/v1/mastery/evidence      ✓
+  health.check       → GET  /health                      → /api/v1/health                ✓
+
+RESULT: ALL FRONTEND API PATHS MATCH OPENAPI SPEC
+        NO 404s FROM PATH MISMATCHES ON HAPPY PATH

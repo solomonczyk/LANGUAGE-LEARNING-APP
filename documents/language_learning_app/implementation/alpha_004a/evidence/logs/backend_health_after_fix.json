@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-11T09:06:00+02:00",
+  "endpoint": "/api/v1/health",
+  "status_code": 200,
+  "response": {
+    "status": "ok",
+    "version": "0.1.0",
+    "database": "ready",
+    "mock_ai": "ready"
+  },
+  "database_status": "connected",
+  "mock_ai_gateway": "active"
+}

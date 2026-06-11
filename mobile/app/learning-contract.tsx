@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,33 +11,73 @@ import { learningContract } from "../src/services/api";
 export default function LearningContractScreen() {
   const router = useRouter();
   const [creating, setCreating] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
+  const [needsContract, setNeedsContract] = useState(false);
 
-  const { data: contract, isLoading, error, refetch } = useQuery({
+  const {
+    data: contract,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["learning-contract"],
     queryFn: () => learningContract.getCurrent(),
     retry: false,
   });
 
-  const handleCreate = async () => {
+  // Detect when contract doesn't exist yet and auto-create
+  useEffect(() => {
+    if (error && !needsContract && !creating) {
+      const apiError = error as { status?: number; code?: string };
+      if (apiError?.status === 404 || apiError?.code === "NOT_FOUND") {
+        setNeedsContract(true);
+      }
+    }
+  }, [error, needsContract, creating]);
+
+  const handleCreate = useCallback(async () => {
+    if (creating) return;
     setCreating(true);
+    setCreateError(null);
     try {
       await learningContract.create();
       await refetch();
-    } catch (err) {
-      // Will show error state
+    } catch (err: any) {
+      setCreateError(err?.message || "Failed to create learning plan");
     } finally {
       setCreating(false);
     }
-  };
+  }, [creating, refetch]);
 
-  if (isLoading) return <LoadingScreen message="Loading your learning plan..." />;
+  // Auto-create triggered when needed
+  useEffect(() => {
+    if (needsContract && !creating && !contract) {
+      handleCreate();
+    }
+  }, [needsContract, creating, contract, handleCreate]);
 
+  // Show loading while fetching or creating contract
+  if (isLoading || creating || needsContract) {
+    return (
+      <LoadingScreen
+        message={
+          creating || needsContract
+            ? "Creating your learning plan..."
+            : "Loading your learning plan..."
+        }
+      />
+    );
+  }
+
+  // Show error for non-404 failures
   if (error) {
     return (
       <SafeAreaView style={styles.container}>
         <ErrorScreen
-          message="No learning contract found yet. Complete your diagnostic first."
-          onRetry={refetch}
+          message={createError || "Could not load learning contract."}
+          onRetry={() => {
+            setNeedsContract(true);
+          }}
         />
       </SafeAreaView>
     );

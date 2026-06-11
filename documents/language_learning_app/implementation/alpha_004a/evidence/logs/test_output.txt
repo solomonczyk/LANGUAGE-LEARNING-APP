@@ -1,0 +1,28 @@
+Test Results — 2026-06-11
+=========================
+Backend Test Suite
+
+Unit Tests: 70 passed, 0 failed
+Integration Tests: 39 passed, 0 failed
+Total: 109 passed, 0 failed
+
+Backend Health Endpoint:
+  GET /api/v1/health → 200
+  Response: {"status":"ok","version":"0.1.0","database":"ready","mock_ai":"ready"}
+
+Mobile TypeScript Typecheck:
+  npx tsc --noEmit → 0 errors
+
+OpenAPI Paths: All 22 paths verified against frontend API client
+  Frontend API paths match OpenAPI: YES
+  No path mismatches found
+  All 404s were resource-not-found (not routing issues)
+
+Contract Creation Flow:
+  GET /api/v1/learning-contract/current → 200 (after auto-create on 404)
+  POST /api/v1/learning-contract/current → 200
+
+Visual Verification:
+  Localhost:8081 → Root route redirects to /onboarding (PASS)
+  Invalid lesson route shows safe error (PASS)
+  Full learner journey completes end-to-end (PASS)

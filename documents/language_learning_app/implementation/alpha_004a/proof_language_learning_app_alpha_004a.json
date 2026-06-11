@@ -1,0 +1,84 @@
+{
+  "task_id": "LANGUAGE-LEARNING-APP-004A-VISUAL-RUNTIME-BLOCKER-FIX-AND-EVIDENCE-RECHECK",
+  "parent_task_id": "LANGUAGE-LEARNING-APP-S1-ACCEPTANCE-HARDENING-AND-CLOSED-LEARNER-ALPHA-PREP-004",
+  "verdict": "ACCEPTED_WITH_ENVIRONMENT_BLOCKERS",
+  "manual_visual_review_triggered_fix": true,
+  "blockers_before": {
+    "root_route_unmatched": true,
+    "database_health_pending": true,
+    "frontend_api_404": true,
+    "diagnostic_to_contract_failed": true,
+    "direct_lesson_route_api_errors": true,
+    "screenshots_missing": true
+  },
+  "blockers_after": {
+    "root_route_unmatched": false,
+    "database_health_pending": false,
+    "frontend_api_404": false,
+    "diagnostic_to_contract_failed": false,
+    "direct_lesson_route_api_errors": false,
+    "screenshots_missing": false
+  },
+  "runtime": {
+    "backend_health": "PASS",
+    "database": "ready",
+    "mock_ai_gateway_active": true,
+    "real_ai_calls_executed": false
+  },
+  "frontend": {
+    "expo_web_runs": true,
+    "root_route_pass": true,
+    "api_404_on_happy_path": 0,
+    "diagnostic_contract_flow_pass": true,
+    "lesson_route_pass": true
+  },
+  "visual_evidence": {
+    "screenshots_created": 12,
+    "screenshots_path": "documents/language_learning_app/implementation/alpha_004a/evidence/screenshots/",
+    "operator_visual_recheck_completed": true,
+    "operator_visual_verdict": "PASS"
+  },
+  "tests": {
+    "backend_tests_total": 109,
+    "backend_tests_passed": 109,
+    "backend_tests_failed": 0,
+    "mobile_checks_total": 1,
+    "mobile_checks_passed": 1,
+    "mobile_checks_failed": 0,
+    "contract_checks_total": 18,
+    "contract_checks_passed": 18,
+    "contract_checks_failed": 0,
+    "warnings": 0
+  },
+  "forbidden_actions": {
+    "scope_expanded": false,
+    "new_product_features_added": false,
+    "real_ai_provider_connected": false,
+    "real_llm_calls_executed": false,
+    "staging_deployment": false,
+    "production_deployment": false,
+    "production_modified": false,
+    "production_accepted": false,
+    "secrets_added": false
+  },
+  "git": {
+    "branch": "master",
+    "starting_commit": "a73cd55a722d74ecbbd62eee0f49def43331cd5e",
+    "final_commit": "fdfc3a2abb0ed5334198f9be65e89b5d06a2c13e",
+    "commit_created": true,
+    "commit_pushed": true,
+    "git_clean": true,
+    "head_matches_origin": true,
+    "unpushed_commits": 0,
+    "uncommitted_changes": 0
+  },
+  "final_state": {
+    "layer_004": "SUPERSEDED_BY_004A",
+    "layer_004a": "ACCEPTED_WITH_ENVIRONMENT_BLOCKERS",
+    "closed_learner_alpha_candidate": true,
+    "next_allowed_action": "S1_CLOSED_ALPHA_EXECUTION_OR_S2_ACCEPTANCE_HARDENING",
+    "real_ai_allowed": false,
+    "staging_allowed": false,
+    "production_accepted": false
+  }
+}

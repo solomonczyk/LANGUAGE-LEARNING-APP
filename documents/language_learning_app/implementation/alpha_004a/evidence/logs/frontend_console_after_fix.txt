@@ -1,0 +1,66 @@
+Frontend Console Log — After Fixes
+====================================
+Date: 2026-06-11
+Browser: Chrome/Chromium via agent-browser
+App URL: http://localhost:8081
+
+Flow Tested: Full Learner Journey
+
+1. http://localhost:8081/
+   ✓ Redirected to /onboarding (no Unmatched Route)
+
+2. /onboarding
+   ✓ Step 1: Language selection (English)
+   ✓ Step 2: Native language (English)
+   ✓ Step 3: Learning preferences (Basic conversation, 15 min)
+   ✓ Step 4: Level (A1)
+   ✓ User registered/login created via identity API
+
+3. /diagnostic
+   ✓ Diagnostic session created
+   ✓ Grammar response submitted
+   ✓ Vocabulary response submitted
+   ✓ Writing response submitted
+   ✓ Coherence response submitted
+   ✓ Diagnostic completed with assessments
+
+4. /learning-contract
+   ✓ Auto-created contract on 404 (no contract existed)
+   ✓ Contract displayed with correct parameters
+   ✓ Skill profile from diagnostic shown
+
+5. /home
+   ✓ Dashboard loads with contract data
+   ✓ "Start Lesson" button visible
+
+6. /lesson/[id]
+   ✓ Lesson session created
+   ✓ Lesson content displayed (title, goal, task, grammar/vocab focus)
+
+7. /lesson-session/[id]
+   ✓ Processing animation shown
+   ✓ Process API called successfully
+   ✓ Validation pipeline completed
+
+8. /result/[id]
+   ✓ "Lesson Complete!" displayed
+   ✓ Strengths, corrections, improved phrasing shown
+   ✓ Validation results: Linguistic ✓, Pedagogical ✓
+   ✓ Decision: COMPLETE
+
+9. Invalid lesson route (/lesson/00000000-0000-0000-0000-000000000099)
+   ✓ Safe error screen: "Lesson definition not found"
+   ✓ Retry button functional
+   ✓ No partial/fake lesson data displayed
+
+API Errors:
+  ✓ 0 API 404s on happy path
+  ✓ 0 API routing errors
+  ✓ All API calls return expected responses
+  ✓ Health endpoint: database=ready
+
+Environment:
+  Backend: http://localhost:8000
+  Database: PostgreSQL 16 (connected)
+  Mock AI: active (valid mode)
+  Expo Web: running on port 8081

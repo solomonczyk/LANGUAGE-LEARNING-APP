@@ -1,0 +1,40 @@
+{
+  "artifact_index_version": "1.0.0",
+  "layer": "004a",
+  "title": "Alpha 004A — Visual/Runtime Blocker Fix and Evidence Recheck",
+  "created": "2026-06-11",
+  "inherits_from": ["004"],
+  "documents": [
+    "00_004a_index.md",
+    "01_blocker_reconciliation_report.md",
+    "02_visual_recheck_report.md",
+    "03_api_contract_recheck.md",
+    "04_learning_contract_flow_recheck.md",
+    "05_environment_and_remaining_blockers.md",
+    "proof_language_learning_app_alpha_004a.json",
+    "alpha_004a_artifact_index.json"
+  ],
+  "evidence": {
+    "screenshots": [
+      "evidence/screenshots/01_root_fixed.png",
+      "evidence/screenshots/02_onboarding_step_1.png",
+      "evidence/screenshots/03_onboarding_step_2.png",
+      "evidence/screenshots/04_onboarding_step_3.png",
+      "evidence/screenshots/05_onboarding_step_4.png",
+      "evidence/screenshots/06_diagnostic.png",
+      "evidence/screenshots/07_learning_contract.png",
+      "evidence/screenshots/08_home.png",
+      "evidence/screenshots/09_lesson.png",
+      "evidence/screenshots/10_lesson_session.png",
+      "evidence/screenshots/11_result.png",
+      "evidence/screenshots/12_safe_error_state.png"
+    ],
+    "logs": [
+      "evidence/logs/backend_health_after_fix.json",
+      "evidence/logs/frontend_console_after_fix.txt",
+      "evidence/logs/openapi_paths_check.txt",
+      "evidence/logs/test_output.txt"
+    ],
+    "environment_blockers": "evidence/environment_blockers.md"
+  }
+}

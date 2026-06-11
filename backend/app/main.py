@@ -6,17 +6,25 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text as sa_text
 
 from app.config import settings
+from app.database import async_session_factory
 from app.shared.middleware.error_handler import add_exception_handlers
+
+
+app_started = False
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan handler."""
     # Startup
+    global app_started
+    app_started = True
     yield
     # Shutdown
+    app_started = False
 
 
 app = FastAPI(
@@ -40,11 +48,22 @@ add_exception_handlers(app)
 
 @app.get("/api/v1/health")
 async def health():
-    """Health check endpoint."""
+    """Health check endpoint — reports live DB connectivity."""
+    # Check database connectivity with a simple query
+    db_status = "pending"
+    try:
+        async with async_session_factory() as session:
+            await session.execute(sa_text("SELECT 1"))
+            db_status = "ready"
+    except Exception:
+        db_status = "unavailable"
+
+    overall_status = "ok" if db_status == "ready" else "degraded"
+
     return {
-        "status": "ok",
+        "status": overall_status,
         "version": "0.1.0",
-        "database": "pending",
+        "database": db_status,
         "mock_ai": "ready",
     }
 
