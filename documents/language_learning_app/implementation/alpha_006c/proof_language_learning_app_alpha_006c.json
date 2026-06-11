@@ -61,5 +61,12 @@
   },
   "evidence_paths": {
     "test_output": "evidence/test_outputs/jest_verbose_output.txt"
+  },
+  "git": {
+    "branch": "master",
+    "final_commit": "cdbf6fd97a84dc372a37a4a28f955c9fdf4282df",
+    "commit_created": true,
+    "commit_pushed": false,
+    "git_clean": true
   }
 }
