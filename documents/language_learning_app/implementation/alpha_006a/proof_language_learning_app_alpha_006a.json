@@ -1,0 +1,151 @@
+{
+  "proof_id": "alpha-006a-001",
+  "alpha_release": "006a",
+  "title": "Diagnostic Interaction Blocker Fix",
+  "date": "2026-06-11",
+  "layer_006": "SUPERSEDED_BY_006A",
+  "layer_006a": "ACCEPTANCE_PENDING",
+  "status": "IMPLEMENTED",
+
+  "acceptance_criteria": {
+    "diagnostic_options_clickable": true,
+    "correct_answer_not_prefilled": true,
+    "example_only_not_submitted": true,
+    "user_selection_required": true,
+    "feedback_after_user_action_only": true,
+    "alpha_006_superseded_by_006a": true,
+    "real_ai_calls": false,
+    "staging": false,
+    "production_accepted": false,
+    "tests_failed": 0,
+    "git_clean": false,
+    "head_matches_origin": false
+  },
+
+  "diagnostic_item_audit": [
+    {
+      "item_type": "grammar_recognition",
+      "interaction": "tap-to-select from 3 options (Pressable)",
+      "is_clickable": true,
+      "prefills_correct_answer": false,
+      "shows_feedback_before_action": false,
+      "backend_receives_user_answer": true,
+      "status": "PASS"
+    },
+    {
+      "item_type": "active_vocabulary",
+      "interaction": "tap-to-select definition from 4 options per word (Pressable)",
+      "is_clickable": true,
+      "prefills_correct_answer": false,
+      "shows_feedback_before_action": false,
+      "backend_receives_user_answer": true,
+      "status": "PASS"
+    },
+    {
+      "item_type": "written_production",
+      "interaction": "free-text TextInput",
+      "is_clickable": true,
+      "prefills_correct_answer": false,
+      "shows_feedback_before_action": false,
+      "backend_receives_user_answer": true,
+      "status": "PASS"
+    },
+    {
+      "item_type": "narrative_coherence",
+      "interaction": "tap-to-order events (Pressable, build sequence)",
+      "is_clickable": true,
+      "prefills_correct_answer": false,
+      "shows_feedback_before_action": false,
+      "backend_receives_user_answer": true,
+      "status": "PASS"
+    }
+  ],
+
+  "interaction_model": {
+    "submit_disabled_before_input": true,
+    "selected_state_visible": true,
+    "feedback_after_submit_only": true,
+    "inputs_disabled_after_submit": true,
+    "continue_button_after_submit": true,
+    "completion_redirects_to_learning_contract": true
+  },
+
+  "example_demo_rules": {
+    "example_content_not_submitted": true,
+    "correct_answer_not_visible_before_action": true,
+    "no_demo_masquerading_as_task": true
+  },
+
+  "backend_state_rules": {
+    "answer_source_is_user_action": true,
+    "answer_timestamp_exists": true,
+    "selected_answer_stored": true,
+    "prefilled_answer_not_stored": true,
+    "scoring_uses_submitted_answer_only": true
+  },
+
+  "visual_evidence": {
+    "screenshots_captured": 13,
+    "screenshots_list": [
+      "01-diagnostic-grammar-no-selection.png",
+      "02-diagnostic-grammar-selected.png",
+      "03-diagnostic-grammar-feedback.png",
+      "04-vocabulary-no-selection.png",
+      "05-vocabulary-selected.png",
+      "06-vocabulary-feedback.png",
+      "07-writing-no-input.png",
+      "08-writing-filled.png",
+      "09-writing-feedback.png",
+      "10-narrative-no-selection.png",
+      "11-narrative-ordered.png",
+      "12-narrative-feedback.png",
+      "13-diagnostic-complete.png"
+    ],
+    "console_errors": [],
+    "console_warnings": [
+      "shadow* style props deprecated",
+      "props.pointerEvents deprecated"
+    ]
+  },
+
+  "tests": {
+    "total": 17,
+    "passed": 17,
+    "failed": 0,
+    "new_backward_compat_tests": [
+      "test_grammar_with_selected_option_field",
+      "test_grammar_incorrect_with_selected_option",
+      "test_vocabulary_with_selections_field",
+      "test_narrative_with_user_order_field"
+    ],
+    "existing_tests_all_pass": true
+  },
+
+  "files_changed": [
+    "mobile/app/diagnostic.tsx",
+    "backend/tests/unit/test_diagnostics.py"
+  ],
+
+  "files_added": [
+    "documents/language_learning_app/implementation/alpha_006a/00_alpha_006a_index.md",
+    "documents/language_learning_app/implementation/alpha_006a/01_diagnostic_section_audit.md",
+    "documents/language_learning_app/implementation/alpha_006a/02_interaction_model_recovery.md",
+    "documents/language_learning_app/implementation/alpha_006a/03_example_demo_rules.md",
+    "documents/language_learning_app/implementation/alpha_006a/04_backend_state_recheck.md",
+    "documents/language_learning_app/implementation/alpha_006a/05_visual_recheck_report.md",
+    "documents/language_learning_app/implementation/alpha_006a/06_test_results.md",
+    "documents/language_learning_app/implementation/alpha_006a/07_alpha_006_supersession_report.md",
+    "documents/language_learning_app/implementation/alpha_006a/proof_language_learning_app_alpha_006a.json",
+    "documents/language_learning_app/implementation/alpha_006a/alpha_006a_artifact_index.json",
+    "documents/language_learning_app/implementation/alpha_006a/evidence/screenshots/",
+    "documents/language_learning_app/implementation/alpha_006a/evidence/test_outputs/",
+    "documents/language_learning_app/implementation/alpha_006a/evidence/backend_logs/",
+    "documents/language_learning_app/implementation/alpha_006a/evidence/console_logs/"
+  ],
+
+  "remaining_blockers": [
+    "S3/real AI/staging/production not yet enabled (blocked by acceptance)"
+  ],
+
+  "next_allowed_action": "ACCEPT_006A_AND_ENABLE_S3"
+}

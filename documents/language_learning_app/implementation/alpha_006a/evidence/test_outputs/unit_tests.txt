@@ -1,0 +1,28 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.3, pluggy-1.6.0 -- C:\Users\taras\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: F:\Dev\Projects\LANGUAGE-LEARNING-APP\backend
+configfile: pyproject.toml
+plugins: anyio-4.12.1, langsmith-0.6.9, asyncio-0.24.0, cov-5.0.0, httpx-0.36.0, mock-3.15.1, timeout-2.4.0, typeguard-4.5.1
+asyncio: mode=Mode.AUTO, default_loop_scope=None
+collecting ... collected 17 items
+
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_a1_level PASSED [  5%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_a2_level PASSED [ 11%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_b1_level PASSED [ 17%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_boundary_values PASSED [ 23%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_recognition_correct PASSED [ 29%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_recognition_incorrect PASSED [ 35%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_assessment PASSED [ 41%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_low_score PASSED [ 47%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_written_production_scoring PASSED [ 52%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_coherence_correct PASSED [ 58%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_coherence_incorrect PASSED [ 64%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_multi_dimension_assessment PASSED [ 70%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_empty_responses PASSED [ 76%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_with_selected_option_field PASSED [ 82%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_incorrect_with_selected_option PASSED [ 88%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_with_selections_field PASSED [ 94%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_with_user_order_field PASSED [100%]
+
+============================= 17 passed in 0.63s ==============================

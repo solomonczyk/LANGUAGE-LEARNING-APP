@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -19,30 +20,102 @@ import { diagnostics, getUserId } from "../src/services/api";
 
 const STEPS = [
   { key: "grammar_recognition", label: "Grammar", prompt: "Which sentence is correct?" },
-  { key: "active_vocabulary", label: "Vocabulary", prompt: "Match the words to their meanings" },
+  { key: "active_vocabulary", label: "Vocabulary", prompt: "Select the correct meaning for each word" },
   { key: "written_production", label: "Writing", prompt: "Write 2-3 sentences about your morning routine" },
-  { key: "narrative_coherence", label: "Coherence", prompt: "Arrange these events in the correct order" },
+  { key: "narrative_coherence", label: "Coherence", prompt: "Tap each event in the correct order" },
 ];
 
-/** Level-specific helper text for diagnostic steps. */
-function getLevelHelperText(level: string, stepKey: string): string {
-  const l = level.toUpperCase();
-  if (stepKey === "grammar_recognition") {
-    if (l === "A1") return "This is an example. Just read it — we'll use this as your answer.";
-    if (l === "A2") return "This is a sample answer. You don't need to do anything — we'll submit it for you.";
-    return "The example below shows a correct answer. It will be submitted as your response.";
+// ── Grammar Recognition ──────────────────────────────────────────────
+const GRAMMAR_OPTIONS = [
+  { id: "a", text: "He go to school every day." },
+  { id: "b", text: "He goes to school every day." },
+  { id: "c", text: "He going to school every day." },
+];
+const GRAMMAR_CORRECT_ID = "b";
+
+// ── Active Vocabulary ────────────────────────────────────────────────
+interface VocabQuestion {
+  word: string;
+  options: { id: string; text: string }[];
+  correctId: string;
+}
+
+const VOCABULARY_QUESTIONS: VocabQuestion[] = [
+  {
+    word: "Morning",
+    options: [
+      { id: "a", text: "the first meal of the day" },
+      { id: "b", text: "the start of the day" },
+      { id: "c", text: "a domestic animal" },
+      { id: "d", text: "to move on foot" },
+    ],
+    correctId: "b",
+  },
+  {
+    word: "Breakfast",
+    options: [
+      { id: "a", text: "the first meal of the day" },
+      { id: "b", text: "the start of the day" },
+      { id: "c", text: "a period of rest" },
+      { id: "d", text: "the end of the day" },
+    ],
+    correctId: "a",
+  },
+  {
+    word: "Pet",
+    options: [
+      { id: "a", text: "a type of food" },
+      { id: "b", text: "a kind of vehicle" },
+      { id: "c", text: "a domestic animal" },
+      { id: "d", text: "a building" },
+    ],
+    correctId: "c",
+  },
+  {
+    word: "Walk",
+    options: [
+      { id: "a", text: "to move on foot" },
+      { id: "b", text: "to sit still" },
+      { id: "c", text: "to sleep" },
+      { id: "d", text: "to eat quickly" },
+    ],
+    correctId: "a",
+  },
+];
+
+// ── Narrative Coherence ──────────────────────────────────────────────
+const NARRATIVE_EVENTS = [
+  { id: "1", text: "Wake up" },
+  { id: "2", text: "Get out of bed" },
+  { id: "3", text: "Have breakfast" },
+  { id: "4", text: "Brush teeth" },
+  { id: "5", text: "Leave home" },
+];
+const CORRECT_NARRATIVE_ORDER = ["1", "2", "3", "4", "5"];
+
+// Fixed scramble so the diagnostic is deterministic for all learners
+const SCRAMBLED_DISPLAY_ORDER = ["3", "5", "1", "4", "2"];
+
+// ── Feedback helpers ─────────────────────────────────────────────────
+function getGrammarFeedback(selectedId: string | null): { correct: boolean; text: string } {
+  if (selectedId === GRAMMAR_CORRECT_ID) {
+    return { correct: true, text: '✓ Correct! "He goes to school every day." is grammatically correct.' };
   }
-  if (stepKey === "active_vocabulary") {
-    if (l === "A1") return "Here are some example words and meanings. Just read them — we'll record them.";
-    if (l === "A2") return "These are sample vocabulary matches. They'll be used as your response.";
-    return "Example vocabulary matches are shown below. These will be submitted as your response.";
+  return { correct: false, text: '✗ The correct sentence is "He goes to school every day." — the subject "He" requires the verb "goes".' };
+}
+
+function getVocabularyFeedback(correctCount: number, total: number): { correct: boolean; text: string } {
+  if (correctCount === total) {
+    return { correct: true, text: `✓ Perfect! You matched all ${total} words correctly.` };
   }
-  if (stepKey === "narrative_coherence") {
-    if (l === "A1") return "The sentences below are in the right order. Just read them — we'll record this.";
-    if (l === "A2") return "These events are already in the correct order. Read along — this is your answer.";
-    return "The events are arranged in the correct sequence. This sample is your response.";
+  return { correct: false, text: `✗ You matched ${correctCount} out of ${total} words correctly. Review the correct answers above.` };
+}
+
+function getNarrativeFeedback(correctOrder: boolean): { correct: boolean; text: string } {
+  if (correctOrder) {
+    return { correct: true, text: "✓ You arranged the events in the correct order!" };
   }
-  return "";
+  return { correct: false, text: "✗ The correct order is: Wake up → Get out of bed → Have breakfast → Brush teeth → Leave home" };
 }
 
 export default function DiagnosticScreen() {
@@ -51,6 +124,18 @@ export default function DiagnosticScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [textInput, setTextInput] = useState("");
+
+  // Interaction state per step (reset when continuing to next step)
+  const [selectedGrammarOption, setSelectedGrammarOption] = useState<string | null>(null);
+  const [vocabularyAnswers, setVocabularyAnswers] = useState<Record<number, string>>({});
+  const [narrativeOrder, setNarrativeOrder] = useState<string[]>([]);
+
+  // Submission / feedback state
+  const [lastFeedback, setLastFeedback] = useState<{
+    stepKey: string;
+    correct: boolean;
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     initSession();
@@ -71,53 +156,74 @@ export default function DiagnosticScreen() {
     }
   };
 
-  const handleResponse = async () => {
-    if (!store.sessionId) return;
+  const handleSubmit = async () => {
+    if (!store.sessionId || loading || lastFeedback !== null) return;
 
     setLoading(true);
     setError(null);
     try {
       const step = STEPS[store.currentStep];
       let responseData: Record<string, unknown>;
+      let feedback: { correct: boolean; text: string };
 
       switch (step.key) {
-        case "grammar_recognition":
-          responseData = { is_correct: true };
+        case "grammar_recognition": {
+          const selected = selectedGrammarOption;
+          const isCorrect = selected === GRAMMAR_CORRECT_ID;
+          responseData = { is_correct: isCorrect, selected_option: selected };
+          feedback = getGrammarFeedback(selected);
           break;
-        case "active_vocabulary":
-          responseData = { correct_count: 4, total_words: 5 };
-          break;
-        case "written_production":
+        }
+        case "active_vocabulary": {
+          let correctCount = 0;
+          const total = VOCABULARY_QUESTIONS.length;
+          const selections: Record<string, string> = {};
+          VOCABULARY_QUESTIONS.forEach((q, i) => {
+            const ans = vocabularyAnswers[i] || "";
+            selections[q.word] = ans;
+            if (ans === q.correctId) correctCount++;
+          });
           responseData = {
-            word_count: textInput.split(/\s+/).length,
+            correct_count: correctCount,
+            total_words: total,
+            selections,
+          };
+          feedback = getVocabularyFeedback(correctCount, total);
+          break;
+        }
+        case "written_production": {
+          const wordCount = textInput.split(/\s+/).filter(Boolean).length;
+          responseData = {
+            word_count: wordCount,
             has_structure: textInput.length > 30,
             text: textInput,
           };
+          feedback = {
+            correct: textInput.length >= 30,
+            text: `✓ Response recorded (${textInput.length} characters, ${wordCount} words).`,
+          };
           break;
-        case "narrative_coherence":
-          responseData = { correct_order: true };
+        }
+        case "narrative_coherence": {
+          const isCorrectOrder =
+            narrativeOrder.length === CORRECT_NARRATIVE_ORDER.length &&
+            narrativeOrder.every((id, i) => id === CORRECT_NARRATIVE_ORDER[i]);
+          responseData = {
+            correct_order: isCorrectOrder,
+            user_order: [...narrativeOrder],
+          };
+          feedback = getNarrativeFeedback(isCorrectOrder);
           break;
+        }
         default:
           responseData = {};
+          feedback = { correct: false, text: "" };
       }
 
-      await diagnostics.submitResponse(
-        store.sessionId,
-        step.key,
-        responseData,
-      );
-
+      await diagnostics.submitResponse(store.sessionId, step.key, responseData);
       store.setResponse(step.key, responseData);
 
-      if (store.currentStep < STEPS.length - 1) {
-        store.nextStep();
-        setTextInput("");
-      } else {
-        // Complete diagnostic
-        const result = await diagnostics.complete(store.sessionId);
-        store.markComplete();
-        router.replace("/learning-contract");
-      }
+      setLastFeedback({ stepKey: step.key, ...feedback });
     } catch (err: any) {
       setError(err.message || "Failed to submit response");
     } finally {
@@ -125,12 +231,62 @@ export default function DiagnosticScreen() {
     }
   };
 
+  const handleContinue = () => {
+    if (!lastFeedback) return;
+
+    setLastFeedback(null);
+
+    if (store.currentStep < STEPS.length - 1) {
+      // Reset text input for written production
+      setTextInput("");
+      // Reset interaction state for the next step
+      setSelectedGrammarOption(null);
+      setVocabularyAnswers({});
+      setNarrativeOrder([]);
+      store.nextStep();
+    } else {
+      // Complete diagnostic
+      (async () => {
+        setLoading(true);
+        setError(null);
+        try {
+          await diagnostics.complete(store.sessionId);
+          store.markComplete();
+          router.replace("/learning-contract");
+        } catch (err: any) {
+          setError(err.message || "Failed to complete diagnostic");
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }
+  };
+
+  const currentStep = STEPS[store.currentStep];
+  const showingFeedback = lastFeedback?.stepKey === currentStep.key;
+
+  // ── Derived: can we submit? ──────────────────────────────────────
+  const canSubmit = (() => {
+    if (loading || showingFeedback) return false;
+    switch (currentStep.key) {
+      case "grammar_recognition":
+        return selectedGrammarOption !== null;
+      case "active_vocabulary":
+        return Object.keys(vocabularyAnswers).length >= VOCABULARY_QUESTIONS.length;
+      case "written_production":
+        return textInput.trim().length >= 10;
+      case "narrative_coherence":
+        return narrativeOrder.length === NARRATIVE_EVENTS.length;
+      default:
+        return false;
+    }
+  })();
+
+  // ── Loading / error guards ────────────────────────────────────────
   if (loading && !store.sessionId) return <LoadingScreen message="Starting diagnostic..." />;
   if (error && !store.sessionId) return <ErrorScreen message={error} onRetry={initSession} />;
 
-  const currentStep = STEPS[store.currentStep];
-  const learnerLevel = useOnboardingStore.getState().selfReportedLevel || "A1";
-
+  // ── Render ────────────────────────────────────────────────────────
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -145,35 +301,104 @@ export default function DiagnosticScreen() {
 
           {currentStep.key === "grammar_recognition" && (
             <View style={styles.options}>
-              <View style={styles.demoBadge}>
-                <Text style={styles.demoBadgeText}>Example only</Text>
-              </View>
-              {[
-                { id: "a", text: "He go to school every day." },
-                { id: "b", text: "He goes to school every day." },
-                { id: "c", text: "He going to school every day." },
-              ].map((opt) => (
-                <View key={opt.id} style={styles.optionItem}>
-                  <Text style={styles.optionText}>{opt.text}</Text>
-                </View>
-              ))}
-              <Text style={styles.correctLabel}>✓ Sentence B is correct</Text>
-              <Text style={styles.hint}>{getLevelHelperText(learnerLevel, "grammar_recognition")}</Text>
+              {GRAMMAR_OPTIONS.map((opt) => {
+                const isSelected = selectedGrammarOption === opt.id;
+                const isCorrectOption = opt.id === GRAMMAR_CORRECT_ID;
+                const showResult = showingFeedback;
+
+                let optionStyle = [styles.optionItem];
+                if (showResult && isCorrectOption) {
+                  optionStyle.push(styles.optionCorrect);
+                } else if (showResult && isSelected && !isCorrectOption) {
+                  optionStyle.push(styles.optionIncorrect);
+                } else if (isSelected) {
+                  optionStyle.push(styles.optionSelected);
+                }
+
+                return (
+                  <Pressable
+                    key={opt.id}
+                    style={optionStyle}
+                    onPress={() => !showingFeedback && setSelectedGrammarOption(opt.id)}
+                    disabled={showingFeedback}
+                  >
+                    <Text style={styles.optionText}>
+                      {isSelected ? "● " : "○ "}
+                      {opt.text}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+
+              {showingFeedback && (
+                <Text
+                  style={[
+                    styles.feedback,
+                    lastFeedback.correct ? styles.feedbackCorrect : styles.feedbackIncorrect,
+                  ]}
+                >
+                  {lastFeedback.text}
+                </Text>
+              )}
             </View>
           )}
 
           {currentStep.key === "active_vocabulary" && (
             <View style={styles.options}>
-              <View style={styles.demoBadge}>
-                <Text style={styles.demoBadgeText}>Example only</Text>
-              </View>
-              <Text style={styles.hint}>Here are some example word matches:</Text>
-              <Text style={styles.demoText}>• "Morning" → the start of the day</Text>
-              <Text style={styles.demoText}>• "Breakfast" → first meal of the day</Text>
-              <Text style={styles.demoText}>• "Pet" → a domestic animal</Text>
-              <Text style={styles.demoText}>• "Walk" → to move on foot</Text>
-              <Text style={styles.correctLabel}>✓ Vocabulary check complete</Text>
-              <Text style={styles.hint}>{getLevelHelperText(learnerLevel, "active_vocabulary")}</Text>
+              {VOCABULARY_QUESTIONS.map((q, qIdx) => {
+                const selectedId = vocabularyAnswers[qIdx];
+                const showResult = showingFeedback;
+
+                return (
+                  <View key={qIdx} style={styles.vocabBlock}>
+                    <Text style={styles.vocabWord}>{q.word}</Text>
+                    <View style={styles.vocabOptions}>
+                      {q.options.map((opt) => {
+                        const isSelected = selectedId === opt.id;
+                        const isCorrectOpt = opt.id === q.correctId;
+
+                        let optStyle = [styles.vocabOptItem];
+                        if (showResult && isCorrectOpt) {
+                          optStyle.push(styles.vocabOptCorrect);
+                        } else if (showResult && isSelected && !isCorrectOpt) {
+                          optStyle.push(styles.vocabOptIncorrect);
+                        } else if (isSelected) {
+                          optStyle.push(styles.vocabOptSelected);
+                        }
+
+                        return (
+                          <Pressable
+                            key={opt.id}
+                            style={optStyle}
+                            onPress={() => {
+                              if (!showingFeedback) {
+                                setVocabularyAnswers((prev) => ({ ...prev, [qIdx]: opt.id }));
+                              }
+                            }}
+                            disabled={showingFeedback}
+                          >
+                            <Text style={styles.vocabOptText}>
+                              {isSelected ? "● " : "○ "}
+                              {opt.text}
+                            </Text>
+                          </Pressable>
+                        );
+                      })}
+                    </View>
+                  </View>
+                );
+              })}
+
+              {showingFeedback && (
+                <Text
+                  style={[
+                    styles.feedback,
+                    lastFeedback.correct ? styles.feedbackCorrect : styles.feedbackIncorrect,
+                  ]}
+                >
+                  {lastFeedback.text}
+                </Text>
+              )}
             </View>
           )}
 
@@ -187,26 +412,114 @@ export default function DiagnosticScreen() {
                 multiline
                 numberOfLines={5}
                 textAlignVertical="top"
+                editable={!showingFeedback}
               />
               <Text style={styles.hint}>
-                Write at least 20 characters. Current: {textInput.length} chars
+                Write at least 10 characters. Current: {textInput.length} chars
               </Text>
+
+              {showingFeedback && (
+                <Text
+                  style={[
+                    styles.feedback,
+                    lastFeedback.correct ? styles.feedbackCorrect : styles.feedbackIncorrect,
+                  ]}
+                >
+                  {lastFeedback.text}
+                </Text>
+              )}
             </View>
           )}
 
           {currentStep.key === "narrative_coherence" && (
             <View style={styles.options}>
-              <View style={styles.demoBadge}>
-                <Text style={styles.demoBadgeText}>Example only</Text>
-              </View>
-              <Text style={styles.hint}>The events are already in the right order:</Text>
-              <Text style={styles.demoText}>1. Wake up</Text>
-              <Text style={styles.demoText}>2. Get out of bed</Text>
-              <Text style={styles.demoText}>3. Have breakfast</Text>
-              <Text style={styles.demoText}>4. Brush teeth</Text>
-              <Text style={styles.demoText}>5. Leave home</Text>
-              <Text style={styles.correctLabel}>✓ Correct order selected</Text>
-              <Text style={styles.hint}>{getLevelHelperText(learnerLevel, "narrative_coherence")}</Text>
+              {(() => {
+                const availableEvents = NARRATIVE_EVENTS.filter(
+                  (e) => !narrativeOrder.includes(e.id),
+                );
+                const orderedEvents = narrativeOrder
+                  .map((id) => NARRATIVE_EVENTS.find((e) => e.id === id))
+                  .filter(Boolean);
+
+                return (
+                  <>
+                    {/* Available events list */}
+                    {availableEvents.length > 0 && (
+                      <>
+                        <Text style={styles.narrativeLabel}>
+                          Tap each event in the correct order:
+                        </Text>
+                        {SCRAMBLED_DISPLAY_ORDER.filter((scrambledId) =>
+                          availableEvents.some((e) => e.id === scrambledId),
+                        ).map((scrambledId) => {
+                          const ev = NARRATIVE_EVENTS.find((e) => e.id === scrambledId)!;
+                          return (
+                            <Pressable
+                              key={ev.id}
+                              style={styles.narrativeItem}
+                              onPress={() => {
+                                if (!showingFeedback) {
+                                  setNarrativeOrder((prev) => [...prev, ev.id]);
+                                }
+                              }}
+                              disabled={showingFeedback}
+                            >
+                              <Text style={styles.narrativeItemText}>+ {ev.text}</Text>
+                            </Pressable>
+                          );
+                        })}
+                      </>
+                    )}
+
+                    {/* Your order list */}
+                    {orderedEvents.length > 0 && (
+                      <>
+                        <Text style={[styles.narrativeLabel, styles.narrativeYourOrderLabel]}>
+                          Your order (tap to undo):
+                        </Text>
+                        {orderedEvents.map((ev, idx) =>
+                          ev ? (
+                            <Pressable
+                              key={ev.id}
+                              style={styles.narrativeOrderedItem}
+                              onPress={() => {
+                                if (!showingFeedback) {
+                                  setNarrativeOrder((prev) =>
+                                    prev.filter((id) => id !== ev.id),
+                                  );
+                                }
+                              }}
+                              disabled={showingFeedback}
+                            >
+                              <Text style={styles.narrativeOrderNum}>{idx + 1}.</Text>
+                              <Text style={styles.narrativeItemText}>{ev.text}</Text>
+                            </Pressable>
+                          ) : null,
+                        )}
+                      </>
+                    )}
+
+                    {/* Progress indicator */}
+                    <Text style={styles.hint}>
+                      {narrativeOrder.length} of {NARRATIVE_EVENTS.length} placed
+                    </Text>
+
+                    {/* Feedback after submission */}
+                    {showingFeedback && (
+                      <Text
+                        style={[
+                          styles.feedback,
+                          lastFeedback.correct
+                            ? styles.feedbackCorrect
+                            : styles.feedbackIncorrect,
+                        ]}
+                      >
+                        {lastFeedback.text}
+                      </Text>
+                    )}
+                  </>
+                );
+              })()}
             </View>
           )}
 
@@ -215,16 +528,9 @@ export default function DiagnosticScreen() {
 
         <View style={styles.footer}>
           <Button
-            title={
-              store.currentStep < STEPS.length - 1
-                ? "Next"
-                : "Complete Diagnostic"
-            }
-            onPress={handleResponse}
-            disabled={
-              loading ||
-              (currentStep.key === "written_production" && textInput.length < 10)
-            }
+            title={showingFeedback ? "Continue →" : store.currentStep < STEPS.length - 1 ? "Submit" : "Complete Diagnostic"}
+            onPress={showingFeedback ? handleContinue : handleSubmit}
+            disabled={showingFeedback ? false : !canSubmit}
             loading={loading}
           />
         </View>
@@ -233,21 +539,105 @@ export default function DiagnosticScreen() {
   );
 }
 
+// ── Styles ───────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   flex: { flex: 1 },
   scroll: { padding: 24, paddingBottom: 100 },
-  stepLabel: { fontSize: 14, color: "#007AFF", fontWeight: "500", marginBottom: 8, textAlign: "center" },
-  title: { fontSize: 22, fontWeight: "700", marginBottom: 24, color: "#1a1a1a", textAlign: "center" },
+  stepLabel: {
+    fontSize: 14,
+    color: "#007AFF",
+    fontWeight: "500",
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 24,
+    color: "#1a1a1a",
+    textAlign: "center",
+  },
   options: { gap: 12 },
+
+  // Option items (used by grammar)
   optionItem: {
     padding: 16,
+    borderRadius: 12,
+    backgroundColor: "#f8f9fa",
+    borderWidth: 1.5,
+    borderColor: "#e9ecef",
+  },
+  optionSelected: {
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: "#E8F0FE",
+    borderWidth: 1.5,
+    borderColor: "#007AFF",
+  },
+  optionCorrect: {
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: "#E8F5E9",
+    borderWidth: 1.5,
+    borderColor: "#34C759",
+  },
+  optionIncorrect: {
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: "#FFEBEE",
+    borderWidth: 1.5,
+    borderColor: "#FF3B30",
+  },
+  optionText: { fontSize: 16, color: "#333" },
+
+  // Vocabulary
+  vocabBlock: {
+    marginBottom: 8,
+    padding: 12,
     borderRadius: 12,
     backgroundColor: "#f8f9fa",
     borderWidth: 1,
     borderColor: "#e9ecef",
   },
-  optionText: { fontSize: 16, color: "#333" },
+  vocabWord: {
+    fontSize: 17,
+    fontWeight: "700",
+    color: "#1a1a1a",
+    marginBottom: 8,
+  },
+  vocabOptions: { gap: 6 },
+  vocabOptItem: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#e9ecef",
+  },
+  vocabOptSelected: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#E8F0FE",
+    borderWidth: 1,
+    borderColor: "#007AFF",
+  },
+  vocabOptCorrect: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#E8F5E9",
+    borderWidth: 1,
+    borderColor: "#34C759",
+  },
+  vocabOptIncorrect: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#FFEBEE",
+    borderWidth: 1,
+    borderColor: "#FF3B30",
+  },
+  vocabOptText: { fontSize: 14, color: "#444" },
+
+  // Text area
   textArea: {
     borderWidth: 1,
     borderColor: "#ddd",
@@ -257,25 +647,77 @@ const styles = StyleSheet.create({
     minHeight: 120,
     backgroundColor: "#fafafa",
   },
-  hint: { fontSize: 14, color: "#666", marginTop: 8, fontStyle: "italic", lineHeight: 20 },
-  demoBadge: {
-    alignSelf: "flex-start",
-    backgroundColor: "#E8F0FE",
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 6,
-    marginBottom: 8,
-  },
-  demoBadgeText: { fontSize: 12, fontWeight: "600", color: "#007AFF" },
-  correctLabel: {
+
+  // Narrative
+  narrativeLabel: {
     fontSize: 14,
-    color: "#34C759",
+    fontWeight: "600",
+    color: "#555",
+    marginBottom: 4,
+  },
+  narrativeYourOrderLabel: {
+    marginTop: 16,
+    color: "#007AFF",
+  },
+  narrativeItem: {
+    padding: 14,
+    borderRadius: 10,
+    backgroundColor: "#f0f4ff",
+    borderWidth: 1,
+    borderColor: "#d0d8f0",
+    borderStyle: "dashed",
+  },
+  narrativeOrderedItem: {
+    padding: 14,
+    borderRadius: 10,
+    backgroundColor: "#E8F0FE",
+    borderWidth: 1,
+    borderColor: "#007AFF",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  narrativeOrderNum: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#007AFF",
+    marginRight: 8,
+    width: 24,
+  },
+  narrativeItemText: { fontSize: 15, color: "#333" },
+
+  // Feedback
+  feedback: {
+    fontSize: 15,
     fontWeight: "600",
     marginTop: 8,
-    paddingVertical: 4,
+    padding: 12,
+    borderRadius: 8,
+    textAlign: "center",
+    lineHeight: 22,
   },
-  demoText: { fontSize: 15, color: "#555", paddingVertical: 4, paddingLeft: 8 },
-  error: { color: "#dc3545", fontSize: 14, textAlign: "center", marginTop: 8 },
+  feedbackCorrect: {
+    color: "#1B5E20",
+    backgroundColor: "#E8F5E9",
+  },
+  feedbackIncorrect: {
+    color: "#B71C1C",
+    backgroundColor: "#FFEBEE",
+  },
+
+  // Misc
+  hint: {
+    fontSize: 14,
+    color: "#666",
+    marginTop: 8,
+    fontStyle: "italic",
+    lineHeight: 20,
+  },
+  error: {
+    color: "#dc3545",
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 8,
+  },
   footer: {
     padding: 24,
     paddingBottom: Platform.OS === "ios" ? 36 : 24,

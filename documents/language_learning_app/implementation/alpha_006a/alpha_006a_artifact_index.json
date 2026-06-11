@@ -1,0 +1,118 @@
+{
+  "artifact_index_id": "alpha-006a-artifacts-001",
+  "alpha_release": "006a",
+  "base_path": "documents/language_learning_app/implementation/alpha_006a/",
+  "generated_at": "2026-06-11T14:30:00+02:00",
+  "artifacts": {
+    "docs": [
+      {
+        "path": "00_alpha_006a_index.md",
+        "description": "Main index and change summary for Alpha 006A",
+        "type": "documentation",
+        "size_bytes": null
+      },
+      {
+        "path": "01_diagnostic_section_audit.md",
+        "description": "Full audit of all 4 diagnostic item types — interaction, clickability, prefilling, feedback",
+        "type": "audit",
+        "size_bytes": null
+      },
+      {
+        "path": "02_interaction_model_recovery.md",
+        "description": "Per-step interaction state machines, enable/disable triggers, code implementation",
+        "type": "documentation",
+        "size_bytes": null
+      },
+      {
+        "path": "03_example_demo_rules.md",
+        "description": "Example/demo separation verification — rules enforcement before/after",
+        "type": "audit",
+        "size_bytes": null
+      },
+      {
+        "path": "04_backend_state_recheck.md",
+        "description": "Backend data flow verification — answer source, storage, scoring audit trail",
+        "type": "audit",
+        "size_bytes": null
+      },
+      {
+        "path": "05_visual_recheck_report.md",
+        "description": "Visual verification report with 13 screenshots across full diagnostic flow",
+        "type": "report",
+        "size_bytes": null
+      },
+      {
+        "path": "06_test_results.md",
+        "description": "Test results — 17/17 passed, including 4 new backward-compatibility tests",
+        "type": "report",
+        "size_bytes": null
+      },
+      {
+        "path": "07_alpha_006_supersession_report.md",
+        "description": "Alpha 006 supersession declaration — reasons, changes, key files",
+        "type": "report",
+        "size_bytes": null
+      }
+    ],
+    "proof": [
+      {
+        "path": "proof_language_learning_app_alpha_006a.json",
+        "description": "Primary proof JSON — acceptance criteria, audit, interaction model, evidence",
+        "type": "proof",
+        "size_bytes": null
+      },
+      {
+        "path": "alpha_006a_artifact_index.json",
+        "description": "This file — artifact index for Alpha 006A",
+        "type": "index",
+        "size_bytes": null
+      }
+    ],
+    "evidence": {
+      "screenshots": {
+        "path": "evidence/screenshots/",
+        "count": 13,
+        "files": [
+          "01-diagnostic-grammar-no-selection.png",
+          "02-diagnostic-grammar-selected.png",
+          "03-diagnostic-grammar-feedback.png",
+          "04-vocabulary-no-selection.png",
+          "05-vocabulary-selected.png",
+          "06-vocabulary-feedback.png",
+          "07-writing-no-input.png",
+          "08-writing-filled.png",
+          "09-writing-feedback.png",
+          "10-narrative-no-selection.png",
+          "11-narrative-ordered.png",
+          "12-narrative-feedback.png",
+          "13-diagnostic-complete.png"
+        ]
+      },
+      "test_outputs": {
+        "path": "evidence/test_outputs/",
+        "files": [
+          "unit_tests.txt",
+          "all_unit_tests.txt"
+        ]
+      },
+      "backend_logs": {
+        "path": "evidence/backend_logs/",
+        "files": [
+          "backend.log"
+        ]
+      },
+      "console_logs": {
+        "path": "evidence/console_logs/"
+      }
+    }
+  },
+  "git_info": {
+    "branch": "master",
+    "changes_pending_commit": true,
+    "changed_files": [
+      "mobile/app/diagnostic.tsx",
+      "backend/tests/unit/test_diagnostics.py"
+    ],
+    "added_files_count": 14
+  }
+}

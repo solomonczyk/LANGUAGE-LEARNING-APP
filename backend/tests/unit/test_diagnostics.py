@@ -95,3 +95,50 @@ class TestAssessmentCalculation:
     def test_empty_responses(self):
         result = _assess_responses([])
         assert len(result) == 0
+
+    def test_grammar_with_selected_option_field(self):
+        """Backend must ignore extra frontend fields (selected_option)."""
+        responses = [
+            {"question_key": "grammar_recognition", "response_data": {"is_correct": True, "selected_option": "b"}},
+        ]
+        result = _assess_responses(responses)
+        assert result["grammar_recognition"]["cefr"] == "A2"
+        assert result["grammar_recognition"]["score"] == 80.0
+
+    def test_grammar_incorrect_with_selected_option(self):
+        responses = [
+            {"question_key": "grammar_recognition", "response_data": {"is_correct": False, "selected_option": "a"}},
+        ]
+        result = _assess_responses(responses)
+        assert result["grammar_recognition"]["cefr"] == "A1"
+
+    def test_vocabulary_with_selections_field(self):
+        """Backend uses correct_count/total_words, ignores extra selections dict."""
+        responses = [
+            {
+                "question_key": "active_vocabulary",
+                "response_data": {
+                    "correct_count": 3,
+                    "total_words": 4,
+                    "selections": {"Morning": "b", "Breakfast": "a", "Pet": "c", "Walk": "d"},
+                },
+            },
+        ]
+        result = _assess_responses(responses)
+        assert result["active_vocabulary"]["score"] == 75.0
+        assert result["active_vocabulary"]["cefr"] == "A2"
+
+    def test_narrative_with_user_order_field(self):
+        """Backend uses correct_order, ignores extra user_order array."""
+        responses = [
+            {
+                "question_key": "narrative_coherence",
+                "response_data": {
+                    "correct_order": False,
+                    "user_order": ["3", "1", "2", "5", "4"],
+                },
+            },
+        ]
+        result = _assess_responses(responses)
+        assert result["narrative_coherence"]["cefr"] == "A1"
+        assert result["narrative_coherence"]["score"] == 40.0

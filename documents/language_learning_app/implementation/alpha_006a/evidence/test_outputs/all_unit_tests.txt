@@ -1,0 +1,111 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.3, pluggy-1.6.0 -- C:\Users\taras\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: F:\Dev\Projects\LANGUAGE-LEARNING-APP\backend
+configfile: pyproject.toml
+plugins: anyio-4.12.1, langsmith-0.6.9, asyncio-0.24.0, cov-5.0.0, httpx-0.36.0, mock-3.15.1, timeout-2.4.0, typeguard-4.5.1
+asyncio: mode=Mode.AUTO, default_loop_scope=None
+collecting ... collected 78 items
+
+tests/unit/test_audit.py::TestAuditEvents::test_record_audit_event PASSED [  1%]
+tests/unit/test_audit.py::test_audit_event_requires_mandatory_fields PASSED [  2%]
+tests/unit/test_audit.py::test_audit_write_failure PASSED                [  3%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_a1_level PASSED [  5%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_a2_level PASSED [  6%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_b1_level PASSED [  7%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_boundary_values PASSED [  8%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_recognition_correct PASSED [ 10%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_recognition_incorrect PASSED [ 11%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_assessment PASSED [ 12%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_low_score PASSED [ 14%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_written_production_scoring PASSED [ 15%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_coherence_correct PASSED [ 16%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_coherence_incorrect PASSED [ 17%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_multi_dimension_assessment PASSED [ 19%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_empty_responses PASSED [ 20%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_with_selected_option_field PASSED [ 21%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_incorrect_with_selected_option PASSED [ 23%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_with_selections_field PASSED [ 24%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_with_user_order_field PASSED [ 25%]
+tests/unit/test_learning_contract.py::test_a1_contract_params PASSED     [ 26%]
+tests/unit/test_learning_contract.py::test_a2_contract_params PASSED     [ 28%]
+tests/unit/test_learning_contract.py::test_b1_contract_params PASSED     [ 29%]
+tests/unit/test_learning_contract.py::test_lowest_level_determines_params PASSED [ 30%]
+tests/unit/test_learning_contract.py::test_multi_assessment_lowest PASSED [ 32%]
+tests/unit/test_learning_contract.py::test_all_levels_deterministic PASSED [ 33%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_forbidden_evidence_types PASSED [ 34%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_allowed_evidence_types PASSED [ 35%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_invalid_evidence_type_raises PASSED [ 37%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_get_mastery_profile PASSED [ 38%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_cat_pet_fixture_default_a2 PASSED [ 39%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_morning_routine_fixture_default_a2 PASSED [ 41%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_generic_fixture_default_a2 PASSED [ 42%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_empty_text_uses_generic PASSED [ 43%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_pet_variations PASSED [ 44%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_morning_variations PASSED [ 46%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_deterministic_output PASSED [ 47%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_a1_fixture_simplified PASSED [ 48%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_b2_fixture_more_detailed PASSED [ 50%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_level_aware_deterministic PASSED [ 51%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_different_levels_different_output PASSED [ 52%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_valid_fixture_has_all_fields PASSED [ 53%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_detected_issues_structure PASSED [ 55%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_valid_severity_values PASSED [ 56%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_valid_issue_codes PASSED [ 57%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_confidence_range PASSED [ 58%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_malformed_output_missing_fields PASSED [ 60%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_strengths_is_list PASSED [ 61%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_recommended_focus_is_list PASSED [ 62%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_no_randomness PASSED [ 64%]
+tests/unit/test_policy_engine.py::TestPolicyEngine::test_policy_decision_complete PASSED [ 65%]
+tests/unit/test_policy_engine.py::test_make_decision_complete_flow PASSED [ 66%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_initial_state PASSED [ 67%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_valid_transition PASSED [ 69%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_invalid_transition PASSED [ 70%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_forbidden_transition_after_failure PASSED [ 71%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_allowed_events PASSED [ 73%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_guard_denied_transition PASSED [ 74%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_duplicate_event_safe PASSED [ 75%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_reset PASSED [ 76%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_full_happy_path PASSED [ 78%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_rejection_path PASSED [ 79%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_failure_at_any_state PASSED [ 80%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_audit_event_per_transition PASSED [ 82%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_valid_analysis_passes PASSED [ 83%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_valid_morning_analysis_passes PASSED [ 84%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_valid_generic_analysis_passes PASSED [ 85%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_malformed_output_fails PASSED [ 87%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_missing_fields_fails PASSED [ 88%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_invalid_confidence_fails PASSED [ 89%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_negative_confidence_fails PASSED [ 91%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_confidence_over_one_fails PASSED [ 92%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_output_consistency_check PASSED [ 93%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_all_checks_recorded PASSED [ 94%]
+tests/unit/test_validation.py::test_pedagogical_validation_checks PASSED [ 96%]
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_feedback_matches_goal_check PASSED [ 97%]
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_mastery_claim_detection PASSED [ 98%]
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_reward_command_detection PASSED [100%]
+
+============================== warnings summary ===============================
+tests/unit/test_mastery.py::TestMasteryEvidence::test_invalid_evidence_type_raises
+  C:\Users\taras\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py:478: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    _safe_super(NonCallableMock, self).__init__(
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_validation.py::test_pedagogical_validation_checks
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_mastery_claim_detection
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_reward_command_detection
+  F:\Dev\Projects\LANGUAGE-LEARNING-APP\backend\app\modules\pedagogical_validation\services.py:85: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    db.add(vr)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_validation.py::test_pedagogical_validation_checks
+  C:\Users\taras\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py:2217: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    def __init__(self, name, parent):
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 78 passed, 5 warnings in 0.82s ========================
