@@ -151,6 +151,15 @@ async def process_lesson_session(
     )
 
     if not analysis_result.get("schema_valid", False):
+        await record_event(
+            db,
+            event_type="LESSON_ANALYSIS_FAILED",
+            user_id=user_id,
+            module="lesson_engine",
+            entity_type="lesson_session",
+            entity_id=session_id,
+            data={"reason": "mock_ai_schema_invalid", "submission_id": str(submission.id)},
+        )
         session.status = "FAILED"
         submission.status = "FAILED"
         await db.flush()
@@ -162,6 +171,15 @@ async def process_lesson_session(
     submission.status = "ANALYSIS_PENDING"
 
     if not ling_result["passed"]:
+        await record_event(
+            db,
+            event_type="LESSON_LINGUISTIC_REJECTED",
+            user_id=user_id,
+            module="lesson_engine",
+            entity_type="lesson_session",
+            entity_id=session_id,
+            data={"reason": "linguistic_validation_failed", "submission_id": str(submission.id)},
+        )
         from app.models import ValidationResult
 
         vr = ValidationResult(
@@ -181,6 +199,15 @@ async def process_lesson_session(
     ped_result = await validate_pedagogical(db, submission.id, analysis_result)
 
     if not ped_result["passed"]:
+        await record_event(
+            db,
+            event_type="LESSON_PEDAGOGICAL_REJECTED",
+            user_id=user_id,
+            module="lesson_engine",
+            entity_type="lesson_session",
+            entity_id=session_id,
+            data={"reason": "pedagogical_validation_failed", "submission_id": str(submission.id)},
+        )
         from app.models import ValidationResult
 
         vr = ValidationResult(
@@ -233,6 +260,21 @@ async def process_lesson_session(
             session.status = sm.current_state
             submission.status = "ACCEPTED"
 
+            # Record audit event
+            await record_event(
+                db,
+                event_type="LESSON_COMPLETED",
+                user_id=user_id,
+                module="lesson_engine",
+                entity_type="lesson_session",
+                entity_id=session_id,
+                data={
+                    "submission_id": str(submission.id),
+                    "decision": decision,
+                    "analysis_version": analysis_result.get("analysis_version"),
+                },
+            )
+
             # Create mastery evidence
             from app.modules.mastery.services import create_evidence
 
@@ -251,9 +293,27 @@ async def process_lesson_session(
         except ValueError as e:
             raise InvalidStateTransitionError(str(e))
     elif decision["decision"] == "REJECT":
+        await record_event(
+            db,
+            event_type="LESSON_REJECTED",
+            user_id=user_id,
+            module="lesson_engine",
+            entity_type="lesson_session",
+            entity_id=session_id,
+            data={"reason": "policy_rejected", "submission_id": str(submission.id)},
+        )
         session.status = "REJECTED"
         submission.status = "REJECTED"
     else:
+        await record_event(
+            db,
+            event_type="LESSON_FAILED",
+            user_id=user_id,
+            module="lesson_engine",
+            entity_type="lesson_session",
+            entity_id=session_id,
+            data={"reason": "policy_unknown", "decision": decision},
+        )
         session.status = "FAILED"
         submission.status = "FAILED"
 

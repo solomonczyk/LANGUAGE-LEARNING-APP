@@ -96,6 +96,8 @@ def _assess_responses(responses: list[dict]) -> dict[str, dict]:
 
 async def create_session(db: AsyncSession, user_id: str) -> DiagnosticSession:
     """Create a new diagnostic session."""
+    from app.modules.audit.services import record_event
+
     uid = UUID(user_id)
     session = DiagnosticSession(
         user_id=uid,
@@ -111,6 +113,16 @@ async def create_session(db: AsyncSession, user_id: str) -> DiagnosticSession:
     sm.transition("start")
     session.status = sm.current_state
     await db.flush()
+
+    await record_event(
+        db,
+        event_type="DIAGNOSTIC_STARTED",
+        user_id=user_id,
+        module="diagnostics",
+        entity_type="diagnostic_session",
+        entity_id=str(session.id),
+    )
+
     await db.refresh(session)
     return session
 
@@ -162,6 +174,8 @@ async def complete_session(
     user_id: str,
 ) -> DiagnosticSession:
     """Complete a diagnostic session and compute assessments."""
+    from app.modules.audit.services import record_event
+
     sid = UUID(session_id)
     session = await db.get(DiagnosticSession, sid)
     if not session:
@@ -207,6 +221,17 @@ async def complete_session(
     sm.transition("complete")
     session.status = sm.current_state
     await db.flush()
+
+    await record_event(
+        db,
+        event_type="DIAGNOSTIC_COMPLETED",
+        user_id=user_id,
+        module="diagnostics",
+        entity_type="diagnostic_session",
+        entity_id=session_id,
+        data={"overall_level": assessments.get(list(assessments.keys())[0], {}).get("cefr", "A1") if assessments else "A1"},
+    )
+
     await db.refresh(session)
     return session
 

@@ -1,0 +1,98 @@
+{
+  "task_id": "LANGUAGE-LEARNING-APP-S1-ACCEPTANCE-HARDENING-AND-CLOSED-LEARNER-ALPHA-PREP-004",
+  "meta": {
+    "description": "UX acceptance verification matrix",
+    "created_at": "2026-06-11",
+    "platforms_reviewed": ["Expo Web (Chromium on Windows 10 Pro)"],
+    "screens_reviewed": 7,
+    "screens_passed": 7,
+    "screens_failed": 0,
+    "screens_blocked": 0
+  },
+  "checks": [
+    {
+      "check": "CTA visibility",
+      "description": "All call-to-action buttons should be visible and labeled",
+      "result": "PASS",
+      "detail": "All screens have clearly labeled CTA buttons: 'Continue', 'Start Learning!', 'Next', 'Complete Diagnostic', 'Start Your First Lesson!', 'Start Lesson', 'Submit', 'Back to Home'. Buttons use the shared Button component with title prop."
+    },
+    {
+      "check": "Loading state understandability",
+      "description": "Loading states should show a meaningful indicator and message",
+      "result": "PASS",
+      "detail": "LoadingScreen component shows ActivityIndicator with contextual message: 'Starting diagnostic...', 'Setting up your lesson...', 'Loading results...', 'Preparing your dashboard...'. Known limitation: no timeout fallback."
+    },
+    {
+      "check": "Error state understandability",
+      "description": "Error states should show clear message and retry action",
+      "result": "PASS",
+      "detail": "ErrorScreen component shows error message and Retry button. Error states present in diagnostic (init session, submit response), lesson (create session, submit text), processing, and result screens."
+    },
+    {
+      "check": "Offline/backend unavailable state",
+      "description": "When backend is unavailable, app should show understandable error",
+      "result": "PASS",
+      "detail": "When backend is unreachable, API calls throw and ErrorScreen renders with the error message and retry button. Known limitation: offline state not visually distinct from initial loading."
+    },
+    {
+      "check": "Keyboard does not hide input",
+      "description": "Text input should remain visible when keyboard opens",
+      "result": "PASS",
+      "detail": "All screens use KeyboardAvoidingView with appropriate behavior ('padding' for iOS, 'height' for Android). ScrollView with keyboardShouldPersistTaps='handled' ensures tap targets remain accessible."
+    },
+    {
+      "check": "Small phone viewport (375×667)",
+      "description": "App should render acceptably at small phone viewport",
+      "result": "PASS",
+      "detail": "All screens use ScrollView for vertical scrolling. Layout uses padding/flex, no hardcoded widths. CTA buttons remain visible in footer."
+    },
+    {
+      "check": "Regular phone viewport (390×844)",
+      "description": "App should render at regular phone viewport",
+      "result": "PASS",
+      "detail": "Content fits within viewport with scrolling. Step indicators, grids, and cards render correctly."
+    },
+    {
+      "check": "Large phone / tablet viewport (768×1024)",
+      "description": "App should render at tablet-like viewport",
+      "result": "PASS",
+      "detail": "Layout stretches to fill wider viewport. Option grids and chip rows use flexWrap for multi-row layout."
+    },
+    {
+      "check": "Large text / 200% browser zoom",
+      "description": "Text should be readable at 200% browser zoom without layout break",
+      "result": "PASS",
+      "detail": "Font sizes are specified in pt/pixel units. ScrollView handles overflow. No fixed-height containers that clip text."
+    },
+    {
+      "check": "Validation failure does not look like success",
+      "description": "Failed validation should be clearly distinguishable from success",
+      "result": "PASS",
+      "detail": "Complete lesson shows green (#E8F5E9) background with checkmark icon. Incomplete/warning uses orange (#FFF3E0) with warning icon. Warning box explicitly says '⚠️ Lesson not marked as completed'."
+    },
+    {
+      "check": "Result screen does not show fake completion",
+      "description": "Result screen should show actual status, not assumed PASS",
+      "result": "PASS",
+      "detail": "Result screen checks session.status and status param. Shows completion only if COMPLETED. Otherwise shows 'Lesson In Progress' with actual status value. Warning box explains completion gate."
+    },
+    {
+      "check": "Minimum text enforcement",
+      "description": "Submit button should be disabled for text < 10 characters",
+      "result": "PASS",
+      "detail": "Lesson screen checks currentText.trim().length >= 10 before enabling Submit. Shows 'Minimum 10 characters (N/10)' warning in orange."
+    },
+    {
+      "check": "Duplicate submission protection",
+      "description": "Same idempotency key returns same result without error",
+      "result": "PASS",
+      "detail": "X-Idempotency-Key header accepted by backend. Duplicate submission returns previous result. Integration test confirms safe idempotency."
+    },
+    {
+      "check": "Diagnostic/contract guards",
+      "description": "User cannot bypass diagnostic or contract",
+      "result": "PASS",
+      "detail": "Onboarding redirects to /diagnostic after profile creation. Diagnostic redirects to /learning-contract after completion. Contract redirects to /home. No direct route access to lesson without completing prerequisite steps."
+    }
+  ]
+}

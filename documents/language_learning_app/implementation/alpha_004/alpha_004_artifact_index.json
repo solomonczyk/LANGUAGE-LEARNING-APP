@@ -1,0 +1,88 @@
+{
+  "task_id": "LANGUAGE-LEARNING-APP-S1-ACCEPTANCE-HARDENING-AND-CLOSED-LEARNER-ALPHA-PREP-004",
+  "description": "Artifact index for alpha_004 layer",
+  "created_at": "2026-06-11",
+  "artifacts": {
+    "00_alpha_004_index.md": {
+      "path": "implementation/alpha_004/00_alpha_004_index.md",
+      "title": "Alpha 004 Index",
+      "type": "documentation"
+    },
+    "01_closed_alpha_scope.md": {
+      "path": "implementation/alpha_004/01_closed_alpha_scope.md",
+      "title": "Closed Alpha Scope",
+      "type": "documentation"
+    },
+    "02_alpha_test_plan.md": {
+      "path": "implementation/alpha_004/02_alpha_test_plan.md",
+      "title": "Alpha Test Plan",
+      "type": "documentation"
+    },
+    "03_learner_test_script.md": {
+      "path": "implementation/alpha_004/03_learner_test_script.md",
+      "title": "Learner Test Script",
+      "type": "documentation"
+    },
+    "04_operator_review_checklist.md": {
+      "path": "implementation/alpha_004/04_operator_review_checklist.md",
+      "title": "Operator Review Checklist",
+      "type": "documentation"
+    },
+    "05_known_limitations.md": {
+      "path": "implementation/alpha_004/05_known_limitations.md",
+      "title": "Known Limitations",
+      "type": "documentation"
+    },
+    "06_alpha_exit_criteria.md": {
+      "path": "implementation/alpha_004/06_alpha_exit_criteria.md",
+      "title": "Alpha Exit Criteria",
+      "type": "documentation"
+    },
+    "07_alpha_risk_register.md": {
+      "path": "implementation/alpha_004/07_alpha_risk_register.md",
+      "title": "Alpha Risk Register",
+      "type": "documentation"
+    },
+    "08_alpha_feedback_form.md": {
+      "path": "implementation/alpha_004/08_alpha_feedback_form.md",
+      "title": "Alpha Feedback Form",
+      "type": "documentation"
+    },
+    "09_alpha_acceptance_report.md": {
+      "path": "implementation/alpha_004/09_alpha_acceptance_report.md",
+      "title": "Alpha Acceptance Report",
+      "type": "documentation"
+    },
+    "proof_language_learning_app_alpha_004.json": {
+      "path": "implementation/alpha_004/proof_language_learning_app_alpha_004.json",
+      "title": "Alpha 004 Proof JSON",
+      "type": "proof"
+    },
+    "alpha_004_artifact_index.json": {
+      "path": "implementation/alpha_004/alpha_004_artifact_index.json",
+      "title": "Alpha 004 Artifact Index",
+      "type": "metadata"
+    },
+    "evidence/e2e_journey_matrix.json": {
+      "path": "implementation/alpha_004/evidence/e2e_journey_matrix.json",
+      "title": "E2E Journey Matrix",
+      "type": "evidence"
+    },
+    "evidence/ux_acceptance_matrix.json": {
+      "path": "implementation/alpha_004/evidence/ux_acceptance_matrix.json",
+      "title": "UX Acceptance Matrix",
+      "type": "evidence"
+    },
+    "evidence/operator_review_report.md": {
+      "path": "implementation/alpha_004/evidence/operator_review_report.md",
+      "title": "Operator Review Report",
+      "type": "evidence"
+    },
+    "evidence/environment_blockers.md": {
+      "path": "implementation/alpha_004/evidence/environment_blockers.md",
+      "title": "Environment Blockers",
+      "type": "evidence"
+    }
+  },
+  "total_artifacts": 16
+}
