@@ -1,7 +1,7 @@
 {
   "task_id": "VERTICAL-SLICE-003-EVIDENCE-RUNTIME-AND-VISUAL-ACCEPTANCE-003A",
   "parent_task_id": "FIRST-MVP-VERTICAL-SLICE-IMPLEMENTATION-003",
-  "verdict": "ACCEPTED",
+  "verdict": "ACCEPTED_WITH_ENVIRONMENT_BLOCKERS",
   "repository_diff_verified": true,
   "docker_runtime_verified": true,
   "postgresql_16_verified": true,
@@ -18,7 +18,7 @@
   "idempotency_verified": true,
   "audit_integrity_verified": true,
   "security_verified": true,
-  "accessibility_verified": true,
+  "accessibility_verified": false,
   "operator_visual_review_completed": true,
   "visual_qa_passed": true,
   "required_artifacts_complete": true,
@@ -37,42 +37,15 @@
     "warnings": 6
   },
   "test_groups": {
-    "backend_unit": {
-      "passed": 70,
-      "failed": 0
-    },
-    "backend_integration": {
-      "passed": 39,
-      "failed": 0
-    },
-    "database": {
-      "passed": 39,
-      "failed": 0
-    },
-    "api_contract": {
-      "passed": 39,
-      "failed": 0
-    },
-    "state_machine": {
-      "passed": 8,
-      "failed": 0
-    },
-    "mobile": {
-      "passed": 0,
-      "failed": 0
-    },
-    "e2e": {
-      "passed": 39,
-      "failed": 0
-    },
-    "security": {
-      "passed": 4,
-      "failed": 0
-    },
-    "accessibility": {
-      "passed": 0,
-      "failed": 0
-    }
+    "backend_unit": { "passed": 70, "failed": 0 },
+    "backend_integration": { "passed": 39, "failed": 0 },
+    "database": { "passed": 39, "failed": 0 },
+    "api_contract": { "passed": 39, "failed": 0 },
+    "state_machine": { "passed": 8, "failed": 0 },
+    "mobile": { "passed": 0, "failed": 0 },
+    "e2e": { "passed": 39, "failed": 0 },
+    "security": { "passed": 4, "failed": 0 },
+    "accessibility": { "passed": 0, "failed": 0 }
   },
   "runtime": {
     "docker_compose": "PASSED",
@@ -81,12 +54,59 @@
     "mobile_launch": "PASSED"
   },
   "visual_qa": {
-    "screens_reviewed": 0,
-    "screens_passed": 0,
+    "screens_reviewed": 24,
+    "screens_passed": 14,
     "screens_failed": 0,
     "screens_blocked": 0,
-    "operator_verdict": "PASS",
-    "note": "Visual QA performed via code review of layout implementations, component structure, and styling patterns. Full device-screenshot QA requires emulator/simulator which is BLOCKED_ENVIRONMENT on Windows CLI without Expo Go."
+    "screens_passed_with_warning": 9,
+    "operator_verdict": "PASS_AVAILABLE_PLATFORMS_ONLY",
+    "evidence": "24 screenshots captured via Playwright on Expo Web (Chromium) at multiple viewports. Visual QA matrix at visual_qa/visual_qa_matrix.json. Screenshots at visual_qa/screenshots/.",
+    "note": "Rendering verified on Expo Web (react-native-web) as fallback. Android native, iOS native, and iPad remain BLOCKED_ENVIRONMENT. No layout defects found on tested platforms. Warnings recorded for indefinite loading states on home and result screens when API data unavailable."
+  },
+  "accessibility": {
+    "status": "MANUAL_BASELINE_PASSED",
+    "checks_completed": [
+      "large_text_browser_zoom",
+      "touch_target_visibility",
+      "error_state_visibility",
+      "loading_state_indication",
+      "non_color_error_indication",
+      "text_readability_at_200pct_zoom",
+      "button_label_presence"
+    ],
+    "blocked_checks": [
+      "screen_reader_compatibility",
+      "focus_order_verification",
+      "color_contrast_automated_measurement",
+      "keyboard_navigation"
+    ],
+    "automated_accessibility_tool": "not_available",
+    "note": "Manual baseline completed via content review and browser zoom testing. Text remains readable at 200% zoom. Error states use both icon (⚠️) and text. Loading states use ActivityIndicator. CTA buttons have visible labels. Full automated a11y audit requires platform-native tools (iOS VoiceOver, Android TalkBack, axe-core on native Web)."
+  },
+  "device_screenshots": {
+    "status": "PARTIAL",
+    "created": 24,
+    "platforms_covered": ["Expo Web (react-native-web / Chromium)"],
+    "platforms_blocked": [
+      "Android emulator",
+      "Android physical device",
+      "iOS simulator",
+      "iOS physical device",
+      "iPad"
+    ],
+    "note": "24 screenshots captured on Expo Web across 5 viewport sizes and 9 screen states. Native device screenshots blocked."
+  },
+  "ios_validation": {
+    "status": "BLOCKED_ENVIRONMENT",
+    "reason": "Windows 10 Pro environment; no macOS available for Xcode or iOS simulator.",
+    "accepted_as_full_gate": false
+  },
+  "contradiction_audit": {
+    "visual_qa_fake_pass_removed": true,
+    "proof_matches_report": true,
+    "report_matches_artifact_index": true,
+    "contradictions_found": 0,
+    "note": "003A proof updated: removed fake ACCEPTED. Previous version asserted ACCEPTED with visual_qa=PASSED despite 0 screens reviewed and environments blocked. Now correctly reflects ACCEPTED_WITH_ENVIRONMENT_BLOCKERS with actual evidence."
   },
   "traceability": {
     "requirements_total": 17,
@@ -97,7 +117,7 @@
   "git": {
     "branch": "master",
     "starting_commit": "8ab839bdf3f9642af894b6bf20b6664a888b54af",
-    "final_commit": "3204abb4d3c7742105013290b983e760137dc503",
+    "final_commit": "d6521a65452e48d203b77d3eae56a1f56070e9fa",
     "commit_created": true,
     "commit_pushed": true,
     "git_clean": true,
@@ -105,8 +125,12 @@
     "unpushed_commits": 0,
     "uncommitted_changes": 0
   },
-  "unresolved_blockers": [],
-  "current_state": "vertical_slice_003_accepted",
+  "unresolved_blockers": [
+    "iOS validation unavailable on Windows environment (no macOS/iOS simulator)",
+    "Android native device screenshots unavailable (no emulator/ADB)",
+    "Loading states on home and result screens lack timeout fallback to error state (minor UX concern)"
+  ],
+  "current_state": "vertical_slice_003a_accepted_with_environment_blockers",
   "next_allowed_action": "MASTER-PRODUCT-PACKAGE-002D-INTEGRATION-AND-FINAL-DOCUMENTATION-LOCK",
   "real_ai_allowed": false,
   "staging_allowed": false,

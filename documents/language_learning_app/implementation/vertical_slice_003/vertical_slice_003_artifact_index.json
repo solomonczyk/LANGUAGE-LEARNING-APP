@@ -2,8 +2,8 @@
   "schema_version": "1.0.0",
   "layer": "003",
   "layer_name": "First MVP Vertical Slice",
-  "status": "ACCEPTED",
-  "last_updated": "2026-06-11",
+  "status": "ACCEPTED_WITH_ENVIRONMENT_BLOCKERS",
+  "last_updated": "2026-06-11T15:00:00+02:00",
   "artifacts": [
     {
       "path": "docker-compose.yml",
@@ -323,10 +323,10 @@
     {
       "path": "documents/language_learning_app/implementation/vertical_slice_003/proof_language_learning_app_vertical_slice_003a.json",
       "type": "proof",
-      "purpose": "Vertical slice 003 acceptance proof (runtime + visual)",
+      "purpose": "Vertical slice 003 acceptance proof (runtime + visual, corrected for environment blockers)",
       "version": "003a",
-      "status": "verified",
-      "sha256": "ba1714716f1d28c1cd847920dd1becb15013c173d15a1eee9aff468f85f1e5d8",
+      "status": "finalized",
+      "sha256": "",
       "related_requirements": ["ACCEPT-002"]
     },
     {
@@ -562,6 +562,51 @@
       "status": "finalized",
       "sha256": "",
       "related_requirements": ["INDEX-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/proof_language_learning_app_vertical_slice_003b.json",
+      "type": "proof",
+      "purpose": "Vertical slice 003A reconciliation proof (visual QA + environment blockers)",
+      "version": "003b",
+      "status": "finalized",
+      "sha256": "",
+      "related_requirements": ["ACCEPT-004"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/15_visual_qa_reconciliation_report.md",
+      "type": "documentation",
+      "purpose": "Visual QA blocker reconciliation report for 003A",
+      "version": "1.0.0",
+      "status": "finalized",
+      "sha256": "",
+      "related_requirements": ["ACCEPT-004"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/003a_acceptance_full_report.md",
+      "type": "documentation",
+      "purpose": "Full 003A acceptance report (corrected for contradictions)",
+      "version": "1.0.0",
+      "status": "finalized",
+      "sha256": "",
+      "related_requirements": ["ACCEPT-003"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/visual_qa/visual_qa_matrix.json",
+      "type": "data",
+      "purpose": "Visual QA matrix with operator verdicts for all screens",
+      "version": "1.0.0",
+      "status": "finalized",
+      "sha256": "",
+      "related_requirements": ["QA-001"]
+    },
+    {
+      "path": "documents/language_learning_app/implementation/vertical_slice_003/visual_qa/environment_blockers.md",
+      "type": "documentation",
+      "purpose": "Environment blocker classification for iOS, Android, iPad",
+      "version": "1.0.0",
+      "status": "finalized",
+      "sha256": "",
+      "related_requirements": ["QA-002"]
     }
   ]
 }
