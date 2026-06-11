@@ -1,0 +1,111 @@
+{
+  "artifact_index_id": "alpha_005_artifact_index",
+  "created": "2026-06-11T11:00:00Z",
+  "project": "language_learning_app",
+  "layer": "alpha_005",
+  "description": "Alpha 005 — Closed Learner Alpha Execution artifact index",
+  "artifacts": [
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/00_alpha_005_index.md",
+      "type": "documentation",
+      "description": "Alpha 005 index and document map",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/01_closed_alpha_execution_plan.md",
+      "type": "plan",
+      "description": "Closed alpha execution plan with scope and success criteria",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/02_participant_matrix.md",
+      "type": "evidence",
+      "description": "Participant matrix with detailed per-tester results",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/03_alpha_session_logs.md",
+      "type": "log",
+      "description": "Alpha session execution logs",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/04_feedback_summary.md",
+      "type": "feedback",
+      "description": "Tester feedback summary and aggregate themes",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/05_issue_register.md",
+      "type": "evidence",
+      "description": "Issue register with all findings classified by severity",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/06_go_no_go_decision.md",
+      "type": "decision",
+      "description": "Go/Hold/Fix/Stop decision with criteria evaluation",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/07_alpha_learning_findings.md",
+      "type": "findings",
+      "description": "Learning clarity and pedagogical findings",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/08_alpha_runtime_findings.md",
+      "type": "findings",
+      "description": "Runtime health and performance findings",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/09_alpha_ux_findings.md",
+      "type": "findings",
+      "description": "UX findings and recommendations",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/10_alpha_next_stage_recommendation.md",
+      "type": "recommendation",
+      "description": "Next stage recommendation (S2/S3/Alpha fix)",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/proof_language_learning_app_alpha_005.json",
+      "type": "proof",
+      "description": "Alpha 005 proof JSON with full evidence",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/alpha_005_artifact_index.json",
+      "type": "index",
+      "description": "This artifact index file",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/evidence/audit_exports/audit_events.json",
+      "type": "evidence",
+      "description": "Exported audit events (50 events)",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/evidence/backend_logs/health_check.json",
+      "type": "evidence",
+      "description": "Health check response (status=ok, database=ready)",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/evidence/backend_logs/backend_container_logs.txt",
+      "type": "evidence",
+      "description": "Backend container logs (80 lines)",
+      "required": true
+    },
+    {
+      "path": "documents/language_learning_app/implementation/alpha_005/evidence/operator_notes/raw_session_results.json",
+      "type": "evidence",
+      "description": "Raw session results for all 5 testers (85/85 steps passed)",
+      "required": true
+    }
+  ]
+}

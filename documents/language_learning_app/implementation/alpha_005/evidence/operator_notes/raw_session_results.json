@@ -1,0 +1,522 @@
+{
+  "ALPHA-001": [
+    {
+      "tester_id": "ALPHA-001",
+      "step": "health_check",
+      "status": true,
+      "detail": "status=200"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "register",
+      "status": true,
+      "detail": "user_id=58fe2754-0603-4802-930a-890c8097b233"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "create_profile",
+      "status": true,
+      "detail": "lang=English level=A2"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "diagnostic_create",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "diagnostic_response_grammar_recognition",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "diagnostic_response_active_vocabulary",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "diagnostic_response_written_production",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "diagnostic_response_narrative_coherence",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "diagnostic_complete",
+      "status": true,
+      "detail": "4 assessments"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "learning_contract_create",
+      "status": true,
+      "detail": "lang=English version=1.0.0"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "mastery_profile",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "lesson_create",
+      "status": true,
+      "detail": "session_id=4bc69e27-a7ca-42a0-9986-450b4f296580"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "lesson_submit",
+      "status": true,
+      "detail": "submission_id=d44729a6-714b-40f1-8b51-0482435a9e31"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "lesson_process",
+      "status": true,
+      "detail": "decision=COMPLETE has_validation=True"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "lesson_result",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "mastery_after_lesson",
+      "status": true,
+      "detail": "records=1"
+    },
+    {
+      "tester_id": "ALPHA-001",
+      "step": "audit_events",
+      "status": true,
+      "detail": "total_events=50"
+    }
+  ],
+  "ALPHA-002": [
+    {
+      "tester_id": "ALPHA-002",
+      "step": "health_check",
+      "status": true,
+      "detail": "status=200"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "register",
+      "status": true,
+      "detail": "user_id=4a69b059-9d2a-4cfb-9352-13f595682bc0"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "create_profile",
+      "status": true,
+      "detail": "lang=English level=A1"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "diagnostic_create",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "diagnostic_response_grammar_recognition",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "diagnostic_response_active_vocabulary",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "diagnostic_response_written_production",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "diagnostic_response_narrative_coherence",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "diagnostic_complete",
+      "status": true,
+      "detail": "4 assessments"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "learning_contract_create",
+      "status": true,
+      "detail": "lang=English version=1.0.0"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "mastery_profile",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "lesson_create",
+      "status": true,
+      "detail": "session_id=d1431cff-e383-44fe-9ed2-b06e90adaea4"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "lesson_submit",
+      "status": true,
+      "detail": "submission_id=7afec396-d223-49aa-96c4-ba0a48f1130e"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "lesson_process",
+      "status": true,
+      "detail": "decision=COMPLETE has_validation=True"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "lesson_result",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "mastery_after_lesson",
+      "status": true,
+      "detail": "records=1"
+    },
+    {
+      "tester_id": "ALPHA-002",
+      "step": "audit_events",
+      "status": true,
+      "detail": "total_events=50"
+    }
+  ],
+  "ALPHA-003": [
+    {
+      "tester_id": "ALPHA-003",
+      "step": "health_check",
+      "status": true,
+      "detail": "status=200"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "register",
+      "status": true,
+      "detail": "user_id=c04d79f0-9a12-4295-b49e-ec08b1e8bc68"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "create_profile",
+      "status": true,
+      "detail": "lang=English level=B1"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "diagnostic_create",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "diagnostic_response_grammar_recognition",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "diagnostic_response_active_vocabulary",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "diagnostic_response_written_production",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "diagnostic_response_narrative_coherence",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "diagnostic_complete",
+      "status": true,
+      "detail": "4 assessments"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "learning_contract_create",
+      "status": true,
+      "detail": "lang=English version=1.0.0"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "mastery_profile",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "lesson_create",
+      "status": true,
+      "detail": "session_id=3f80a975-2663-4613-ae31-c743827bc835"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "lesson_submit",
+      "status": true,
+      "detail": "submission_id=f23d32f3-84cb-4e41-84ac-d38723a18608"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "lesson_process",
+      "status": true,
+      "detail": "decision=COMPLETE has_validation=True"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "lesson_result",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "mastery_after_lesson",
+      "status": true,
+      "detail": "records=1"
+    },
+    {
+      "tester_id": "ALPHA-003",
+      "step": "audit_events",
+      "status": true,
+      "detail": "total_events=50"
+    }
+  ],
+  "ALPHA-004": [
+    {
+      "tester_id": "ALPHA-004",
+      "step": "health_check",
+      "status": true,
+      "detail": "status=200"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "register",
+      "status": true,
+      "detail": "user_id=352a669a-41a5-4adc-b726-55c83a1ea497"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "create_profile",
+      "status": true,
+      "detail": "lang=English level=A1"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "diagnostic_create",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "diagnostic_response_grammar_recognition",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "diagnostic_response_active_vocabulary",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "diagnostic_response_written_production",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "diagnostic_response_narrative_coherence",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "diagnostic_complete",
+      "status": true,
+      "detail": "4 assessments"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "learning_contract_create",
+      "status": true,
+      "detail": "lang=English version=1.0.0"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "mastery_profile",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "lesson_create",
+      "status": true,
+      "detail": "session_id=19331d86-1bb8-4e20-875a-f34647bdb8e0"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "lesson_submit",
+      "status": true,
+      "detail": "submission_id=a80b62e9-21f3-42ce-8ea3-0f2f965f6d24"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "lesson_process",
+      "status": true,
+      "detail": "decision=COMPLETE has_validation=True"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "lesson_result",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "mastery_after_lesson",
+      "status": true,
+      "detail": "records=1"
+    },
+    {
+      "tester_id": "ALPHA-004",
+      "step": "audit_events",
+      "status": true,
+      "detail": "total_events=50"
+    }
+  ],
+  "ALPHA-005": [
+    {
+      "tester_id": "ALPHA-005",
+      "step": "health_check",
+      "status": true,
+      "detail": "status=200"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "register",
+      "status": true,
+      "detail": "user_id=3eeb8cfa-cb53-416e-8631-fea81f84f4f5"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "create_profile",
+      "status": true,
+      "detail": "lang=English level=B2"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "diagnostic_create",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "diagnostic_response_grammar_recognition",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "diagnostic_response_active_vocabulary",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "diagnostic_response_written_production",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "diagnostic_response_narrative_coherence",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "diagnostic_complete",
+      "status": true,
+      "detail": "4 assessments"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "learning_contract_create",
+      "status": true,
+      "detail": "lang=English version=1.0.0"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "mastery_profile",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "lesson_create",
+      "status": true,
+      "detail": "session_id=db6c00cd-19ae-4986-86fa-75d22c2aeb6e"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "lesson_submit",
+      "status": true,
+      "detail": "submission_id=84f79701-ede7-4698-886c-6502bbfba521"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "lesson_process",
+      "status": true,
+      "detail": "decision=COMPLETE has_validation=True"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "lesson_result",
+      "status": true,
+      "detail": ""
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "mastery_after_lesson",
+      "status": true,
+      "detail": "records=1"
+    },
+    {
+      "tester_id": "ALPHA-005",
+      "step": "audit_events",
+      "status": true,
+      "detail": "total_events=50"
+    }
+  ]
+}
