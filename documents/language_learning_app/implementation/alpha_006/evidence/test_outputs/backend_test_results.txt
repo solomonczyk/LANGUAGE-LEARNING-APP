@@ -1,0 +1,150 @@
+C:\Users\taras\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytest_asyncio\plugin.py:208: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.3, pluggy-1.6.0 -- C:\Users\taras\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: F:\Dev\Projects\LANGUAGE-LEARNING-APP\backend
+configfile: pyproject.toml
+plugins: anyio-4.12.1, langsmith-0.6.9, asyncio-0.24.0, cov-5.0.0, httpx-0.36.0, mock-3.15.1, timeout-2.4.0, typeguard-4.5.1
+asyncio: mode=Mode.AUTO, default_loop_scope=None
+collecting ... collected 113 items
+
+tests/integration/test_full_integration.py::TestHealthEndpoint::test_health_returns_ok PASSED [  0%]
+tests/integration/test_full_integration.py::TestHealthEndpoint::test_health_response_schema PASSED [  1%]
+tests/integration/test_full_integration.py::TestIdentity::test_register_new_user PASSED [  2%]
+tests/integration/test_full_integration.py::TestIdentity::test_login_existing_user PASSED [  3%]
+tests/integration/test_full_integration.py::TestIdentity::test_login_nonexistent_user_returns_404 PASSED [  4%]
+tests/integration/test_full_integration.py::TestIdentity::test_get_me_returns_user PASSED [  5%]
+tests/integration/test_full_integration.py::TestIdentity::test_register_duplicate_username PASSED [  6%]
+tests/integration/test_full_integration.py::TestLearnerProfile::test_create_profile PASSED [  7%]
+tests/integration/test_full_integration.py::TestLearnerProfile::test_read_profile PASSED [  7%]
+tests/integration/test_full_integration.py::TestLearnerProfile::test_profile_persistence PASSED [  8%]
+tests/integration/test_full_integration.py::TestLearnerProfile::test_duplicate_profile_mutation_is_harmless PASSED [  9%]
+tests/integration/test_full_integration.py::TestDiagnosticFlow::test_full_diagnostic_flow PASSED [ 10%]
+tests/integration/test_full_integration.py::TestDiagnosticFlow::test_cannot_submit_response_to_completed_session PASSED [ 11%]
+tests/integration/test_full_integration.py::TestDiagnosticFlow::test_cross_user_access_blocked PASSED [ 12%]
+tests/integration/test_full_integration.py::TestLessonFlow::test_create_lesson_session PASSED [ 13%]
+tests/integration/test_full_integration.py::TestLessonFlow::test_get_lesson_session PASSED [ 14%]
+tests/integration/test_full_integration.py::TestLessonFlow::test_submit_learner_text PASSED [ 15%]
+tests/integration/test_full_integration.py::TestLessonFlow::test_full_lesson_flow_valid PASSED [ 15%]
+tests/integration/test_full_integration.py::TestLessonFlow::test_full_lesson_flow_with_malformed_ai PASSED [ 16%]
+tests/integration/test_full_integration.py::TestLessonFlow::test_cross_user_lesson_access_blocked PASSED [ 17%]
+tests/integration/test_full_integration.py::TestLearningContract::test_get_learning_contract PASSED [ 18%]
+tests/integration/test_full_integration.py::TestMastery::test_get_mastery_profile PASSED [ 19%]
+tests/integration/test_full_integration.py::TestAudit::test_access_audit_as_operator PASSED [ 20%]
+tests/integration/test_full_integration.py::TestAudit::test_audit_access_blocked_for_non_operator PASSED [ 21%]
+tests/integration/test_full_integration.py::TestIdempotency::test_duplicate_lesson_submission_with_idempotency_key PASSED [ 22%]
+tests/integration/test_full_integration.py::TestIdempotency::test_duplicate_diagnostic_response_same_question PASSED [ 23%]
+tests/integration/test_full_integration.py::TestIdempotency::test_duplicate_completion_request PASSED [ 23%]
+tests/integration/test_full_integration.py::TestSecurity::test_request_body_user_id_ignored PASSED [ 24%]
+tests/integration/test_full_integration.py::TestSecurity::test_injection_attempt_in_text_field PASSED [ 25%]
+tests/integration/test_full_integration.py::TestSecurity::test_malformed_payload_rejected PASSED [ 26%]
+tests/integration/test_full_integration.py::TestSecurity::test_unknown_resource_returns_404 PASSED [ 27%]
+tests/integration/test_full_integration.py::TestStateMachineViaAPI::test_diagnostic_state_flow PASSED [ 28%]
+tests/integration/test_full_integration.py::TestStateMachineViaAPI::test_lesson_state_flow PASSED [ 29%]
+tests/integration/test_full_integration.py::TestErrorContract::test_error_response_has_canonical_structure PASSED [ 30%]
+tests/integration/test_full_integration.py::TestErrorContract::test_trace_id_present_in_error PASSED [ 30%]
+tests/integration/test_full_integration.py::TestPersistenceVerification::test_lesson_data_persisted_in_database PASSED [ 31%]
+tests/integration/test_full_integration.py::TestPersistenceVerification::test_audit_events_persisted PASSED [ 32%]
+tests/integration/test_full_integration.py::TestRetryableFlag::test_server_error_is_retryable PASSED [ 33%]
+tests/integration/test_full_integration.py::TestDuplicateProcessing::test_duplicate_process_request_is_safe PASSED [ 34%]
+tests/unit/test_audit.py::TestAuditEvents::test_record_audit_event PASSED [ 35%]
+tests/unit/test_audit.py::test_audit_event_requires_mandatory_fields PASSED [ 36%]
+tests/unit/test_audit.py::test_audit_write_failure PASSED                [ 37%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_a1_level PASSED [ 38%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_a2_level PASSED [ 38%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_b1_level PASSED [ 39%]
+tests/unit/test_diagnostics.py::TestCefrCalculation::test_boundary_values PASSED [ 40%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_recognition_correct PASSED [ 41%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_grammar_recognition_incorrect PASSED [ 42%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_assessment PASSED [ 43%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_vocabulary_low_score PASSED [ 44%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_written_production_scoring PASSED [ 45%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_coherence_correct PASSED [ 46%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_narrative_coherence_incorrect PASSED [ 46%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_multi_dimension_assessment PASSED [ 47%]
+tests/unit/test_diagnostics.py::TestAssessmentCalculation::test_empty_responses PASSED [ 48%]
+tests/unit/test_learning_contract.py::test_a1_contract_params PASSED     [ 49%]
+tests/unit/test_learning_contract.py::test_a2_contract_params PASSED     [ 50%]
+tests/unit/test_learning_contract.py::test_b1_contract_params PASSED     [ 51%]
+tests/unit/test_learning_contract.py::test_lowest_level_determines_params PASSED [ 52%]
+tests/unit/test_learning_contract.py::test_multi_assessment_lowest PASSED [ 53%]
+tests/unit/test_learning_contract.py::test_all_levels_deterministic PASSED [ 53%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_forbidden_evidence_types PASSED [ 54%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_allowed_evidence_types PASSED [ 55%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_invalid_evidence_type_raises PASSED [ 56%]
+tests/unit/test_mastery.py::TestMasteryEvidence::test_get_mastery_profile PASSED [ 57%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_cat_pet_fixture_default_a2 PASSED [ 58%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_morning_routine_fixture_default_a2 PASSED [ 59%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_generic_fixture_default_a2 PASSED [ 60%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_empty_text_uses_generic PASSED [ 61%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_pet_variations PASSED [ 61%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_morning_variations PASSED [ 62%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_deterministic_output PASSED [ 63%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_a1_fixture_simplified PASSED [ 64%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_b2_fixture_more_detailed PASSED [ 65%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_level_aware_deterministic PASSED [ 66%]
+tests/unit/test_mock_ai.py::TestMockAIFixtureSelection::test_different_levels_different_output PASSED [ 67%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_valid_fixture_has_all_fields PASSED [ 68%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_detected_issues_structure PASSED [ 69%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_valid_severity_values PASSED [ 69%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_valid_issue_codes PASSED [ 70%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_confidence_range PASSED [ 71%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_malformed_output_missing_fields PASSED [ 72%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_strengths_is_list PASSED [ 73%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_recommended_focus_is_list PASSED [ 74%]
+tests/unit/test_mock_ai.py::TestMockAIOutputStructure::test_no_randomness PASSED [ 75%]
+tests/unit/test_policy_engine.py::TestPolicyEngine::test_policy_decision_complete PASSED [ 76%]
+tests/unit/test_policy_engine.py::test_make_decision_complete_flow PASSED [ 76%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_initial_state PASSED [ 77%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_valid_transition PASSED [ 78%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_invalid_transition PASSED [ 79%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_forbidden_transition_after_failure PASSED [ 80%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_allowed_events PASSED [ 81%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_guard_denied_transition PASSED [ 82%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_duplicate_event_safe PASSED [ 83%]
+tests/unit/test_state_machine.py::TestDiagnosticStateMachine::test_reset PASSED [ 84%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_full_happy_path PASSED [ 84%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_rejection_path PASSED [ 85%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_failure_at_any_state PASSED [ 86%]
+tests/unit/test_state_machine.py::TestLessonStateMachine::test_audit_event_per_transition PASSED [ 87%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_valid_analysis_passes PASSED [ 88%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_valid_morning_analysis_passes PASSED [ 89%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_valid_generic_analysis_passes PASSED [ 90%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_malformed_output_fails PASSED [ 91%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_missing_fields_fails PASSED [ 92%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_invalid_confidence_fails PASSED [ 92%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_negative_confidence_fails PASSED [ 93%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_confidence_over_one_fails PASSED [ 94%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_output_consistency_check PASSED [ 95%]
+tests/unit/test_validation.py::TestLinguisticValidation::test_all_checks_recorded PASSED [ 96%]
+tests/unit/test_validation.py::test_pedagogical_validation_checks PASSED [ 97%]
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_feedback_matches_goal_check PASSED [ 98%]
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_mastery_claim_detection PASSED [ 99%]
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_reward_command_detection PASSED [100%]
+
+============================== warnings summary ===============================
+tests/unit/test_mastery.py::TestMasteryEvidence::test_invalid_evidence_type_raises
+  C:\Users\taras\AppData\Local\Programs\Python\Python312\Lib\_weakrefset.py:38: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    self.data = set()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_validation.py::test_pedagogical_validation_checks
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_mastery_claim_detection
+tests/unit/test_validation.py::TestPedagogicalValidationLogic::test_reward_command_detection
+  F:\Dev\Projects\LANGUAGE-LEARNING-APP\backend\app\modules\pedagogical_validation\services.py:85: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    db.add(vr)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_validation.py::test_pedagogical_validation_checks
+  C:\Users\taras\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py:2217: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    def __init__(self, name, parent):
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 113 passed, 5 warnings in 25.37s =======================

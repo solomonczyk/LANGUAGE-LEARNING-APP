@@ -1,0 +1,58 @@
+{
+  "task_id": "LANGUAGE-LEARNING-APP-S2_ACCEPTANCE_HARDENING_AND_LEVEL_ADAPTATION_POLISH-006",
+  "created": "2026-06-11",
+  "artifacts": {
+    "documents": {
+      "index": "documents/language_learning_app/implementation/alpha_006/00_alpha_006_index.md",
+      "product_findings_reconciliation": "documents/language_learning_app/implementation/alpha_006/01_product_findings_reconciliation.md",
+      "level_adaptation_design": "documents/language_learning_app/implementation/alpha_006/02_level_adaptation_design.md",
+      "a1_wording_review": "documents/language_learning_app/implementation/alpha_006/03_a1_wording_review.md",
+      "diagnostic_demo_rework": "documents/language_learning_app/implementation/alpha_006/04_diagnostic_demo_response_rework.md",
+      "mock_feedback_adaptation": "documents/language_learning_app/implementation/alpha_006/05_mock_feedback_level_adaptation.md",
+      "recheck_plan": "documents/language_learning_app/implementation/alpha_006/06_short_alpha_recheck_plan.md",
+      "recheck_results": "documents/language_learning_app/implementation/alpha_006/07_short_alpha_recheck_results.md",
+      "issue_register": "documents/language_learning_app/implementation/alpha_006/08_issue_register.md",
+      "acceptance_report": "documents/language_learning_app/implementation/alpha_006/09_s2_acceptance_report.md",
+      "next_stage_recommendation": "documents/language_learning_app/implementation/alpha_006/10_next_stage_recommendation.md"
+    },
+    "proof": {
+      "proof_json": "documents/language_learning_app/implementation/alpha_006/proof_language_learning_app_alpha_006.json",
+      "artifact_index": "documents/language_learning_app/implementation/alpha_006/alpha_006_artifact_index.json"
+    },
+    "evidence": {
+      "recheck_script": "documents/language_learning_app/implementation/alpha_006/evidence/recheck_sessions/alpha_006_recheck.py",
+      "recheck_summary": "documents/language_learning_app/implementation/alpha_006/evidence/recheck_sessions/recheck_summary.json",
+      "profile_a1": "documents/language_learning_app/implementation/alpha_006/evidence/recheck_sessions/alpha-006-a1.json",
+      "profile_a2": "documents/language_learning_app/implementation/alpha_006/evidence/recheck_sessions/alpha-006-a2.json",
+      "profile_b1": "documents/language_learning_app/implementation/alpha_006/evidence/recheck_sessions/alpha-006-b1.json",
+      "backend_test_results": "documents/language_learning_app/implementation/alpha_006/evidence/test_outputs/backend_test_results.txt"
+    },
+    "changed_files": {
+      "backend": [
+        "backend/app/modules/ai_gateway/services.py",
+        "backend/app/modules/lesson_engine/services.py"
+      ],
+      "frontend": [
+        "mobile/app/onboarding.tsx",
+        "mobile/app/diagnostic.tsx",
+        "mobile/app/learning-contract.tsx",
+        "mobile/app/home.tsx",
+        "mobile/app/lesson/[id].tsx",
+        "mobile/app/result/[id].tsx"
+      ],
+      "tests": [
+        "backend/tests/unit/test_mock_ai.py"
+      ]
+    }
+  },
+  "status": "ACCEPTED",
+  "validation": {
+    "backend_tests_passed": 113,
+    "mobile_typecheck_passed": true,
+    "profile_recheck_completed": 3,
+    "forbidden_actions_scan_passed": true,
+    "proof_json_valid": true,
+    "artifact_index_valid": true,
+    "git_clean": true
+  }
+}

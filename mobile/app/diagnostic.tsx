@@ -14,7 +14,7 @@ import Button from "../src/shared/components/Button";
 import StepIndicator from "../src/shared/components/StepIndicator";
 import LoadingScreen from "../src/shared/components/LoadingScreen";
 import ErrorScreen from "../src/shared/components/ErrorScreen";
-import { useDiagnosticStore } from "../src/state/appState";
+import { useDiagnosticStore, useOnboardingStore } from "../src/state/appState";
 import { diagnostics, getUserId } from "../src/services/api";
 
 const STEPS = [
@@ -23,6 +23,27 @@ const STEPS = [
   { key: "written_production", label: "Writing", prompt: "Write 2-3 sentences about your morning routine" },
   { key: "narrative_coherence", label: "Coherence", prompt: "Arrange these events in the correct order" },
 ];
+
+/** Level-specific helper text for diagnostic steps. */
+function getLevelHelperText(level: string, stepKey: string): string {
+  const l = level.toUpperCase();
+  if (stepKey === "grammar_recognition") {
+    if (l === "A1") return "This is an example. Just read it — we'll use this as your answer.";
+    if (l === "A2") return "This is a sample answer. You don't need to do anything — we'll submit it for you.";
+    return "The example below shows a correct answer. It will be submitted as your response.";
+  }
+  if (stepKey === "active_vocabulary") {
+    if (l === "A1") return "Here are some example words and meanings. Just read them — we'll record them.";
+    if (l === "A2") return "These are sample vocabulary matches. They'll be used as your response.";
+    return "Example vocabulary matches are shown below. These will be submitted as your response.";
+  }
+  if (stepKey === "narrative_coherence") {
+    if (l === "A1") return "The sentences below are in the right order. Just read them — we'll record this.";
+    if (l === "A2") return "These events are already in the correct order. Read along — this is your answer.";
+    return "The events are arranged in the correct sequence. This sample is your response.";
+  }
+  return "";
+}
 
 export default function DiagnosticScreen() {
   const router = useRouter();
@@ -108,6 +129,7 @@ export default function DiagnosticScreen() {
   if (error && !store.sessionId) return <ErrorScreen message={error} onRetry={initSession} />;
 
   const currentStep = STEPS[store.currentStep];
+  const learnerLevel = useOnboardingStore.getState().selfReportedLevel || "A1";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -123,6 +145,9 @@ export default function DiagnosticScreen() {
 
           {currentStep.key === "grammar_recognition" && (
             <View style={styles.options}>
+              <View style={styles.demoBadge}>
+                <Text style={styles.demoBadgeText}>Example only</Text>
+              </View>
               {[
                 { id: "a", text: "He go to school every day." },
                 { id: "b", text: "He goes to school every day." },
@@ -132,18 +157,23 @@ export default function DiagnosticScreen() {
                   <Text style={styles.optionText}>{opt.text}</Text>
                 </View>
               ))}
-              <Text style={styles.hint}>✓ Sentence B is correct (we'll use this as your response)</Text>
+              <Text style={styles.correctLabel}>✓ Sentence B is correct</Text>
+              <Text style={styles.hint}>{getLevelHelperText(learnerLevel, "grammar_recognition")}</Text>
             </View>
           )}
 
           {currentStep.key === "active_vocabulary" && (
             <View style={styles.options}>
-              <Text style={styles.hint}>We'll test active vocabulary with a short matching exercise.</Text>
+              <View style={styles.demoBadge}>
+                <Text style={styles.demoBadgeText}>Example only</Text>
+              </View>
+              <Text style={styles.hint}>Here are some example word matches:</Text>
               <Text style={styles.demoText}>• "Morning" → the start of the day</Text>
               <Text style={styles.demoText}>• "Breakfast" → first meal of the day</Text>
               <Text style={styles.demoText}>• "Pet" → a domestic animal</Text>
               <Text style={styles.demoText}>• "Walk" → to move on foot</Text>
-              <Text style={styles.demoText}>✓ Vocabulary check complete</Text>
+              <Text style={styles.correctLabel}>✓ Vocabulary check complete</Text>
+              <Text style={styles.hint}>{getLevelHelperText(learnerLevel, "active_vocabulary")}</Text>
             </View>
           )}
 
@@ -166,13 +196,17 @@ export default function DiagnosticScreen() {
 
           {currentStep.key === "narrative_coherence" && (
             <View style={styles.options}>
-              <Text style={styles.hint}>The events below are in the correct order:</Text>
+              <View style={styles.demoBadge}>
+                <Text style={styles.demoBadgeText}>Example only</Text>
+              </View>
+              <Text style={styles.hint}>The events are already in the right order:</Text>
               <Text style={styles.demoText}>1. Wake up</Text>
               <Text style={styles.demoText}>2. Get out of bed</Text>
               <Text style={styles.demoText}>3. Have breakfast</Text>
               <Text style={styles.demoText}>4. Brush teeth</Text>
               <Text style={styles.demoText}>5. Leave home</Text>
-              <Text style={styles.hint}>✓ Correct order selected</Text>
+              <Text style={styles.correctLabel}>✓ Correct order selected</Text>
+              <Text style={styles.hint}>{getLevelHelperText(learnerLevel, "narrative_coherence")}</Text>
             </View>
           )}
 
@@ -223,7 +257,23 @@ const styles = StyleSheet.create({
     minHeight: 120,
     backgroundColor: "#fafafa",
   },
-  hint: { fontSize: 13, color: "#999", marginTop: 8, fontStyle: "italic" },
+  hint: { fontSize: 14, color: "#666", marginTop: 8, fontStyle: "italic", lineHeight: 20 },
+  demoBadge: {
+    alignSelf: "flex-start",
+    backgroundColor: "#E8F0FE",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 6,
+    marginBottom: 8,
+  },
+  demoBadgeText: { fontSize: 12, fontWeight: "600", color: "#007AFF" },
+  correctLabel: {
+    fontSize: 14,
+    color: "#34C759",
+    fontWeight: "600",
+    marginTop: 8,
+    paddingVertical: 4,
+  },
   demoText: { fontSize: 15, color: "#555", paddingVertical: 4, paddingLeft: 8 },
   error: { color: "#dc3545", fontSize: 14, textAlign: "center", marginTop: 8 },
   footer: {

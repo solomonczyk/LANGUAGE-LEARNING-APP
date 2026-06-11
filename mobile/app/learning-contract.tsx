@@ -85,6 +85,43 @@ export default function LearningContractScreen() {
 
   const contractData = contract as Record<string, any> | undefined;
 
+  // Determine learner level from contract data
+  const assessments = (contractData?.diagnostic_profile_snapshot as any)?.assessments || [];
+  const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
+  const cefrValues = assessments.map((a: any) => a.cefr).filter(Boolean);
+  const learnerLevel = cefrValues.length > 0
+    ? cefrValues.reduce((lowest: string, level: string) =>
+        levels.indexOf(level) < levels.indexOf(lowest) ? level : lowest
+      , "C2")
+    : "A1";
+  const isA1 = learnerLevel === "A1";
+
+  /** Plain-language explanations for contract terms. */
+  function getTermExplanation(label: string): string {
+    const explanations: Record<string, string> = {
+      "Active Vocabulary Budget": isA1
+        ? "New words you will learn in each lesson"
+        : "Number of new vocabulary items introduced per lesson",
+      "Grammar Focus Count": isA1
+        ? "Grammar topics we will practice"
+        : "Number of grammar areas covered in each lesson",
+      "Max Corrections per Lesson": isA1
+        ? "How many small fixes we suggest (gentle feedback)"
+        : "Maximum number of primary corrections shown per submission",
+      "Scaffolding Level": isA1
+        ? "How much help and support you get"
+          : "Amount of structural support provided during lessons",
+      "Lesson Complexity": isA1
+        ? "How challenging the lesson will be"
+        : "Cognitive complexity level of lesson content",
+      "Lesson Duration": "How long each lesson is designed to take",
+      "Target Language": "The language you are learning",
+      "Support Language": "Your native language — used for explanations",
+      "Contract Version": "Plan version number",
+    };
+    return explanations[label] || "";
+  }
+
   const items = contractData
     ? [
         { label: "Target Language", value: contractData.target_language },
@@ -102,44 +139,80 @@ export default function LearningContractScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.badge}>Your Learning Plan</Text>
-        <Text style={styles.title}>Learning Entry Contract</Text>
+        <Text style={styles.badge}>{isA1 ? "Your Learning Plan" : "Learning Entry Contract"}</Text>
+        <Text style={styles.title}>
+          {isA1 ? "Your Personal Learning Plan" : "Learning Entry Contract"}
+        </Text>
         <Text style={styles.subtitle}>
-          Based on your diagnostic results, we've created a personalized learning plan for you.
+          {isA1
+            ? "Based on your answers, we made a plan just for you. Here's what you can expect."
+            : "Based on your diagnostic results, we've created a personalized learning plan for you."
+          }
         </Text>
 
         {contractData && (
           <View style={styles.card}>
-            {items.map((item, index) => (
-              <View
-                key={item.label}
-                style={[styles.row, index < items.length - 1 && styles.borderRow]}
-              >
-                <Text style={styles.rowLabel}>{item.label}</Text>
-                <Text style={styles.rowValue}>{item.value}</Text>
+            {items.map((item, index) => {
+              const explanation = getTermExplanation(item.label);
+              return (
+                <View key={item.label}>
+                  <View
+                    style={[styles.row, index < items.length - 1 && styles.borderRow]}
+                  >
+                    <View style={styles.rowLabelGroup}>
+                      <Text style={styles.rowLabel}>{item.label}</Text>
+                      {isA1 && explanation ? (
+                        <Text style={styles.rowExplanation}>{explanation}</Text>
+                      ) : null}
+                    </View>
+                    <Text style={styles.rowValue}>{item.value}</Text>
+                  </View>
+                  {!isA1 && explanation && index < items.length - 1 ? (
+                    <Text style={styles.hintText}>{explanation}</Text>
+                  ) : null}
+                </View>
+              );
+            })}
+          </View>
+        )}
+
+        {assessments.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>
+              {isA1 ? "Your Skills" : "Skill Profile"}
+            </Text>
+            {assessments.map((a: any, i: number) => (
+              <View key={i} style={styles.skillRow}>
+                <Text style={styles.skillName}>
+                  {a.skill?.replace(/_/g, " ") || "Skill"}
+                </Text>
+                <View style={styles.levelBadge}>
+                  <Text style={styles.levelText}>{a.cefr || "N/A"}</Text>
+                </View>
+                <Text style={styles.confidence}>
+                  {(a.confidence * 100).toFixed(0)}% confidence
+                </Text>
               </View>
             ))}
           </View>
         )}
 
-        {contractData?.diagnostic_profile_snapshot && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Skill Profile</Text>
-            {(contractData.diagnostic_profile_snapshot as any)?.assessments?.map(
-              (a: any, i: number) => (
-                <View key={i} style={styles.skillRow}>
-                  <Text style={styles.skillName}>
-                    {a.skill?.replace(/_/g, " ") || "Skill"}
-                  </Text>
-                  <View style={styles.levelBadge}>
-                    <Text style={styles.levelText}>{a.cefr || "N/A"}</Text>
-                  </View>
-                  <Text style={styles.confidence}>
-                    {(a.confidence * 100).toFixed(0)}% confidence
-                  </Text>
-                </View>
-              ),
-            )}
+        {/* Summary explanation for A1 */}
+        {isA1 && (
+          <View style={styles.summaryBox}>
+            <Text style={styles.summaryBoxTitle}>What this means for you</Text>
+            <Text style={styles.summaryBoxText}>
+              ✓ Lessons will be {contractData?.lesson_duration_minutes || 10} minutes long.
+            </Text>
+            <Text style={styles.summaryBoxText}>
+              ✓ You'll learn {contractData?.active_vocabulary_budget || 3} new words each lesson.
+            </Text>
+            <Text style={styles.summaryBoxText}>
+              ✓ Extra support is available whenever you need it.
+            </Text>
+            <Text style={styles.summaryBoxText}>
+              ✓ You can repeat lessons if you want more practice.
+            </Text>
           </View>
         )}
       </ScrollView>
@@ -177,8 +250,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   borderRow: { borderBottomWidth: 1, borderBottomColor: "#e9ecef" },
+  rowLabelGroup: { flex: 1, marginRight: 8 },
   rowLabel: { fontSize: 15, color: "#666" },
+  rowExplanation: { fontSize: 12, color: "#999", marginTop: 2, lineHeight: 16 },
   rowValue: { fontSize: 15, fontWeight: "600", color: "#1a1a1a" },
+  hintText: { fontSize: 12, color: "#999", paddingHorizontal: 16, paddingBottom: 8, lineHeight: 16 },
   section: { marginBottom: 24 },
   sectionTitle: {
     fontSize: 18,
@@ -203,6 +279,24 @@ const styles = StyleSheet.create({
   },
   levelText: { fontSize: 13, fontWeight: "600", color: "#007AFF" },
   confidence: { fontSize: 12, color: "#999" },
+  summaryBox: {
+    backgroundColor: "#E8F5E9",
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 24,
+  },
+  summaryBoxTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#2E7D32",
+    marginBottom: 12,
+  },
+  summaryBoxText: {
+    fontSize: 14,
+    color: "#33691E",
+    lineHeight: 22,
+    marginBottom: 4,
+  },
   footer: {
     padding: 24,
     paddingBottom: 36,

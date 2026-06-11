@@ -1,7 +1,8 @@
-"""AI Gateway services — deterministic mock analysis provider."""
+"""AI Gateway services — deterministic mock analysis provider with level-aware feedback."""
 
 from __future__ import annotations
 
+import copy
 import uuid
 from uuid import UUID
 
@@ -12,10 +13,10 @@ from app.config import settings
 from app.models import AIAnalysisRequest, AIAnalysisResult, Submission
 from app.shared.exceptions.domain import NotFoundError
 
-# Deterministic mock analysis fixtures
+# Level-aware mock analysis fixtures (base versions — adapted per level below)
 MOCK_ANALYSIS_FIXTURES = {
     "cat_pet": {
-        "analysis_version": "mock-v1",
+        "analysis_version": "mock-v2-level-aware",
         "meaning_preserved": True,
         "detected_issues": [
             {
@@ -42,7 +43,7 @@ MOCK_ANALYSIS_FIXTURES = {
         "confidence": 0.91,
     },
     "morning_routine": {
-        "analysis_version": "mock-v1",
+        "analysis_version": "mock-v2-level-aware",
         "meaning_preserved": True,
         "detected_issues": [
             {
@@ -69,7 +70,7 @@ MOCK_ANALYSIS_FIXTURES = {
         "confidence": 0.88,
     },
     "generic": {
-        "analysis_version": "mock-v1",
+        "analysis_version": "mock-v2-level-aware",
         "meaning_preserved": True,
         "detected_issues": [
             {
@@ -99,14 +100,81 @@ MALFORMED_OUTPUT = {
 }
 
 
-def _select_fixture(text: str) -> dict:
-    """Deterministically select a fixture based on text content."""
+def _adapt_fixture_by_level(fixture: dict, learner_level: str) -> dict:
+    """Adapt a base fixture to be level-appropriate.
+
+    A1: very short, very supportive, 1-2 corrections max, simple language.
+    A2: short correction, simple reason, one suggested phrase.
+    B1: grammar + vocabulary feedback, more precise, next-step suggestion.
+    B2: nuance, collocation, naturalness, concise but more advanced.
+    """
+    adapted = copy.deepcopy(fixture)
+
+    if learner_level.upper() == "A1":
+        # A1: very short, very supportive, 1-2 max corrections
+        adapted["detected_issues"] = adapted["detected_issues"][:1]
+        for issue in adapted["detected_issues"]:
+            issue["severity"] = "minor"
+        adapted["strengths"] = [
+            "Good job! You are sharing your ideas.",
+        ]
+        adapted["recommended_focus"] = adapted["recommended_focus"][:1]
+        adapted["confidence"] = 0.85
+
+    elif learner_level.upper() == "A2":
+        # A2: short correction, simple reason, 2 corrections max
+        adapted["detected_issues"] = adapted["detected_issues"][:2]
+        adapted["strengths"] = [
+            "You wrote a clear story. Well done!",
+            "The order of events is easy to follow.",
+        ][:1]
+        adapted["recommended_focus"] = adapted["recommended_focus"][:2]
+        adapted["confidence"] = 0.82
+
+    elif learner_level.upper() == "B1":
+        # B1: grammar + vocabulary feedback, more precise
+        if len(adapted["detected_issues"]) > 0:
+            adapted["detected_issues"][0]["suggestion"] = (
+                f"Consider using: {adapted['detected_issues'][0]['suggestion']}"
+            )
+        adapted["strengths"] = [
+            "Effective use of narrative structure.",
+            "Good vocabulary choices for the topic.",
+        ]
+        adapted["recommended_focus"] = adapted["recommended_focus"]
+        adapted["confidence"] = 0.88
+
+    elif learner_level.upper() in ("B2", "C1", "C2"):
+        # B2+: nuance, collocation, naturalness
+        for issue in adapted["detected_issues"]:
+            if issue["code"] in ("VERB_FORM", "TENSE"):
+                issue["suggestion"] = (
+                    f"For more natural phrasing, try: {issue['suggestion']}"
+                )
+        adapted["strengths"] = [
+            "Good narrative flow with clear temporal progression.",
+            "Effective topic-specific vocabulary choices.",
+        ]
+        adapted["recommended_focus"] = [
+            *adapted["recommended_focus"],
+            "Natural collocation",
+            "Stylistic precision",
+        ]
+        adapted["confidence"] = 0.92
+
+    return adapted
+
+
+def _select_fixture(text: str, learner_level: str = "A2") -> dict:
+    """Deterministically select a fixture based on text content and adapt by level."""
     lower = text.lower()
     if "cat" in lower or "pet" in lower or "dog" in lower:
-        return dict(MOCK_ANALYSIS_FIXTURES["cat_pet"])
-    if "morning" in lower or "wake" in lower or "breakfast" in lower:
-        return dict(MOCK_ANALYSIS_FIXTURES["morning_routine"])
-    return dict(MOCK_ANALYSIS_FIXTURES["generic"])
+        base = dict(MOCK_ANALYSIS_FIXTURES["cat_pet"])
+    elif "morning" in lower or "wake" in lower or "breakfast" in lower:
+        base = dict(MOCK_ANALYSIS_FIXTURES["morning_routine"])
+    else:
+        base = dict(MOCK_ANALYSIS_FIXTURES["generic"])
+    return _adapt_fixture_by_level(base, learner_level)
 
 
 async def analyze_submission(
@@ -148,7 +216,7 @@ async def analyze_submission(
         schema_valid = False
         status = "INVALID_OUTPUT"
     else:
-        raw_output = _select_fixture(text)
+        raw_output = _select_fixture(text, learner_level)
         schema_valid = True
         status = "SUCCEEDED"
 

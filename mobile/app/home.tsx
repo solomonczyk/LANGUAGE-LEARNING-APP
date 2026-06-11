@@ -71,9 +71,16 @@ export default function HomeScreen() {
         <View style={styles.lessonCard}>
           <Text style={styles.lessonTitle}>My Morning with My Pet</Text>
           <Text style={styles.lessonDesc}>
-            Write about your morning routine and what you did with your pet.
+            {contractData?.scaffolding_mode === "high"
+              ? "Write a few short sentences about your morning with your pet."
+              : contractData?.scaffolding_mode === "moderate"
+                ? "Write about your morning routine and what you did with your pet."
+                : "Write 3-5 sentences describing your morning routine with your pet, using time markers."
+            }
           </Text>
-          <Text style={styles.lessonMeta}>Personal Narrative • ~15 min</Text>
+          <Text style={styles.lessonMeta}>
+            Personal Narrative • ~{contractData?.lesson_duration_minutes || 15} min
+          </Text>
           <Button title="Start Lesson" onPress={handleStartLesson} style={styles.startButton} />
         </View>
       </ScrollView>

@@ -1,0 +1,144 @@
+{
+  "tester_id": "ALPHA-006-A2",
+  "level": "A2",
+  "flow_completed": true,
+  "diagnostic_confusion": false,
+  "contract_understood": true,
+  "lesson_understood": true,
+  "feedback_understood": true,
+  "operator_notes": "",
+  "issues": [],
+  "steps": {
+    "health": {
+      "status": "ok",
+      "version": "0.1.0",
+      "database": "ready",
+      "mock_ai": "ready"
+    },
+    "register": {
+      "username": "alpha-006-a2_803a4e42",
+      "user_id": "5882f22f-e236-4c65-a606-0f5e07d6ca16"
+    },
+    "profile": {
+      "id": "3da2023b-8e16-4f55-ac63-e05403ffb162",
+      "user_id": "5882f22f-e236-4c65-a606-0f5e07d6ca16",
+      "target_language": "English",
+      "native_language": "Ukrainian",
+      "learning_goal": "Basic conversation",
+      "preferred_lesson_duration": 10,
+      "self_reported_level": "A2",
+      "profile_status": "created",
+      "created_at": "2026-06-11T11:46:11.130933+00:00",
+      "updated_at": "2026-06-11T11:46:11.130933+00:00"
+    },
+    "diagnostic_start": {
+      "session_id": "9a4124b8-28ab-4ee4-a21b-d6e35ec9e0e8",
+      "status": "IN_PROGRESS",
+      "current_step": 0,
+      "total_steps": 4
+    },
+    "diagnostic_complete": {
+      "status": "COMPLETED",
+      "assessments": [
+        {
+          "skill": "active_vocabulary",
+          "cefr": "A2",
+          "confidence": 0.8
+        },
+        {
+          "skill": "narrative_coherence",
+          "cefr": "B1",
+          "confidence": 0.7
+        },
+        {
+          "skill": "grammar_recognition",
+          "cefr": "A2",
+          "confidence": 0.75
+        },
+        {
+          "skill": "written_production",
+          "cefr": "B1",
+          "confidence": 0.65
+        }
+      ]
+    },
+    "contract": {
+      "id": "ecd29007-e557-48bb-be0c-eb61cfe0105e",
+      "version": "1.0.0",
+      "scaffolding_mode": "moderate",
+      "lesson_complexity": "moderate",
+      "lesson_duration_minutes": 15,
+      "active_vocabulary_budget": 5
+    },
+    "lesson_create": {
+      "session_id": "d35d7457-f967-4971-b74c-88d305b21d3e"
+    },
+    "submission": {
+      "submission_id": "36a58716-eec3-4454-8b04-687933c6362e"
+    },
+    "process": {
+      "status": "COMPLETED",
+      "decision": "COMPLETE",
+      "validation_results": {
+        "linguistic": {
+          "passed": true,
+          "details": {
+            "checks": {
+              "allowed_codes": true,
+              "span_validity": true,
+              "issue_structure": true,
+              "confidence_range": true,
+              "severity_validity": true,
+              "output_consistency": true
+            },
+            "failed_checks": []
+          }
+        },
+        "pedagogical": {
+          "passed": true,
+          "details": {
+            "checks": {
+              "no_reward_command": true,
+              "feedback_matches_goal": true,
+              "no_curriculum_mutation": true,
+              "corrections_within_budget": true,
+              "no_unsupported_mastery_claim": true
+            },
+            "failed_checks": []
+          }
+        }
+      }
+    },
+    "session_get": {
+      "status": "COMPLETED"
+    },
+    "mastery": {
+      "records_count": 1
+    },
+    "audit": {
+      "restricted": true,
+      "note": "Operator access required (known limitation)"
+    }
+  },
+  "timestamps": {
+    "health": 1781178371.095353,
+    "register": 1781178371.1156855,
+    "profile": 1781178371.1400273,
+    "diagnostic_start": 1781178371.1772785,
+    "diagnostic_responses": 1781178371.3071873,
+    "diagnostic_complete": 1781178371.3370512,
+    "contract": 1781178371.3700871,
+    "lesson": 1781178371.3902419,
+    "submission": 1781178371.4210162,
+    "process": 1781178371.473563,
+    "complete": 1781178371.4978595,
+    "end": 1781178371.5600815
+  },
+  "user_id": "5882f22f-e236-4c65-a606-0f5e07d6ca16",
+  "diagnostic_cefr": [
+    "A2",
+    "B1",
+    "A2",
+    "B1"
+  ]
+}

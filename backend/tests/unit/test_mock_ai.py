@@ -5,24 +5,24 @@ from app.modules.ai_gateway.services import _select_fixture, MOCK_ANALYSIS_FIXTU
 
 
 class TestMockAIFixtureSelection:
-    def test_cat_pet_fixture(self):
+    def test_cat_pet_fixture_default_a2(self):
         result = _select_fixture("I have a cat and it loves to play")
-        assert result["analysis_version"] == "mock-v1"
+        assert result["analysis_version"] == "mock-v2-level-aware"
         assert "VERB_FORM" in [i["code"] for i in result["detected_issues"]]
 
-    def test_morning_routine_fixture(self):
+    def test_morning_routine_fixture_default_a2(self):
         result = _select_fixture("This morning I woke up early")
-        assert result["analysis_version"] == "mock-v1"
+        assert result["analysis_version"] == "mock-v2-level-aware"
         assert "TENSE" in [i["code"] for i in result["detected_issues"]]
 
-    def test_generic_fixture(self):
+    def test_generic_fixture_default_a2(self):
         result = _select_fixture("I went to the store yesterday")
-        assert result["analysis_version"] == "mock-v1"
+        assert result["analysis_version"] == "mock-v2-level-aware"
         assert "WORD_ORDER" in [i["code"] for i in result["detected_issues"]]
 
     def test_empty_text_uses_generic(self):
         result = _select_fixture("")
-        assert result["analysis_version"] == "mock-v1"
+        assert result["analysis_version"] == "mock-v2-level-aware"
 
     def test_pet_variations(self):
         for text in ["my dog", "my pet", "the cat"]:
@@ -40,11 +40,40 @@ class TestMockAIFixtureSelection:
         result2 = _select_fixture("I have a cat")
         assert result1 == result2
 
+    def test_a1_fixture_simplified(self):
+        """A1 fixtures should have max 1 correction and simplified strengths."""
+        result = _select_fixture("I have a cat", "A1")
+        assert len(result["detected_issues"]) <= 1
+        for issue in result["detected_issues"]:
+            assert issue["severity"] == "minor"
+        assert len(result["strengths"]) == 1
+        assert "Good job" in result["strengths"][0]
+
+    def test_b2_fixture_more_detailed(self):
+        """B2 fixtures should have more recommended focus items."""
+        result = _select_fixture("I have a cat", "B2")
+        assert len(result["recommended_focus"]) >= 3  # base + extra
+        assert "Natural collocation" in result["recommended_focus"]
+        assert result["confidence"] > 0.9
+
+    def test_level_aware_deterministic(self):
+        """Same input + level always produces same output."""
+        r1 = _select_fixture("I wake up", "A1")
+        r2 = _select_fixture("I wake up", "A1")
+        assert r1 == r2
+
+    def test_different_levels_different_output(self):
+        """Different levels should produce different feedback."""
+        a1 = _select_fixture("I have a cat", "A1")
+        b2 = _select_fixture("I have a cat", "B2")
+        assert a1 != b2  # Different strengths, issues, etc.
+
 
 class TestMockAIOutputStructure:
     def test_valid_fixture_has_all_fields(self):
         fixture = MOCK_ANALYSIS_FIXTURES["cat_pet"]
         assert "analysis_version" in fixture
+        assert fixture["analysis_version"] == "mock-v2-level-aware"
         assert "meaning_preserved" in fixture
         assert "detected_issues" in fixture
         assert "strengths" in fixture

@@ -277,13 +277,13 @@ function getStepSubtitle(step: number): string {
 function getLevelDescription(level: string): string {
   switch (level) {
     case "A1":
-      return "Beginner";
+      return "Starting Out";
     case "A2":
-      return "Elementary";
+      return "Building Confidence";
     case "B1":
-      return "Intermediate";
+      return "Getting Comfortable";
     case "B2":
-      return "Upper Intermediate";
+      return "Growing Independent";
     case "C1":
       return "Advanced";
     case "C2":

@@ -142,11 +142,18 @@ async def process_lesson_session(
     except ValueError as e:
         raise InvalidStateTransitionError(str(e))
 
-    # Run mock AI analysis
+    # Get learner level from profile
+    from app.models import LearnerProfile
+    profile_stmt = select(LearnerProfile).where(LearnerProfile.user_id == UUID(user_id))
+    profile_result = await db.execute(profile_stmt)
+    profile = profile_result.scalar_one_or_none()
+    learner_level = (profile.self_reported_level or "A2") if profile else "A2"
+
+    # Run mock AI analysis with level-aware fixtures
     analysis_result = await analyze_submission(
         db, submission.id, user_id,
         submission.source_text,
-        "A2",  # simplified — would come from profile
+        learner_level,
         "personal_narrative",
     )
 
